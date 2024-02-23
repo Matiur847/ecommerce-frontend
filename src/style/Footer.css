@@ -1,0 +1,39 @@
+.footer-container {
+    background-color: #fdf8f8;
+    border-top: 1px solid rgba(106, 185, 86, 0.226);
+    padding: 20px;
+}
+
+.contact-us {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-container h3 {
+    color: #000000c7;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contact-us p {
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-us p span {
+    font-weight: 500;
+    color: rgb(173, 5, 5);
+}
+
+.follow-us span i {
+    font-size: 30px;
+    padding: 0px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.follow-us span i:hover {
+    color: rgb(61, 118, 223);
+}

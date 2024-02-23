@@ -1,0 +1,159 @@
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.navbar {
+    background-color: #fdf8f8;
+    height: 4rem;
+    border-bottom: 1px solid rgba(106, 185, 86, 0.226);
+}
+
+nav.navbar {
+    padding: 0px 10px;
+}
+
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    color: black;
+}
+
+.menu-icon {
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+}
+
+.user-icon span {
+    margin: 0 10px;
+    background: none;
+    font-size: 20px;
+    border: none;
+}
+
+.user-icon .cart-icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.cart-icon span {
+    font-size: 20px;
+}
+
+span sup {
+    background-color: #1580d8;
+    padding: 0px 5px;
+    top: -20px;
+    left: 3px;
+    border-radius: 50%;
+    margin-left: -10px;
+    font-size: 15px;
+    color: white;
+}
+
+.header-login-button {
+    font-family: 'Times New Roman', Times, serif;
+    border: none;
+    color: white;
+    border-radius: 10px 30px;
+    padding: 2px 30px;
+    background-color: #1580d8;
+    transition: 0.3s ease-in-out;
+}
+
+.header-login-button:hover {
+    background-color: #3c5e80a6;
+}
+
+.nav-menu-link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon input {
+    width: 100%;
+    padding: 5px 39px;
+    border: 1px solid rgba(0, 0, 255, 0.63);
+    border-radius: 50px;
+    outline: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+
+.mobile-menu i {
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 992px) {
+    .mobile-menu {
+        display: block;
+        padding-left: 5px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .modal-nav {
+        display: block;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 100%;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .search-icon input {
+        padding: 5px 5px;
+        font-size: 11px;
+    }
+
+    .user-icon .cart-icon {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    span sup {
+        font-size: 13px;
+    }
+
+    .header-login-button {
+        font-size: 13px;
+        padding: 2px 15px;
+    }
+}

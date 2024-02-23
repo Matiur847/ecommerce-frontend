@@ -1,0 +1,99 @@
+.carousel-container {
+    background-color: #FFFFFF;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.carousel-container p {
+    color: coral;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.carousel-category {
+    margin: 8px 0px;
+}
+
+.carousel-category span {
+    font-weight: 600;
+    font-size: 15px;
+    color: #757575;
+}
+
+.carousel-category:hover span {
+    color: red;
+}
+
+.carousel-category:hover {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.carousel-category i {
+    cursor: pointer;
+    background-color: #F5F5F5;
+    padding: 5px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.carousel-slider-container {
+    padding: 10px;
+    color: white;
+    background-color: #DADBD6;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: linear-gradient(rgba(195, 73, 7, 0.9), rgba(40, 58, 90, 0.9)), url("../img/laptop.jpg") fixed center center;
+    border: 10px solid #d7d7cf33;
+    border-radius: 10px;
+}
+
+.carousel-slider-container:hover {
+    cursor: pointer;
+}
+
+.carousel-slider {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 30px;
+}
+
+.carousel-slider-container button.slick-arrow.slick-prev {
+    background: none;
+    left: -2px;
+}
+
+.carousel-slider-container button.slick-arrow.slick-prev::before {
+    font-size: 30px;
+}
+
+.carousel-slider-container button.slick-arrow.slick-next {
+    background: none;
+    right: 7px;
+}
+
+.carousel-slider-container button.slick-arrow.slick-next::before {
+    font-size: 30px;
+}
+
+.details-button {
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    padding: 0px 30px;
+    color: #757575;
+    border: 1px solid blueviolet;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.carousel-title h3, p {
+    color: #eddfdf;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+}

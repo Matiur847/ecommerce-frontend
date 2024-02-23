@@ -1,0 +1,48 @@
+.home-container {
+    padding: 40px 0px;
+}
+
+.product-container {
+    border: 1px solid blue;
+    background-color: #F1F0F5;
+}
+
+.home-product-carousel {
+    z-index: -99;
+}
+
+.banner-container {
+    height: 90px;
+}
+
+.banner-data {
+    border: 1px solid blue;
+}
+
+.banner-logo i {
+    font-size: 40px;
+}
+
+.category-item {
+    background: #fde4e4;
+    padding: 30px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-top: 30px;
+}
+
+.category-item:hover {
+    background-color: rgba(73, 73, 218, 0.699);
+    transform: translateY(-15px);
+    color: #fde4e4;
+}
+
+.category-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-img i {
+    font-size: 30px;
+}
