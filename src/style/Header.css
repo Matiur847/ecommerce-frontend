@@ -23,6 +23,7 @@ nav.navbar {
 }
 
 .navbar-logo {
+    cursor: pointer;
     color: black;
 }
 

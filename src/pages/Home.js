@@ -67,7 +67,7 @@ const Home = () => {
                     <Row>
                         {
                             bannerData.map((item, index) => (
-                                <Col lg='3' md='4' sm='6' xs='6'>
+                                <Col lg='3' md='4' sm='6' xs='6' key={index}>
                                     <div className="category-item d-flex align-items-center gap-3">
                                         <div className="category-img">
                                             {item.logo}

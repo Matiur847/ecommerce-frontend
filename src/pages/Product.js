@@ -4,8 +4,8 @@ import Helmet from '../components/Helmet/Helmet';
 const Product = () => {
     return (
         <Helmet title='Product'>
-            <div>
-                This is product page
+            <div className='product-container'>
+                
             </div>
         </Helmet>
     );
