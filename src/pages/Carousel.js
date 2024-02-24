@@ -44,19 +44,19 @@ const Carousel = () => {
           <div className="carousel-container border h-full">
             <p className="mt-2">All Category</p>
             <div className="carousel-category">
-              <i class="ri-smartphone-line"></i>
+              <i className="ri-smartphone-line"></i>
               <span>Mobile</span>
             </div>
             <div className="carousel-category">
-              <i class="ri-infinity-line"></i>
+              <i className="ri-infinity-line"></i>
               <span>All Mobile Gadget's</span>
             </div>
             <div className="carousel-category">
-              <i class="ri-macbook-line"></i>
+              <i className="ri-macbook-line"></i>
               <span className="gap-2">Laptop</span>
             </div>
             <div className="carousel-category">
-              <i class="ri-alipay-fill"></i>
+              <i className="ri-alipay-fill"></i>
               <span>Laptop Accessories</span>
             </div>
           </div>
