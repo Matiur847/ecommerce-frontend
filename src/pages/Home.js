@@ -27,7 +27,7 @@ const Home = () => {
 
     {
       logo: <i className="ri-text-wrap"></i>,
-      title: "90 days return",
+      title: "7 days return",
       para: "For all users",
     },
 

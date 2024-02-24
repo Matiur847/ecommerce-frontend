@@ -11,7 +11,18 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 
+import ReactStars from "react-rating-stars-component";
+
 const Product = ({ products }) => {
+  const options = {
+    edit: false,
+    color: "rgba(20,20,20,0.1)",
+    activeColor: "tomato",
+    size: window.innerWidth < 600 ? 20 : 25,
+    value: products?.ratings,
+    isHalf: true,
+  };
+
   console.log(products);
   return (
     <Helmet title="Products">
@@ -26,24 +37,39 @@ const Product = ({ products }) => {
                 <Card sx={{ width: 520, maxWidth: "100%", boxShadow: "lg" }}>
                   <CardOverflow>
                     <AspectRatio>
-                      <img src={laptop} loading="lazy" alt="Product Img" className="productImg" />
+                      <img
+                        src={laptop}
+                        loading="lazy"
+                        alt="Product Img"
+                        className="productImg"
+                      />
                     </AspectRatio>
                   </CardOverflow>
                   <CardContent>
+                    <Typography level="body-xs">
+                      Price: ${item.price}
+                    </Typography>
                     <Typography
                       level="title-sm"
                       sx={{ mt: 1, fontWeight: "xl" }}
                     >
-                      Price: ${item.price}
+                      {item.name}
                     </Typography>
-                    <Typography level="body-xs">Bluetooth Headset</Typography>
 
                     <Typography level="body-sm">
-                      <b>{item.stock}</b> left in stock!
+                      <div className="product-stock-details">
+                        <b>{item.stock}</b> left in stock!
+                        <div className="react-starts d-flex align-items-center justify-content-start">
+                          <ReactStars {...options} />{" "}
+                          <span>{`(${products.numOfReview || 0})`}</span>
+                        </div>
+                      </div>
                     </Typography>
                   </CardContent>
                   <div className="add-cart">
-                    <button>Add To <i className="ri-shopping-cart-line"></i></button>
+                    <button>
+                      Add To <i className="ri-shopping-cart-line"></i>
+                    </button>
                   </div>
                 </Card>
               </div>
