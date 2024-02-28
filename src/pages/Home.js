@@ -111,7 +111,7 @@ const Home = () => {
       </Col>
     ));
   } else if (status === "failed") {
-    <h1>{error}</h1>;
+    data = <h1>{error}</h1>;
   }
 
   return (

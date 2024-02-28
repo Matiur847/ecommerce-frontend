@@ -10,7 +10,6 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   const { product, status, error } = useSelector((state) => state.product);
-  console.log(product);
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [id, dispatch]);
@@ -22,6 +21,13 @@ const ProductDetails = () => {
         <HashLoader color="#000000" />
       </div>
     );
+  } else if(status === 'succeeded') {
+    data = (
+        <div>
+            <h2>{product.product?.ratings}</h2>
+        </div>)
+  } else if(status === 'failed') {
+    data = <h1>{error}</h1>;
   }
 
   return (
