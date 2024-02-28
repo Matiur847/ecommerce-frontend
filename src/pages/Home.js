@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from "react";
-import "../style/Home.css";
-import Helmet from "../components/Helmet/Helmet";
-import axios from "axios";
+
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import Helmet from "../components/Helmet/Helmet";
+import "../style/Home.css";
 import Carousel from "./Carousel";
-import Product from "./Product";
+import { Link } from "react-router-dom";
+
+import AspectRatio from "@mui/joy/AspectRatio";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Typography from "@mui/joy/Typography";
+import ReactStars from "react-rating-stars-component";
+import laptop from "../img/laptop.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProduct,
+} from "../store/productSlice/productSlice";
+import HashLoader from "react-spinners/HashLoader";
 
 const Home = () => {
-  const [products, setProducts] = useState();
+  const dispatch = useDispatch();
+  const { products, status, error } = useSelector((state) => state.product);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4242/api/v1/products")
-      .then((data) => {
-        setProducts(data.data.allProduct);
-      })
-      .catch((error) => console.log("Error", error.message));
-  }, []);
+    dispatch(fetchProduct());
+  }, [dispatch]);
 
   const bannerData = [
     {
@@ -44,6 +53,67 @@ const Home = () => {
     },
   ];
 
+  let data;
+  if (status === "loading") {
+    data = (
+      <div className="loading-spinner">
+        <HashLoader color="#000000" />
+      </div>
+    );
+  } else if (status === "succeeded") {
+    data = products.allProduct?.map((product, index) => (
+      <Col lg="3" md="4" sm="6" xs="6" key={index}>
+        <div className="product-card-container mb-3">
+          <Card>
+            <CardOverflow>
+              <AspectRatio>
+                <Link to={product._id}>
+                <img
+                  src={laptop}
+                  loading="lazy"
+                  alt={product.name}
+                  className="productImg"
+                />
+                </Link>
+              </AspectRatio>
+            </CardOverflow>
+            <CardContent>
+              <Typography level="body-xs">Price: ${product.price}</Typography>
+              <Typography level="title-sm" sx={{ mt: 1, fontWeight: "xl" }}>
+                {product.name}
+              </Typography>
+
+              <Typography level="body-sm">
+                <div className="product-stock-details">
+                  {product.stock < 1 ? (
+                    <span className="stock-product">Stock Out</span>
+                  ) : (
+                    <span className="stock-product">Stock {product.stock}</span>
+                  )}
+                  <div className="react-starts d-flex align-items-center justify-content-start">
+                    <ReactStars
+                      value={product.ratings}
+                      edit={false}
+                      isHalf={true}
+                    />{" "}
+                    <span>{`(${product.numOfReview})`}</span>
+                  </div>
+                </div>
+              </Typography>
+            </CardContent>
+            <div className="add-cart">
+              <button>
+                Add To <i className="ri-shopping-cart-line"></i>
+              </button>
+            </div>
+          </Card>
+        </div>
+      </Col>
+    ));
+  } else if (status === "failed") {
+    <h1>{error}</h1>;
+  }
+
   return (
     <Helmet title="Home">
       <div className="home-container">
@@ -54,19 +124,22 @@ const Home = () => {
           <Row>
             {bannerData.map((item, index) => (
               <Col lg="3" md="4" sm="6" xs="6" key={index}>
-                <div className="category-item d-flex align-items-center gap-3">
+                <h4 className="category-item d-flex align-items-center gap-3">
                   <div className="category-img">{item.logo}</div>
                   <div className="category-title">
                     <h6>{item.title}</h6>
-                    {/* <p>{item.para}</p> */}
                   </div>
-                </div>
+                </h4>
               </Col>
             ))}
           </Row>
-          <div className="products">
-            <Product products={products} />
-          </div>
+
+          <Row>
+            <div className="ui-title mt-5 mb-2">
+              <h3>Just For You</h3>
+            </div>
+            {data}
+          </Row>
         </Container>
       </div>
     </Helmet>

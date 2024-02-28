@@ -2,10 +2,10 @@ import React from "react";
 import "../style/Carousel.css";
 import { Col, Row } from "react-bootstrap";
 import Slider from "react-slick";
-import mobile from '../img/mobile.jpg'
+import mobile from "../img/mobile.jpg";
 // import mobile from '../img/rsz_mobile.jpg'
-import laptop from '../img/laptop.jpg'
-import gadget from '../img/gadget.jpg'
+import laptop from "../img/laptop.jpg";
+import gadget from "../img/gadget.jpg";
 
 const Carousel = () => {
   const settings = {
@@ -22,17 +22,17 @@ const Carousel = () => {
   const slides = [
     {
       title: "Mobile",
-      para: 'Best Mobile ever',
+      para: "Best Mobile ever",
       image: mobile,
     },
     {
       title: "Laptop",
-      para: 'Best Laptop for you',
+      para: "Best Laptop for you",
       image: laptop,
     },
     {
       title: "Gadeget",
-      para: 'All new Gadget here',
+      para: "All new Gadget here",
       image: gadget,
     },
   ];
