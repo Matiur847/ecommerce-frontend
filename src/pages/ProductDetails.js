@@ -12,12 +12,12 @@ import google from "../img/google.avif";
 import laptop from "../img/laptop.jpg";
 import mobile from "../img/mobile.jpg";
 import gadget from "../img/gadget.jpg";
+import Review from "./Review";
 
 const ProductDetails = () => {
   const id = useParams();
   const dispatch = useDispatch();
   const [mainImg, setMainImg] = useState("");
-  console.log(mainImg);
 
   const { product, status, error } = useSelector((state) => state.product);
   useEffect(() => {
@@ -52,7 +52,7 @@ const ProductDetails = () => {
   } else if (status === "succeeded") {
     data = (
       <Row>
-        <Col md="4">
+        <Col md="4" className="detils-sections">
           <div className="product-details-img-container d-flex align-items-center">
             <div className="image3 gap-3 align-items-center">
               {image.map((item, index) => (
@@ -94,7 +94,11 @@ const ProductDetails = () => {
           <div className="product-title-container">
             <h4>{product.product?.name}</h4>
             <div className="react-starts d-flex ">
-              <ReactStars edit={false} isHalf={true} value={product.product.ratings} />{" "}
+              <ReactStars
+                edit={false}
+                isHalf={true}
+                value={product.product?.ratings}
+              />{" "}
               <span>{`(${product.product?.numOfReview})`}</span>
             </div>
 
@@ -104,9 +108,9 @@ const ProductDetails = () => {
               </b>
               <p className="single-desc">{product.product?.description}</p>
 
-              <div className="product-stocks text-center mb-5">
-                <h4>Order now, before stock out this product</h4>
-                <div className="sold-progress">
+              <div className="product-stocks mb-5">
+                <h4 className="text-center">Order now, before stock out the product</h4>
+                <div className="sold-progress mt-3">
                   <div className="sold-items d-flex">
                     <span className="mb-1">STOCK NOW</span>
                   </div>
@@ -117,6 +121,17 @@ const ProductDetails = () => {
                       label={product.product?.stock}
                     />
                   </div>
+                  {
+                    product.product?.reviews && product.product?.reviews[0] ? (
+                      <div className="reviews d-flex align-items-center mt-3">
+                        {
+                          product.product?.reviews && product.product.reviews.map((review, index) => (
+                            <Review review={review} />
+                          ))
+                        }
+                      </div>
+                    ) : <p className="d-flex mt-3 no-review">No Reviews Yet!</p>
+                  }
                 </div>
               </div>
             </div>
@@ -125,7 +140,7 @@ const ProductDetails = () => {
               <p>Quantity</p>
               <div className="quantityBox">
                 <i class="ri-subtract-line"></i>
-                <i class="ri-number-0"></i>
+                <span>0</span>
                 <i class="ri-add-line"></i>
               </div>
               <div className="addCart-btn mt-3 mb-5">
@@ -142,15 +157,13 @@ const ProductDetails = () => {
       </Row>
     );
   } else if (status === "failed") {
-    data = <h1>{error}</h1>;
+    data = <h1 className="network-error">{error}</h1>;
   }
 
   return (
     <Helmet title="Details">
       <div className="productDetails-section mt-5">
-        <Container>
-          {data}
-        </Container>
+        <Container>{data}</Container>
       </div>
     </Helmet>
   );
