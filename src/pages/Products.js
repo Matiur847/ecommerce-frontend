@@ -107,8 +107,8 @@ const Products = () => {
           <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
             <Pagination
               activePage={currentPage}
-              itemsCountPerPage={8}
-              totalItemsCount={12}
+              itemsCountPerPage={products.resultPerPage}
+              totalItemsCount={product.totalProduct}
               onChange={setCurrentPageNumber}
               nextPageText="Next"
               prevPageText="Prev"
