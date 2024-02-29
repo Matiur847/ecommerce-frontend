@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import '../style/Products.css'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../store/productSlice/productSlice";
 import HashLoader from "react-spinners/HashLoader";
@@ -12,16 +13,26 @@ import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
 import { Col, Container, Row } from "react-bootstrap";
 import laptop from "../img/laptop.jpg";
+import Pagination from "react-js-pagination";
 
 const Products = () => {
   const { keyword } = useParams();
-  const { products, status, error } = useSelector((state) => state.product);
+  const { products, totalProduct, resultPerPage, status, error } = useSelector(
+    (state) => state.product
+  );
+  console.log(products)
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const setCurrentPageNumber = (e) => {
+    setCurrentPage(e);
+  };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProduct(keyword));
-  }, [dispatch, keyword]);
+    dispatch(fetchProduct(keyword, currentPage));
+  }, [dispatch, keyword, currentPage]);
 
   let data;
   if (status === "loading") {
@@ -92,6 +103,23 @@ const Products = () => {
             <h3>All Products</h3>
           </div>
           {data}
+
+          <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resultPerPage}
+              totalItemsCount={totalProduct}
+              onChange={setCurrentPageNumber}
+              nextPageText="Next"
+              prevPageText="Prev"
+              firstPageText="1st"
+              lastPageText="Last"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive"
+              activeLinkClass="pageLinkActive"
+            />
+          </div>
         </Row>
       </Container>
     </div>
