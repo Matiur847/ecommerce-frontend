@@ -1,0 +1,98 @@
+.product-details-img-container img {
+    cursor: pointer;
+}
+
+.product-title-container h4 {
+    margin: 0;
+}
+
+.image3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-stocks {
+    border-radius: 10px;
+    background-color: #f3e7e7;
+    padding: 15px 20px;
+}
+
+.product-stocks h4 {
+    color: #383636dc;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+}
+
+.sold-items span {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+
+.react-starts {
+    border-bottom: 1px solid rgb(205, 205, 231);
+    padding: 3px 0px;
+}
+
+.single-desc {
+    border-bottom: 1px solid rgb(205, 205, 231);
+    padding: 3px 0px;
+}
+
+.productDetils-order p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    color: #383636dc;
+    margin-bottom: 5px;
+}
+
+.progress {
+    border: 1px solid rgb(189, 185, 185);
+    box-shadow: 1px 1px 1px rgba(250, 128, 114, 0.76);
+}
+
+.quantityBox {
+    display: inline-block;
+    background-color: azure;
+}
+
+.quantityBox i {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.firstBtn {
+    background-color: black;
+    border: none;
+    color: rgb(231, 226, 226);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 15px;
+    border-radius: 2px;
+    transition: 0.3s ease-in-out;
+}
+
+.firstBtn:hover {
+    background-color: rgba(0, 0, 0, 0.822);
+    color: white;
+}
+
+.checkout {
+    background-color: orange;
+    border: none;
+    color: rgb(252, 246, 246);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 15px;
+    border-radius: 2px;
+    margin-left: 13px;
+    transition: 0.3s ease-in-out;
+}
+
+.checkout:hover {
+    background-color: rgba(255, 166, 0, 0.781);
+    color: white;
+}
