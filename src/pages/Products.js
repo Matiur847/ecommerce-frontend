@@ -16,22 +16,24 @@ import laptop from "../img/laptop.jpg";
 import Pagination from "react-js-pagination";
 
 const Products = () => {
-  const { keyword } = useParams();
-  const { products, totalProduct, resultPerPage, status, error } = useSelector(
+  let { keyword } = useParams();
+  const { products, status, error } = useSelector(
     (state) => state.product
   );
-  console.log(products)
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const setCurrentPageNumber = (e) => {
-    setCurrentPage(e);
+    setCurrentPage(e)
   };
 
   const dispatch = useDispatch();
 
+  if(!keyword) {
+    keyword = ''
+  }
+
   useEffect(() => {
-    dispatch(fetchProduct(keyword, currentPage));
+    dispatch(fetchProduct({keyword, currentPage}));
   }, [dispatch, keyword, currentPage]);
 
   let data;
@@ -108,7 +110,7 @@ const Products = () => {
             <Pagination
               activePage={currentPage}
               itemsCountPerPage={products.resultPerPage}
-              totalItemsCount={product.totalProduct}
+              totalItemsCount={products.totalProduct}
               onChange={setCurrentPageNumber}
               nextPageText="Next"
               prevPageText="Prev"

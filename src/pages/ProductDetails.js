@@ -126,7 +126,7 @@ const ProductDetails = () => {
                       <div className="reviews d-flex align-items-center mt-3">
                         {
                           product.product?.reviews && product.product.reviews.map((review, index) => (
-                            <Review review={review} />
+                            <Review review={review} key={index} />
                           ))
                         }
                       </div>

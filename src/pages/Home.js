@@ -21,10 +21,11 @@ import HashLoader from "react-spinners/HashLoader";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.product);
+  const { products, status, error } = useSelector((state) => state.product)
+  console.log('homeProduct', products)
 
   useEffect(() => {
-    dispatch(fetchProduct());
+    dispatch(fetchProduct('keyword'));
   }, [dispatch]);
 
   const bannerData = [
@@ -67,7 +68,7 @@ const Home = () => {
           <Card>
             <CardOverflow>
               <AspectRatio>
-                <Link to={product._id}>
+                <Link to={`/product/${product._id}`}>
                 <img
                   src={laptop}
                   loading="lazy"

@@ -32,7 +32,6 @@ const Header = () => {
         <div className="search-icon d-flex align-items-center">
           <form onSubmit={searchHandler}>
             <input type="text" placeholder="Search Product" onChange={(e) => setKeyword(e.target.value)} />
-            <button>Search</button>
           </form>
         </div>
         <div className="nav-menu-link-container">

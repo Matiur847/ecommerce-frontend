@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const fetchProduct = createAsyncThunk('/products', async (keyword = '', currentPage = 1) => {
+const fetchProduct = createAsyncThunk('/products', async (data) => {
   try {
+    const { keyword = '', currentPage} = data;
+    // console.log('currentPage', keyword)
     let link = `http://localhost:4242/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}`
     const response = await axios.get(link);
     return response.data;
@@ -28,7 +30,7 @@ const initialState = {
 };
 
 const productSlice = createSlice({
-  name: "product",
+  name: "productsss",
   initialState,
   reducers: {
     allProduct: (state, action) => {
@@ -37,6 +39,10 @@ const productSlice = createSlice({
     productDetails: (state, action) => {
       // const id = action.payload.id
       state.product = action.payload
+    },
+    paginationNumber: (state, action) => {
+      const currentPage = action.payload
+      console.log('paginationNumber', currentPage)
     }
   },
   extraReducers: (builder) => {
