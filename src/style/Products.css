@@ -1,0 +1,11 @@
+.price-range-title p {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+    margin-left: -130px;
+}
+
+/* .price-range-slider {
+    display: flex;
+    justify-content: flex-end;
+} */

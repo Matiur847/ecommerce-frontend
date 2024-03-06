@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../style/Products.css'
+import "../style/Products.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../store/productSlice/productSlice";
 import HashLoader from "react-spinners/HashLoader";
@@ -11,30 +11,40 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import laptop from "../img/laptop.jpg";
 import Pagination from "react-js-pagination";
+import RangeSlider from "react-bootstrap-range-slider";
+import MultiRangeSlider from "multi-range-slider-react";
 
 const Products = () => {
+  const [minValue, set_minValue] = useState(0);
+  const [maxValue, set_maxValue] = useState(2500000);
+  const handleInput = (e) => {
+    e.preventDefault();
+    maxValue = 250000;
+  };
+
+  console.log("setPriceHandler", minValue, maxValue);
+
   let { keyword } = useParams();
-  const { products, status, error } = useSelector(
-    (state) => state.product
-  );
+  const { products, status, error } = useSelector((state) => state.product);
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const setCurrentPageNumber = (e) => {
-    setCurrentPage(e)
+    setCurrentPage(e);
   };
 
   const dispatch = useDispatch();
 
-  if(!keyword) {
-    keyword = ''
+  if (!keyword) {
+    keyword = "";
   }
 
   useEffect(() => {
-    dispatch(fetchProduct({keyword, currentPage}));
-  }, [dispatch, keyword, currentPage]);
+    dispatch(fetchProduct({ keyword, currentPage, minValue, maxValue }));
+  }, [dispatch, keyword, currentPage, minValue, maxValue]);
 
   let data;
   if (status === "loading") {
@@ -50,7 +60,7 @@ const Products = () => {
           <Card>
             <CardOverflow>
               <AspectRatio>
-                <Link to={product._id}>
+                <Link to={`/product/${product._id}`}>
                   <img
                     src={laptop}
                     loading="lazy"
@@ -101,27 +111,49 @@ const Products = () => {
     <div>
       <Container>
         <Row>
-          <div className="ui-title mt-5 mb-2">
-            <h3>All Products</h3>
+          <div className="ui-title mt-5 mb-2 d-flex align-items-center justify-content-between">
+            <div className="ui-titles">
+              <h3>All Products</h3>
+            </div>
+            <div className="price-range-title gap-3">
+              <p>Price Filter</p>
+            </div>
+          </div>
+          <div className="price-range-slider">
+            <form>
+              <input
+                onChange={(e) => set_minValue(e.target.value)}
+                type="text"
+                placeholder="Min Price"
+              />
+              <input
+                onChange={(e) => set_maxValue(e.target.value)}
+                type="text"
+                placeholder="Max Price"
+              />
+              <Button>Clear Filter</Button>
+            </form>
           </div>
           {data}
 
-          <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={products.resultPerPage}
-              totalItemsCount={products.totalProduct}
-              onChange={setCurrentPageNumber}
-              nextPageText="Next"
-              prevPageText="Prev"
-              firstPageText="1st"
-              lastPageText="Last"
-              itemClass="page-item"
-              linkClass="page-link"
-              activeClass="pageItemActive"
-              activeLinkClass="pageLinkActive"
-            />
-          </div>
+          {products.resultPerPage < products.totalProduct && (
+            <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={products.resultPerPage}
+                totalItemsCount={products.totalProduct}
+                onChange={setCurrentPageNumber}
+                nextPageText="Next"
+                prevPageText="Prev"
+                firstPageText="1st"
+                lastPageText="Last"
+                itemClass="page-item"
+                linkClass="page-link"
+                activeClass="pageItemActive"
+                activeLinkClass="pageLinkActive"
+              />
+            </div>
+          )}
         </Row>
       </Container>
     </div>

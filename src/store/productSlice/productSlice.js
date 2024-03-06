@@ -3,9 +3,9 @@ import axios from "axios";
 
 const fetchProduct = createAsyncThunk('/products', async (data) => {
   try {
-    const { keyword = '', currentPage} = data;
-    // console.log('currentPage', keyword)
-    let link = `http://localhost:4242/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}`
+    const { keyword = '', currentPage, minValue = 0, maxValue = 2500000} = data;  
+    console.log('priceSlice', minValue, maxValue)
+    let link = `http://localhost:4242/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${minValue}&price[lte]=${maxValue}`
     const response = await axios.get(link);
     return response.data;
   } catch (error) {
