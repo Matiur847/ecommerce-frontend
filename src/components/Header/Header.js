@@ -11,17 +11,17 @@ const Header = () => {
   const handleClose = () => offcanSetShow(false);
   const handleShow = () => offcanSetShow(true);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const searchHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(keyword.trim()) {
-      navigate(`/products/${keyword}`)
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
     } else {
-      navigate('/products')
+      navigate("/products");
     }
-  }
+  };
 
   return (
     <div className="header">
@@ -31,7 +31,11 @@ const Header = () => {
         </div>
         <div className="search-icon d-flex align-items-center">
           <form onSubmit={searchHandler}>
-            <input type="text" placeholder="Search Product" onChange={(e) => setKeyword(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Search Product"
+              onChange={(e) => setKeyword(e.target.value)}
+            />
           </form>
         </div>
         <div className="nav-menu-link-container">
@@ -63,7 +67,11 @@ const Header = () => {
                 <p>Empty Cart</p>
               </Modal.Body>
             </Modal>
-            <button className="header-login-button">Login</button>
+            <div className="user-component">
+              <Link to={"/login-register"}>
+                <i className="ri-user-3-fill cart-icon"></i>
+              </Link>
+            </div>
             <div className="offcanvas-container">
               <div className="mobile-menu">
                 <i className="ri-menu-line" onClick={handleShow}></i>

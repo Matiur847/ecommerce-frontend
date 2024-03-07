@@ -67,6 +67,10 @@ nav.navbar {
     font-size: 20px;
 }
 
+.user-component a {
+    text-decoration: none;
+}
+
 span sup {
     background-color: #1580d8;
     padding: 0px 5px;
