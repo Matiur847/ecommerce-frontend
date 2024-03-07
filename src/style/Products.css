@@ -1,11 +1,32 @@
+.products-section {
+    min-height: 70vh;
+}
+
 .price-range-title p {
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 500;
-    margin-left: -130px;
 }
 
-/* .price-range-slider {
-    display: flex;
-    justify-content: flex-end;
-} */
+.price-range-slider p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.user-category-items ul li span {
+    cursor: pointer;
+    margin: 0;
+}
+
+.price-range-slider span {
+    font-weight: 600;
+    color: #383636dc;
+}
+
+.range-category h5 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    color: #383636dc;
+}

@@ -11,24 +11,29 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import laptop from "../img/laptop.jpg";
 import Pagination from "react-js-pagination";
-import RangeSlider from "react-bootstrap-range-slider";
-import MultiRangeSlider from "multi-range-slider-react";
+
+import RangeSlider from "react-range-slider-input";
+import "react-range-slider-input/dist/style.css";
+
+import ReactSlider from "react-bootstrap-range-slider";
+
+const categoryes = ["mobile", "Laptop", "Gadgets"];
 
 const Products = () => {
-  const [minValue, set_minValue] = useState(0);
-  const [maxValue, set_maxValue] = useState(2500000);
-  const handleInput = (e) => {
-    e.preventDefault();
-    maxValue = 250000;
-  };
+  const [price, setPrice] = useState([0, 250000]);
+  const [category, setCategoy] = useState("");
+  const [ratings, setRatings] = useState(0);
 
-  console.log("setPriceHandler", minValue, maxValue);
+  const handleInput = (e) => {
+    setPrice(e);
+  };
 
   let { keyword } = useParams();
   const { products, status, error } = useSelector((state) => state.product);
+  console.log("Ratings", ratings);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -43,8 +48,8 @@ const Products = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchProduct({ keyword, currentPage, minValue, maxValue }));
-  }, [dispatch, keyword, currentPage, minValue, maxValue]);
+    dispatch(fetchProduct({ keyword, currentPage, price, category, ratings }));
+  }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   let data;
   if (status === "loading") {
@@ -56,7 +61,7 @@ const Products = () => {
   } else if (status === "succeeded") {
     data = products.allProduct?.map((product, index) => (
       <Col lg="3" md="4" sm="6" xs="6" key={index}>
-        <div className="product-card-container mb-3">
+        <div className="product-card-container mb-3 mt-4">
           <Card>
             <CardOverflow>
               <AspectRatio>
@@ -104,11 +109,16 @@ const Products = () => {
       </Col>
     ));
   } else if (status === "failed") {
-    data = <h1 className="network-error">{error}</h1>;
+    data = (
+      <h1 className="network-error">
+        Somthing Worng, Check your Internet Connection!
+        {error}
+      </h1>
+    );
   }
 
   return (
-    <div>
+    <div className="products-section">
       <Container>
         <Row>
           <div className="ui-title mt-5 mb-2 d-flex align-items-center justify-content-between">
@@ -116,26 +126,54 @@ const Products = () => {
               <h3>All Products</h3>
             </div>
             <div className="price-range-title gap-3">
-              <p>Price Filter</p>
+              <p>Filter</p>
             </div>
           </div>
-          <div className="price-range-slider">
-            <form>
-              <input
-                onChange={(e) => set_minValue(e.target.value)}
-                type="text"
-                placeholder="Min Price"
+          <div className="price-range-slider d-flex justify-content-between">
+            <div className="range">
+              <p className="mb-2">Price Range</p>
+              <div className="price-value mb-3">
+                <span className="mt-5">{`Min Price: ${price[0]}`}</span> <br />
+                <span>{`Max Price: ${price[1]}`}</span>
+              </div>
+              <RangeSlider
+                defaultValue={price}
+                min={0}
+                max={25000}
+                value={price}
+                setp={2000}
+                onInput={(e) => handleInput(e)}
               />
-              <input
-                onChange={(e) => set_maxValue(e.target.value)}
-                type="text"
-                placeholder="Max Price"
-              />
-              <Button>Clear Filter</Button>
-            </form>
+              <div className="fieldset-container mt-3">
+                <fieldset>
+                  <span>Filter With Rating</span>
+                  <ReactSlider
+                    max={5}
+                    value={ratings}
+                    defaultValue={5}
+                    onChange={(e) => setRatings(e.target.value)}
+                    tooltip="auto"
+                    tooltipPlacement="top"
+                  />
+                </fieldset>
+              </div>
+            </div>
+            <div className="range-category">
+              <h5>Category</h5>
+              {categoryes.map((category, index) => (
+                <div className="user-category-items" key={index}>
+                  <ul>
+                    <li>
+                      <span onClick={() => setCategoy(category)}>
+                        {category}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
           {data}
-
           {products.resultPerPage < products.totalProduct && (
             <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
               <Pagination
