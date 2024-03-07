@@ -68,7 +68,7 @@ const Header = () => {
               </Modal.Body>
             </Modal>
             <div className="user-component">
-              <Link to={"/login-register"}>
+              <Link to={"/login"}>
                 <i className="ri-user-3-fill cart-icon"></i>
               </Link>
             </div>

@@ -1,12 +1,9 @@
 import React from "react";
-import "../style/LoginRegister.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../style/Register.css";
 
-const LoginRegister = () => {
-
-  
-
+const Register = () => {
   return (
     <div className="loginComp">
       <Container>
@@ -18,22 +15,20 @@ const LoginRegister = () => {
             <div className="login-container text-center">
               <div className="login-sectino">
                 <div className="login-title">
-                  <p>Login</p>
+                  <p>Register</p>
                   <div className="after-margin d-flex align-items-center justify-content-center"></div>
                 </div>
                 <div className="login-inputField">
                   <form>
+                    <input type="name" placeholder="Name" /> <br />
                     <input type="email" placeholder="Email" /> <br />
                     <input type="password" placeholder="Password" /> <br />
-                    <p className="d-flex justify-content-start">
-                      Forgot Password ?
-                    </p>
-                    <input type="submit" className="login-btn" value="Login" />
+                    <input type="submit" className="login-btn" value="Register" />
                   </form>
                   <p className="mt-2 register-link">
-                    Not Have Account?{" "}
-                    <Link to={"/register"}>
-                      <span>Register</span>
+                    Already Register?{" "}
+                    <Link to={"/login"}>
+                      <span>Login</span>
                     </Link>
                   </p>
                 </div>
@@ -46,4 +41,4 @@ const LoginRegister = () => {
   );
 };
 
-export default LoginRegister;
+export default Register;
