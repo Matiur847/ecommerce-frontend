@@ -33,9 +33,9 @@ const Products = () => {
 
   let { keyword } = useParams();
   const { products, status, error } = useSelector((state) => state.product);
-  console.log("Ratings", ratings);
+  console.log("Products", products);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  let [currentPage, setCurrentPage] = useState(1);
 
   const setCurrentPageNumber = (e) => {
     setCurrentPage(e);
@@ -171,25 +171,34 @@ const Products = () => {
                   </ul>
                 </div>
               ))}
+              <form action="">
+                <button className="clear-filter" variant="light">Clear Filter</button>
+              </form>
             </div>
           </div>
           {data}
           {products.resultPerPage < products.totalProduct && (
             <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
-              <Pagination
-                activePage={currentPage}
-                itemsCountPerPage={products.resultPerPage}
-                totalItemsCount={products.totalProduct}
-                onChange={setCurrentPageNumber}
-                nextPageText="Next"
-                prevPageText="Prev"
-                firstPageText="1st"
-                lastPageText="Last"
-                itemClass="page-item"
-                linkClass="page-link"
-                activeClass="pageItemActive"
-                activeLinkClass="pageLinkActive"
-              />
+              {products.allProduct.length ? (
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={products.resultPerPage}
+                  totalItemsCount={products.totalProduct}
+                  onChange={setCurrentPageNumber}
+                  nextPageText="Next"
+                  prevPageText="Prev"
+                  firstPageText="1st"
+                  lastPageText="Last"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  activeClass="pageItemActive"
+                  activeLinkClass="pageLinkActive"
+                />
+              ) : (
+                <div>
+                  <h3 className="productNotFound">Product Not Found!</h3>
+                </div>
+              )}
             </div>
           )}
         </Row>

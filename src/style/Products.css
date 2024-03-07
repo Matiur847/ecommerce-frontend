@@ -30,3 +30,17 @@
     font-weight: 600;
     color: #383636dc;
 }
+
+.productNotFound {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    color: #383636dc;
+}
+
+.clear-filter {
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
