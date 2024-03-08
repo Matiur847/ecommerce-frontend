@@ -1,3 +1,7 @@
+.login-inputField form a {
+  text-decoration: none;
+}
+
 .loginComp {
   min-height: 70vh;
 }
@@ -40,7 +44,7 @@
 }
 
 .login-btn {
-  background-color: #DC7062;
+  background-color: #e05240;
   font-size: 18px;
   font-weight: 600;
   color: #ffff;
@@ -48,6 +52,11 @@
   width: 60%;
   border-radius: 2px;
   outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background-color: #4b1a13c7;
 }
 
 .register-link a {

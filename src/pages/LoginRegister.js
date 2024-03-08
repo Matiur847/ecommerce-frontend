@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/LoginRegister.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const LoginRegister = () => {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  
+  const loginSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(loginEmail, loginPassword)
+    
+  }
 
   return (
     <div className="loginComp">
@@ -22,12 +28,28 @@ const LoginRegister = () => {
                   <div className="after-margin d-flex align-items-center justify-content-center"></div>
                 </div>
                 <div className="login-inputField">
-                  <form>
-                    <input type="email" placeholder="Email" /> <br />
-                    <input type="password" placeholder="Password" /> <br />
-                    <p className="d-flex justify-content-start">
-                      Forgot Password ?
-                    </p>
+                  <form onSubmit={loginSubmitHandler}>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      required
+                    />{" "}
+                    <br />
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      required
+                    />{" "}
+                    <br />
+                    <Link to={"/password/forgot"}>
+                      <p className="d-flex justify-content-start">
+                        Forgot Password ?
+                      </p>
+                    </Link>
                     <input type="submit" className="login-btn" value="Login" />
                   </form>
                   <p className="mt-2 register-link">
