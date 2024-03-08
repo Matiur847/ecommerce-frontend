@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/LoginRegister.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/userSlice/userSlice";
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
+import Spinner from "react-bootstrap/Spinner";
 
 const LoginRegister = () => {
+  const navigate = useNavigate();
+
+  const { user, status, error } = useSelector((state) => state.user);
+  console.log("user", user);
+  const dispatch = useDispatch();
+
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(loginEmail, loginPassword)
-    
-  }
+
+    dispatch(login({ loginEmail, loginPassword }));
+
+    // if (user.message) {
+    //   toast(user.message);
+    // }
+  };
+
+  useEffect(() => {
+    if (user.success === true) {
+      navigate("/register");
+    }
+  });
 
   return (
     <div className="loginComp">
@@ -45,12 +66,17 @@ const LoginRegister = () => {
                       required
                     />{" "}
                     <br />
+                    <p className="user-error-message d-flex align-items-center justify-content-start bg-white">{user.message}</p>
                     <Link to={"/password/forgot"}>
                       <p className="d-flex justify-content-start">
                         Forgot Password ?
                       </p>
                     </Link>
-                    <input type="submit" className="login-btn" value="Login" />
+                    <input
+                      type="submit"
+                      className="login-btn"
+                      value={status === "loading" ? "Please Wait ..." : "Login"}
+                    />
                   </form>
                   <p className="mt-2 register-link">
                     Not Have Account?{" "}

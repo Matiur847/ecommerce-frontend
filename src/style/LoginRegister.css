@@ -62,3 +62,10 @@
 .register-link a {
   text-decoration: none;
 }
+
+.user-error-message {
+  font-size: 12px;
+  color: red;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+}

@@ -5,8 +5,8 @@ import "../style/Register.css";
 import profileUser from "../img/profile.jpg";
 
 const Register = () => {
-  const [avtar, setAvtar] = useState();
-  const [avtarPreview, setAvtarPreview] = useState(profileUser);
+  const [avatar, setAvatar] = useState();
+  const [avatarPreview, setAvatarPreview] = useState(profileUser);
 
   const [user, setUser] = useState({
     name: "",
@@ -26,13 +26,13 @@ const Register = () => {
   };
 
   const registerAllData = (e) => {
-    if (e.target.name === "avtar") {
+    if (e.target.name === "avatar") {
         const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setAvtarPreview(reader.result);
-          setAvtar(reader.result);
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
         }
       };
 
@@ -70,7 +70,7 @@ const Register = () => {
                     <br />
                     <input
                       type="file"
-                      name="avtar"
+                      name="avatar"
                       accept="image/*"
                       placeholder="Password"
                       onChange={registerAllData}
