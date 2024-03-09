@@ -4,15 +4,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/userSlice/userSlice";
-import { toast } from "react-toastify";
-import HashLoader from "react-spinners/HashLoader";
-import Spinner from "react-bootstrap/Spinner";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
 
-  const { user, status, error } = useSelector((state) => state.user);
-  console.log("user", user);
+  const { user, status } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -22,10 +18,6 @@ const LoginRegister = () => {
     e.preventDefault();
 
     dispatch(login({ loginEmail, loginPassword }));
-
-    // if (user.message) {
-    //   toast(user.message);
-    // }
   };
 
   useEffect(() => {
@@ -66,7 +58,7 @@ const LoginRegister = () => {
                       required
                     />{" "}
                     <br />
-                    <p className="user-error-message d-flex align-items-center justify-content-start bg-white">{user.message}</p>
+                    <p className="user-error-message d-flex align-items-center justify-content-start">{user.message}</p>
                     <Link to={"/password/forgot"}>
                       <p className="d-flex justify-content-start">
                         Forgot Password ?

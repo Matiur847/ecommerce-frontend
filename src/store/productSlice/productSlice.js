@@ -63,10 +63,6 @@ const productSlice = createSlice({
         state.error = action.error.message;
       })
 
-
-
-
-
       .addCase(detailsProduct.pending, (state) => {
         state.status = "loading";
       })
