@@ -47,10 +47,9 @@ nav.navbar {
 }
 
 .headerSpeedDial {
-    /* display: flex; */
-    /* position: fixed;
-    top: 0;
-    right: 1px; */
+    display: flex;
+    position: sticky;
+    background-color: blue;
 }
 
 .user-icon span {

@@ -8,3 +8,9 @@ button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeLarge.MuiFab-pr
     width: 50px !important;
     height: 42px !important;
 }
+
+.IsAuthUser-section {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0px;
+}

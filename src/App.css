@@ -10,8 +10,7 @@
 
 .globalSpeedDial {
     display: inline-block;
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 20px;
-    align-items: flex-start;
 }
