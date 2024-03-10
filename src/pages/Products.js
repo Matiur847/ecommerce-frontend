@@ -33,7 +33,6 @@ const Products = () => {
 
   let { keyword } = useParams();
   const { products, status, error } = useSelector((state) => state.product);
-  console.log("Products", products);
 
   let [currentPage, setCurrentPage] = useState(1);
 

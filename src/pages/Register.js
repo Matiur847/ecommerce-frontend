@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/userSlice/userSlice";
 
 const Register = () => {
-  
   const { user, status } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const Register = () => {
         setUser({ ...users, [e.target.name]: e.target.value });
       }
     } catch (error) {
-      // handle your error here 
+      // handle your error here
     }
   };
 
@@ -110,7 +109,9 @@ const Register = () => {
                     <input
                       type="submit"
                       className="login-btn"
-                      value={status === "loading" ? "Please Wait ..." : "Register"}
+                      value={
+                        status === "loading" ? "Please Wait ..." : "Register"
+                      }
                     />
                   </form>
                   <p className="mt-2 register-link">
@@ -126,55 +127,6 @@ const Register = () => {
         </Row>
       </Container>
     </div>
-    // <div>
-    //   <form
-    //     className="signUpForm"
-    //     encType="multipart/form-data"
-    //     onSubmit={registerSubmit}
-    //   >
-    //     <div className="signUpName">
-    //       <input
-    //         type="text"
-    //         placeholder="Name"
-    //         required
-    //         name="name"
-    //         value={name}
-    //         onChange={registerDataChange}
-    //       />
-    //     </div>
-    //     <div className="signUpEmail">
-    //       <input
-    //         type="email"
-    //         placeholder="Email"
-    //         required
-    //         name="email"
-    //         value={email}
-    //         onChange={registerDataChange}
-    //       />
-    //     </div>
-    //     <div className="signUpPassword">
-    //       <input
-    //         type="password"
-    //         placeholder="Password"
-    //         required
-    //         name="password"
-    //         value={password}
-    //         onChange={registerDataChange}
-    //       />
-    //     </div>
-
-    //     <div id="registerImage">
-    //       <img src={avatarPreview} alt="Avatar Preview" />
-    //       <input
-    //         type="file"
-    //         name="avatar"
-    //         accept="image/*"
-    //         onChange={registerDataChange}
-    //       />
-    //     </div>
-    //     <input type="submit" value="Register" className="signUpBtn" />
-    //   </form>
-    // </div>
   );
 };
 

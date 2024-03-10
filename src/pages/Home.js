@@ -22,7 +22,6 @@ import HashLoader from "react-spinners/HashLoader";
 const Home = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.product)
-  console.log('homeProduct', products)
 
   useEffect(() => {
     dispatch(fetchProduct('keyword'));

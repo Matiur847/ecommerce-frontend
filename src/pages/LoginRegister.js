@@ -4,11 +4,13 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/userSlice/userSlice";
+import { toast } from "react-toastify";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
 
   const { user, status } = useSelector((state) => state.user);
+  console.log("user", user);
   const dispatch = useDispatch();
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -17,14 +19,22 @@ const LoginRegister = () => {
   const loginSubmitHandler = (e) => {
     e.preventDefault();
 
+    const token = 63637744
+
+    localStorage.setItem('jwtToken', token)
+
     dispatch(login({ loginEmail, loginPassword }));
   };
 
   useEffect(() => {
     if (user.success === true) {
-      navigate("/register");
+      navigate("/");
+      toast.success("Login Succesfully", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
-  });
+  }, [navigate, user.success]);
 
   return (
     <div className="loginComp">
@@ -58,7 +68,9 @@ const LoginRegister = () => {
                       required
                     />{" "}
                     <br />
-                    <p className="user-error-message d-flex align-items-center justify-content-start">{user.message}</p>
+                    <p className="user-error-message d-flex align-items-center justify-content-start">
+                      {user.message}
+                    </p>
                     <Link to={"/password/forgot"}>
                       <p className="d-flex justify-content-start">
                         Forgot Password ?

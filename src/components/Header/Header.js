@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+  const { user  } = useSelector((state) => state.user)
+  console.log('userForAuth', user)
+
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
 
@@ -68,7 +73,7 @@ const Header = () => {
               </Modal.Body>
             </Modal>
             <div className="user-component">
-              <Link to={"/login"}>
+              <Link to={"/register"} className={user?.user ? 'cartIconDisplay' : ''}>
                 <i className="ri-user-3-fill cart-icon"></i>
               </Link>
             </div>

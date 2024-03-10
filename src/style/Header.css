@@ -53,6 +53,10 @@ nav.navbar {
     border: none;
 }
 
+.cartIconDisplay {
+    display: none;
+}
+
 .user-icon .cart-icon {
     font-size: 25px;
     cursor: pointer;

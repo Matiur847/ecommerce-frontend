@@ -3,10 +3,13 @@ import axios from "axios";
 
 export const login = createAsyncThunk("/login", async (data) => {
   try {
+    console.log(
+      
+    )
     const { loginEmail, loginPassword } = data;
     const config = { Headers: { "Content-Type": "application/json" } };
     const response = await axios.post(
-      "http://localhost:4242/api/v1/login",
+      "/api/v1/login",
       { email: loginEmail, password: loginPassword },
       config
     );
@@ -20,9 +23,20 @@ export const register = createAsyncThunk("/register", async (myForm) => {
   try {
     const config = { Headers: { "content-type": "multipart/form-data" } };
     const response = await axios.post(
-      "http://localhost:4242/api/v1/register",
+      "/api/v1/register",
       myForm,
       config
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const getUserDetails = createAsyncThunk("/user-detail", async () => {
+  try {
+    const response = await axios.get(
+      "/api/v1/user/details"
     );
     return response.data;
   } catch (error) {
@@ -64,6 +78,19 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
+        state.status = "failed";
+        state.user = action.error.message;
+      })
+
+      .addCase(getUserDetails.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getUserDetails.fulfilled, (state, action) => {
+        console.log('action', action)
+        state.status = "succeeded";
+        state.user = action.payload;
+      })
+      .addCase(getUserDetails.rejected, (state, action) => {
         state.status = "failed";
         state.user = action.error.message;
       });
