@@ -46,6 +46,13 @@ nav.navbar {
     color: black;
 }
 
+.headerSpeedDial {
+    /* display: flex; */
+    /* position: fixed;
+    top: 0;
+    right: 1px; */
+}
+
 .user-icon span {
     margin: 0 10px;
     background: none;

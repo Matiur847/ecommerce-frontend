@@ -19,10 +19,6 @@ const LoginRegister = () => {
   const loginSubmitHandler = (e) => {
     e.preventDefault();
 
-    const token = 63637744
-
-    localStorage.setItem('jwtToken', token)
-
     dispatch(login({ loginEmail, loginPassword }));
   };
 
