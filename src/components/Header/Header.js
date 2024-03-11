@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSelector } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
 
 const Header = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user, status } = useSelector((state) => state.user);
 
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
@@ -71,12 +72,18 @@ const Header = () => {
               </Modal.Body>
             </Modal>
             <div className="user-component">
-              <Link
-                to={"/register"}
-                className={user?.user ? "cartIconDisplay" : ""}
-              >
-                <i className="ri-user-3-fill cart-icon"></i>
-              </Link>
+              {status === "loading" ? (
+                <Spinner animation="border" role="status" size="sm" variant="primary">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                <Link
+                  to={"/register"}
+                  className={user?.user ? "cartIconDisplay" : ""}
+                >
+                  <i className="ri-user-3-fill cart-icon"></i>
+                </Link>
+              )}
             </div>
             <div className="offcanvas-container">
               <div className="mobile-menu">

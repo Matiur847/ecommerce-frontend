@@ -7,27 +7,38 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loggedOut } from "../store/userSlice/userSlice";
 import { toast } from "react-toastify";
+import Backdrop from "@mui/material/Backdrop";
+// import Box from "@mui/material/Box";
 
 const IsAuthUser = ({ user }) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dialOption = [
     { icon: <i className="ri-list-check-3"></i>, name: "Orders", func: orders },
-    { icon: <i className="ri-account-circle-line"></i>, name: "Profile", func: account },
+    {
+      icon: <i className="ri-account-circle-line"></i>,
+      name: "Profile",
+      func: account,
+    },
     {
       icon: (
-        <i className="ri-luggage-cart-fill" style={{ color: 'cartItems.length' > 0 ? "tomato" : "unset" }}></i> 
+        <i
+          className="ri-luggage-cart-fill"
+          style={{ color: "cartItems.length" > 0 ? "tomato" : "unset" }}
+        ></i>
       ),
-      name: `Cart(${'cartItems.length'})`,
+      name: `Cart(${"cartItems.length"})`,
       func: cart,
     },
-    { icon: <i className="ri-logout-box-line"></i>, name: "Logout", func: logoutUser },
+    {
+      icon: <i className="ri-logout-box-line"></i>,
+      name: "Logout",
+      func: logoutUser,
+    },
   ];
-
 
   if (user?.user.role === "admin") {
     dialOption.unshift({
@@ -51,7 +62,7 @@ const IsAuthUser = ({ user }) => {
     navigate("/cart");
   }
   function logoutUser() {
-    dispatch(loggedOut(null));   
+    dispatch(loggedOut(null));
     toast.success("Logout Succesfully", {
       position: "top-right",
       autoClose: 2000,
@@ -60,11 +71,13 @@ const IsAuthUser = ({ user }) => {
 
   return (
     <div className="IsAuthUser-section">
+      <Backdrop open={open} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
+        sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={
           <img
             src={user.user.avatar?.url ? user.user.avatar?.url : profileUser}
@@ -73,16 +86,14 @@ const IsAuthUser = ({ user }) => {
           />
         }
       >
-        {
-          dialOption.map((item, index) => (
-            <SpeedDialAction  
+        {dialOption.map((item, index) => (
+          <SpeedDialAction
             key={index}
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
-            />
-          ))
-        }
+          />
+        ))}
       </SpeedDial>
     </div>
   );
