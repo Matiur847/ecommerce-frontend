@@ -7,6 +7,7 @@ import { register } from "../store/userSlice/userSlice";
 
 const Register = () => {
   const { user, status } = useSelector((state) => state.user);
+  console.log('userData', user)
 
   const dispatch = useDispatch();
 

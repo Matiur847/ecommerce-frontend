@@ -22,14 +22,14 @@ const LoginRegister = () => {
   };
 
   useEffect(() => {
-    if (user.success === true) {
+    if (user.user) {
       navigate("/");
       toast.success("Login Succesfully", {
         position: "top-right",
         autoClose: 2000,
       });
     }
-  }, [navigate, user.success]);
+  }, [navigate, user]);
 
   return (
     <div className="loginComp">
