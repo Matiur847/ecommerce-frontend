@@ -19,6 +19,7 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 
 import ReactSlider from "react-bootstrap-range-slider";
+import Helmet from "../components/Helmet/Helmet";
 
 const categoryes = ["mobile", "Laptop", "Gadgets"];
 
@@ -117,92 +118,97 @@ const Products = () => {
   }
 
   return (
-    <div className="products-section">
-      <Container>
-        <Row>
-          <div className="ui-title mt-5 mb-2 d-flex align-items-center justify-content-between">
-            <div className="ui-titles">
-              <h3>All Products</h3>
-            </div>
-            <div className="price-range-title gap-3">
-              <p>Filter</p>
-            </div>
-          </div>
-          <div className="price-range-slider d-flex justify-content-between">
-            <div className="range">
-              <p className="mb-2">Price Range</p>
-              <div className="price-value mb-3">
-                <span className="mt-5">{`Min Price: ${price[0]}`}</span> <br />
-                <span>{`Max Price: ${price[1]}`}</span>
+    <Helmet title='Products'>
+      <div className="products-section">
+        <Container>
+          <Row>
+            <div className="ui-title mt-5 mb-2 d-flex align-items-center justify-content-between">
+              <div className="ui-titles">
+                <h3>All Products</h3>
               </div>
-              <RangeSlider
-                defaultValue={price}
-                min={0}
-                max={25000}
-                value={price}
-                setp={2000}
-                onInput={(e) => handleInput(e)}
-              />
-              <div className="fieldset-container mt-3">
-                <fieldset>
-                  <span>Filter With Rating</span>
-                  <ReactSlider
-                    max={5}
-                    value={ratings}
-                    defaultValue={5}
-                    onChange={(e) => setRatings(e.target.value)}
-                    tooltip="auto"
-                    tooltipPlacement="top"
-                  />
-                </fieldset>
+              <div className="price-range-title gap-3">
+                <p>Filter</p>
               </div>
             </div>
-            <div className="range-category">
-              <h5>Category</h5>
-              {categoryes.map((category, index) => (
-                <div className="user-category-items" key={index}>
-                  <ul>
-                    <li>
-                      <span onClick={() => setCategoy(category)}>
-                        {category}
-                      </span>
-                    </li>
-                  </ul>
+            <div className="price-range-slider d-flex justify-content-between">
+              <div className="range">
+                <p className="mb-2">Price Range</p>
+                <div className="price-value mb-3">
+                  <span className="mt-5">{`Min Price: ${price[0]}`}</span>{" "}
+                  <br />
+                  <span>{`Max Price: ${price[1]}`}</span>
                 </div>
-              ))}
-              <form action="">
-                <button className="clear-filter" variant="light">Clear Filter</button>
-              </form>
-            </div>
-          </div>
-          {data}
-          {products.resultPerPage < products.totalProduct && (
-            <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
-              {products.allProduct.length ? (
-                <Pagination
-                  activePage={currentPage}
-                  itemsCountPerPage={products.resultPerPage}
-                  totalItemsCount={products.totalProduct}
-                  onChange={setCurrentPageNumber}
-                  nextPageText="Next"
-                  prevPageText="Prev"
-                  firstPageText="1st"
-                  lastPageText="Last"
-                  itemClass="page-item"
-                  linkClass="page-link"
-                  activeClass="pageItemActive"
-                  activeLinkClass="pageLinkActive"
+                <RangeSlider
+                  defaultValue={price}
+                  min={0}
+                  max={25000}
+                  value={price}
+                  setp={2000}
+                  onInput={(e) => handleInput(e)}
                 />
-              ) : (
-                <div>
-                  <h3 className="productNotFound">Product Not Found!</h3>
+                <div className="fieldset-container mt-3">
+                  <fieldset>
+                    <span>Filter With Rating</span>
+                    <ReactSlider
+                      max={5}
+                      value={ratings}
+                      defaultValue={5}
+                      onChange={(e) => setRatings(e.target.value)}
+                      tooltip="auto"
+                      tooltipPlacement="top"
+                    />
+                  </fieldset>
                 </div>
-              )}
+              </div>
+              <div className="range-category">
+                <h5>Category</h5>
+                {categoryes.map((category, index) => (
+                  <div className="user-category-items" key={index}>
+                    <ul>
+                      <li>
+                        <span onClick={() => setCategoy(category)}>
+                          {category}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+                <form action="">
+                  <button className="clear-filter" variant="light">
+                    Clear Filter
+                  </button>
+                </form>
+              </div>
             </div>
-          )}
-        </Row>
-      </Container>
-    </div>
+            {data}
+            {products.resultPerPage < products.totalProduct && (
+              <div className="pagination-box mt-3 d-flex align-items-center justify-content-center">
+                {products.allProduct.length ? (
+                  <Pagination
+                    activePage={currentPage}
+                    itemsCountPerPage={products.resultPerPage}
+                    totalItemsCount={products.totalProduct}
+                    onChange={setCurrentPageNumber}
+                    nextPageText="Next"
+                    prevPageText="Prev"
+                    firstPageText="1st"
+                    lastPageText="Last"
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    activeClass="pageItemActive"
+                    activeLinkClass="pageLinkActive"
+                  />
+                ) : (
+                  <div>
+                    <h3 className="productNotFound">Product Not Found!</h3>
+                  </div>
+                )}
+              </div>
+            )}
+          </Row>
+        </Container>
+      </div>
+    </Helmet>
   );
 };
 

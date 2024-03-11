@@ -1,62 +1,49 @@
 import React, { useState } from "react";
+import Helmet from "../components/Helmet/Helmet";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/userSlice/userSlice";
-import Helmet from "../components/Helmet/Helmet";
 
-const Register = () => {
-  const { user, status } = useSelector((state) => state.user);
+const ProfileUpdate = () => {
+  const { user, status, error } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
   const [avatar, setAvatar] = useState();
-
-  const [users, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { name, email, password } = users;
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const registerSubmit = (e) => {
     e.preventDefault();
 
-    let myForm = new FormData();
+    const myForm = new FormData();
 
-    myForm.append("name", name);
-    myForm.append("email", email);
-    myForm.append("password", password);
-    myForm.append("avatar", avatar);
-
-    // console.log('users', myForm);
-    dispatch(register(myForm));
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("avatar", avatar);
+    dispatch('updateProfile'(myForm));
   };
 
   const registerDataChange = (e) => {
     try {
-      if (e.target.name === "avatar") {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = () => {
-          if (reader.readyState === 2) {
-            setAvatar(reader.result);
-          }
-        };
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatar(reader.result);
+        }
+      };
 
-        reader.readAsDataURL(e.target.files[0]);
-      } else {
-        setUser({ ...users, [e.target.name]: e.target.value });
-      }
+      reader.readAsDataURL(e.target.files[0]);
     } catch (error) {
       // handle your error here
     }
   };
 
   return (
-    <Helmet title="Register">
+    <Helmet title="Update Profile">
       <div className="loginComp">
         <Container>
           <Row className="d-flex align-items-center justify-content-center">
@@ -67,7 +54,7 @@ const Register = () => {
               <div className="login-container text-center">
                 <div className="login-sectino">
                   <div className="login-title">
-                    <p>Register</p>
+                    <p>Update Profile</p>
                     <div className="after-margin d-flex align-items-center justify-content-center"></div>
                   </div>
                   <div className="login-inputField">
@@ -92,14 +79,6 @@ const Register = () => {
                       />{" "}
                       <br />
                       <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={registerDataChange}
-                      />{" "}
-                      <br />
-                      <input
                         type="file"
                         name="avatar"
                         accept="image/*"
@@ -115,16 +94,10 @@ const Register = () => {
                         type="submit"
                         className="login-btn"
                         value={
-                          status === "loading" ? "Please Wait ..." : "Register"
+                          status === "loading" ? "Please Wait ..." : "Update"
                         }
                       />
                     </form>
-                    <p className="mt-2 register-link">
-                      Already Register?{" "}
-                      <Link to={"/login"}>
-                        <span>Login</span>
-                      </Link>
-                    </p>
                   </div>
                 </div>
               </div>
@@ -136,4 +109,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ProfileUpdate;

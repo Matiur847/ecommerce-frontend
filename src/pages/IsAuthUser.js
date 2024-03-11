@@ -56,7 +56,7 @@ const IsAuthUser = ({ user }) => {
     navigate("/orders");
   }
   function account() {
-    navigate("/account");
+    navigate("/profile");
   }
   function cart() {
     navigate("/cart");
