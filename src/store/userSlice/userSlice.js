@@ -36,9 +36,10 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
   }
 });
 
-export const logout = createAsyncThunk("/logout", async () => {
+export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    const response = await axios.get("/logout");
+    console.log('data', data)
+    const response = await axios.get("/api/v1/logout");
     return response.data;
   } catch (error) {
     throw error;
@@ -95,14 +96,15 @@ const userSlice = createSlice({
         state.user = action.error.message;
       })
 
-      .addCase(logout.pending, (state) => {
+      .addCase(loggedOut.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(loggedOut.fulfilled, (state, action) => {
         state.status = "succeeded";
+        console.log(action)
         state.user = action.payload;
       })
-      .addCase(logout.rejected, (state, action) => {
+      .addCase(loggedOut.rejected, (state, action) => {
         state.status = "failed";
         state.user = action.error.message;
       })

@@ -61,8 +61,8 @@
 .add-cart {
     padding-top: 15px;
     border-radius: 10px !important;
-  }
-  
+}
+
 .add-cart button {
     border-end-end-radius: 30px;
     position: absolute;
@@ -75,4 +75,4 @@
     font-weight: 600;
     font-family: sans-serif;
     padding: 5px;
-  }
+}

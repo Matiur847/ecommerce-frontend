@@ -10,7 +10,6 @@ const LoginRegister = () => {
   const navigate = useNavigate();
 
   const { user, status } = useSelector((state) => state.user);
-  console.log("user", user);
   const dispatch = useDispatch();
 
   const [loginEmail, setLoginEmail] = useState("");

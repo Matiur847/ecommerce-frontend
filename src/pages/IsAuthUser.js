@@ -5,7 +5,8 @@ import profileUser from "../img/profile-user.png";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../store/userSlice/userSlice";
+import { loggedOut } from "../store/userSlice/userSlice";
+import { toast } from "react-toastify";
 
 const IsAuthUser = ({ user }) => {
 
@@ -50,8 +51,11 @@ const IsAuthUser = ({ user }) => {
     navigate("/cart");
   }
   function logoutUser() {
-    dispatch(logout());
-    alert('Logout Successfully')
+    dispatch(loggedOut(null));   
+    toast.success("Logout Succesfully", {
+      position: "top-right",
+      autoClose: 2000,
+    });
   }
 
   return (
@@ -63,7 +67,7 @@ const IsAuthUser = ({ user }) => {
         open={open}
         icon={
           <img
-            src={user.user.avatar?.url}
+            src={user.user.avatar?.url ? user.user.avatar?.url : profileUser}
             className="SpeedDialIcon "
             alt="Profile"
           />

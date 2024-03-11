@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSelector } from "react-redux";
-import IsAuthUser from "../../pages/IsAuthUser";
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);

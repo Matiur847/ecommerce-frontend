@@ -64,7 +64,7 @@ const Home = () => {
     data = products.allProduct?.map((product, index) => (
       <Col lg="3" md="4" sm="6" xs="6" key={index}>
         <div className="product-card-container mb-3">
-          <Card>
+          <Card sx={{zIndex: 1}}>
             <CardOverflow>
               <AspectRatio>
                 <Link to={`/product/${product._id}`}>
