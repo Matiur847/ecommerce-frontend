@@ -25,7 +25,7 @@ const LoginRegister = () => {
   useEffect(() => {
     if (user.user) {
       navigate("/");
-      toast.success("Login Succesfully", {
+      toast.success("Login Successfully", {
         position: "top-right",
         autoClose: 2000,
       });

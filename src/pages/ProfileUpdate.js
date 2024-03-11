@@ -5,13 +5,15 @@ import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../store/profileSlice/profileSlice";
 import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
+import { useNavigate } from "react-router-dom";
 
 const ProfileUpdate = () => {
   const { user } = useSelector((state) => state.user);
-  const { profile, status } = useSelector((state) => state);
-  console.log(profile);
+  const { profile, status, error } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [avatar, setAvatar] = useState();
   const [name, setName] = useState("");
@@ -51,11 +53,18 @@ const ProfileUpdate = () => {
   };
 
   useEffect(() => {
-    if (user?.user) {
+    if (user) {
       setName(user.user.name);
       setEmail(user.user.email);
     }
-  }, [user, status, profile]);
+    if (profile.success === true) {
+      toast.success("Update Successfully", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      navigate('/profile');
+    }
+  }, [user, status, profile, navigate]);
 
   return (
     <Helmet title="Update Profile">
@@ -102,9 +111,9 @@ const ProfileUpdate = () => {
                         onChange={registerDataChange}
                       />{" "}
                       <br />
-                      <p className="user-error-message d-flex align-items-center justify-content-start">
+                      {/* <p className="user-error-message d-flex align-items-center justify-content-start">
                         {user.message}
-                      </p>
+                      </p> */}
                       <input
                         type="submit"
                         className="login-btn"
