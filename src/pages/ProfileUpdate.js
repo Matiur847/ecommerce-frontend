@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../store/userSlice/userSlice";
+import { updateProfile } from "../store/profileSlice/profileSlice";
+import { toast } from "react-toastify";
 
 const ProfileUpdate = () => {
-  const { user, status, error } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+  const { profile, status } = useSelector((state) => state);
+  console.log(profile);
 
   const dispatch = useDispatch();
 
@@ -23,7 +25,13 @@ const ProfileUpdate = () => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("avatar", avatar);
-    dispatch('updateProfile'(myForm));
+    dispatch(updateProfile(myForm));
+
+    if (profile?.profile) {
+      toast.success("Update Successfully", {
+        autoClose: 2000,
+      });
+    }
   };
 
   const registerDataChange = (e) => {
@@ -41,6 +49,13 @@ const ProfileUpdate = () => {
       // handle your error here
     }
   };
+
+  useEffect(() => {
+    if (user?.user) {
+      setName(user.user.name);
+      setEmail(user.user.email);
+    }
+  }, [user, status, profile]);
 
   return (
     <Helmet title="Update Profile">
@@ -67,7 +82,7 @@ const ProfileUpdate = () => {
                         name="name"
                         placeholder="Name"
                         value={name}
-                        onChange={registerDataChange}
+                        onChange={(e) => setName(e.target.value)}
                       />{" "}
                       <br />
                       <input
@@ -75,7 +90,7 @@ const ProfileUpdate = () => {
                         name="email"
                         placeholder="Email"
                         value={email}
-                        onChange={registerDataChange}
+                        onChange={(e) => setEmail(e.target.value)}
                       />{" "}
                       <br />
                       <input

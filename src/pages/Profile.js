@@ -31,7 +31,7 @@ const Profile = () => {
                       className="w-50"
                     />
                   </div>
-                  <div className="profile-infos">
+                  <div className="profile-infos mt-4">
                     <p>
                       Name: <span>{user.user?.name}</span>
                     </p>
