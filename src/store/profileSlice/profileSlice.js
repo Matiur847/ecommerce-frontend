@@ -18,9 +18,10 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
-export const updatePassword = createAsyncThunk("/update-password", async () => {
+export const updatePassword = createAsyncThunk("/update-password", async (myForm) => {
   try {
-    const response = await axios.get("/api/v1//forgot/password");
+    const config = { Headers: { "Content-Type": "application/json" } };
+    const response = await axios.put("/api/v1/update/password", myForm, config);
     return response.data;
   } catch (error) {
     throw error;

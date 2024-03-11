@@ -5,12 +5,12 @@ import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../store/profileSlice/profileSlice";
 import { toast } from "react-toastify";
-import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
+// import { getUserDetails } from "../store/userSlice/userSlice";
 
 const ProfileUpdate = () => {
   const { user } = useSelector((state) => state.user);
-  const { profile, status, error } = useSelector((state) => state.profile);
+  const { profile, status } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,8 +54,8 @@ const ProfileUpdate = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.user.name);
-      setEmail(user.user.email);
+      setName(user.user?.name);
+      setEmail(user.user?.email);
     }
     if (profile.success === true) {
       toast.success("Update Successfully", {
@@ -63,6 +63,7 @@ const ProfileUpdate = () => {
         autoClose: 2000,
       });
       navigate('/profile');
+      // dispatch(getUserDetails())
     }
   }, [user, status, profile, navigate]);
 

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user, status, error } = useSelector((state) => state.user);
+  const { user} = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const Profile = () => {
                       <Link>
                         <button className="profile-btn">Orders</button>
                       </Link>
-                      <Link>
+                      <Link to={'/change-password'}>
                         <button className="profile-btn">Change Password</button>
                       </Link>
                     </div>
