@@ -26,13 +26,6 @@ const UpdatePassword = () => {
     myForm.set("newPassword", newPassword);
     myForm.set("confirmPassword", confirmPassword);
     dispatch(updatePassword(myForm));
-
-    // if (profile?.profile) {
-    //   toast.success("Update Successfully", {
-    // position: 'top-right',
-    //     autoClose: 2000,
-    //   });
-    // }
   };
 
   useEffect(() => {

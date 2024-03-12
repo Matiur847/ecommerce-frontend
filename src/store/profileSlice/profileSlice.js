@@ -53,6 +53,19 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
+export const resetPassword = createAsyncThunk(
+  "/reset-password",
+  async (data) => {
+    try {
+      const { password, token } = data;
+      const response = await axios.put(`/api/v1/forgot/password/:${token}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const initialState = {
   profile: {},
   status: "idle",
@@ -102,7 +115,20 @@ const profileSlice = createSlice({
       .addCase(forgotPassword.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      });
+      })
+
+      .addCase(resetPassword.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        console.log("forgotActions", action);
+        state.profile = action.payload;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
   },
 });
 
