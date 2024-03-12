@@ -29,6 +29,7 @@ const UpdatePassword = () => {
 
     // if (profile?.profile) {
     //   toast.success("Update Successfully", {
+    // position: 'top-right',
     //     autoClose: 2000,
     //   });
     // }
@@ -45,7 +46,7 @@ const UpdatePassword = () => {
   }, [status, profile, navigate]);
 
   return (
-    <Helmet title="Update Profile">
+    <Helmet title="Password Update">
       <div className="loginComp">
         <Container>
           <Row className="d-flex align-items-center justify-content-center">

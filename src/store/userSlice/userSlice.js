@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const login = createAsyncThunk("/login", async (data) => {
   try {
-    console.log();
     const { loginEmail, loginPassword } = data;
     const config = { Headers: { "Content-Type": "application/json" } };
     const response = await axios.post(
@@ -38,7 +37,6 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
 
 export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    console.log('data', data)
     const response = await axios.get("/api/v1/logout");
     return response.data;
   } catch (error) {
@@ -101,7 +99,6 @@ const userSlice = createSlice({
       })
       .addCase(loggedOut.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action)
         state.user = action.payload;
       })
       .addCase(loggedOut.rejected, (state, action) => {

@@ -8,6 +8,9 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ProfileUpdate from "../pages/ProfileUpdate";
 import UpdatePassword from "../pages/UpdatePassword";
+import ForgotPassword from "../pages/ForgotPassword";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import ResetPassword from "../pages/ResetPassword";
 
 const Routers = () => {
   return (
@@ -20,7 +23,18 @@ const Routers = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/update" element={<ProfileUpdate />} />
-      <Route path="/change-password" element={<UpdatePassword />} />
+      <Route path="/password/forgot" element={<ForgotPassword />} />
+
+      {/* Protected Route */}
+      <Route
+        path="/change-password"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <UpdatePassword />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/password/reset/:token" element={<ResetPassword />} />
     </Routes>
   );
 };

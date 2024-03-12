@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/userSlice/userSlice";
 import Helmet from "../components/Helmet/Helmet";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { user, status } = useSelector((state) => state.user);
@@ -34,6 +35,15 @@ const Register = () => {
     // console.log('users', myForm);
     dispatch(register(myForm));
   };
+
+  useEffect(() => {
+    if (user?.user) {
+      toast.success(user.user.message, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  }, [user]);
 
   const registerDataChange = (e) => {
     try {
