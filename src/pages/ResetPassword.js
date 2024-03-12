@@ -1,31 +1,49 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
 import { Col, Container, Row } from "react-bootstrap";
 import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { resetPassword } from "../store/profileSlice/profileSlice";
 
 const ResetPassword = () => {
+  const { profile, status, error } = useSelector((state) => state.profile);
 
-  const {user, status, error} = useSelector((state) => state.user)
+  console.log("Profile", profile);
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const { token } = useParams();
-  let profile;
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const registerSubmit = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
-    myForm.set("newPassword", newPassword);
+    myForm.set("password", password);
     myForm.set("confirmPassword", confirmPassword);
-    dispatch("updatePassword"(myForm));
+    dispatch(resetPassword({ myForm, token }));
   };
+
+  useEffect(() => {
+    if (profile) {
+      toast.warning(profile.message, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+
+    if (profile.success === true) {
+      toast.warning('Password Rest Successfully', {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      navigate('/login')
+    }
+  }, [profile, navigate]);
 
   return (
     <Helmet title="Password Update">
@@ -48,8 +66,8 @@ const ResetPassword = () => {
                         type="password"
                         placeholder="New Password"
                         required
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />{" "}
                       <br />
                       <input
@@ -60,11 +78,6 @@ const ResetPassword = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />{" "}
                       <br />
-                      {profile?.message && (
-                        <p className="user-error-message d-flex align-items-center justify-content-start">
-                          {profile?.message}
-                        </p>
-                      )}
                       <input
                         type="submit"
                         className="login-btn"

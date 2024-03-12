@@ -11,8 +11,11 @@ import UpdatePassword from "../pages/UpdatePassword";
 import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import ResetPassword from "../pages/ResetPassword";
+// import { useSelector } from "react-redux";
 
 const Routers = () => {
+  // const { user } = useSelector((state) => state.user);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

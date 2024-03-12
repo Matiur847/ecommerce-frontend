@@ -63,6 +63,7 @@ const IsAuthUser = ({ user }) => {
   }
   function logoutUser() {
     dispatch(loggedOut(null));
+    navigate('/register')
     toast.success("Logout Succesfully", {
       position: "top-right",
       autoClose: 2000,

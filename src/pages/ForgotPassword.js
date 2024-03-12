@@ -21,7 +21,12 @@ const ForgotPassword = () => {
   };
 
   useEffect(() => {
-    if (profile) {
+    if (profile.success === false) {
+      toast.warning(profile.message, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } else {
       toast.success(profile.message, {
         position: "top-right",
         autoClose: 3000,

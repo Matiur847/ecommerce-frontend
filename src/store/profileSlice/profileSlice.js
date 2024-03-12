@@ -54,11 +54,18 @@ export const forgotPassword = createAsyncThunk(
 );
 
 export const resetPassword = createAsyncThunk(
-  "/reset-password",
+  "/reset-pwd",
   async (data) => {
     try {
-      const { password, token } = data;
-      const response = await axios.put(`/api/v1/forgot/password/:${token}`);
+      const { myForm, token } = data;
+      console.log("Token", data);
+      const config = { Headers: { "Content-Type": "application/json" } };
+
+      const response = await axios.put(
+        `/api/v1/forgot/password/${token}`,
+        myForm,
+        config
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -122,13 +129,12 @@ const profileSlice = createSlice({
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("forgotActions", action);
         state.profile = action.payload;
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      })
+      });
   },
 });
 
