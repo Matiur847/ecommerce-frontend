@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../store/profileSlice/profileSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { getUserDetails } from "../store/userSlice/userSlice";
 // import { getUserDetails } from "../store/userSlice/userSlice";
 
 const ProfileUpdate = () => {
@@ -62,10 +63,10 @@ const ProfileUpdate = () => {
         position: "top-right",
         autoClose: 2000,
       });
-      navigate('/profile');
-      // dispatch(getUserDetails())
+      navigate("/profile");
+      dispatch(getUserDetails());
     }
-  }, [user, status, profile, navigate]);
+  }, [user, status, profile, navigate, dispatch]);
 
   return (
     <Helmet title="Update Profile">

@@ -13,6 +13,7 @@ import laptop from "../img/laptop.jpg";
 import mobile from "../img/mobile.jpg";
 import gadget from "../img/gadget.jpg";
 import Review from "./Review";
+import { cartActions } from "../store/cartSlice.js/cartSlice";
 
 const ProductDetails = () => {
   const id = useParams();
@@ -23,6 +24,8 @@ const ProductDetails = () => {
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [id, dispatch]);
+  const cartItem = useSelector((state) => state.cart);
+  console.log("cartItem", cartItem);
 
   const image = [
     {
@@ -41,6 +44,18 @@ const ProductDetails = () => {
 
   const [showText, setShowText] = useState(false);
   const hoverText = "Click To preview";
+
+  const addToCart = (id) => {
+    dispatch(
+      cartActions.addItem({
+        id,
+        name: product.product.name,
+        image: product.product.images[0].url,
+        price: product.product.price,
+        category: product.product.category
+      })
+    );
+  };
 
   let data;
   if (status === "loading") {
@@ -109,7 +124,9 @@ const ProductDetails = () => {
               <p className="single-desc">{product.product?.description}</p>
 
               <div className="product-stocks mb-5">
-                <h4 className="text-center">Order now, before stock out the product</h4>
+                <h4 className="text-center">
+                  Order now, before stock out the product
+                </h4>
                 <div className="sold-progress mt-3">
                   <div className="sold-items d-flex">
                     <span className="mb-1">STOCK NOW</span>
@@ -121,34 +138,33 @@ const ProductDetails = () => {
                       label={product.product?.stock}
                     />
                   </div>
-                  {
-                    product.product?.reviews && product.product?.reviews[0] ? (
-                      <div className="reviews d-flex align-items-center mt-3">
-                        {
-                          product.product?.reviews && product.product.reviews.map((review, index) => (
-                            <Review review={review} key={index} />
-                          ))
-                        }
-                      </div>
-                    ) : <p className="d-flex mt-3 no-review">No Reviews Yet!</p>
-                  }
+                  {product.product?.reviews && product.product?.reviews[0] ? (
+                    <div className="reviews d-flex align-items-center mt-3">
+                      {product.product?.reviews &&
+                        product.product.reviews.map((review, index) => (
+                          <Review review={review} key={index} />
+                        ))}
+                    </div>
+                  ) : (
+                    <p className="d-flex mt-3 no-review">No Reviews Yet!</p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="productDetils-order">
-              <p>Quantity</p>
+              {/* <p>Quantity</p>
               <div className="quantityBox">
-                <i class="ri-subtract-line"></i>
-                <span>0</span>
-                <i class="ri-add-line"></i>
-              </div>
+                <i className="ri-subtract-line" onClick={decreaseQuantity}></i>
+                <span>{quantity}</span>
+                <i className="ri-add-line" onClick={increaseQuantity}></i>
+              </div> */}
               <div className="addCart-btn mt-3 mb-5">
-                <button className="firstBtn">
+                <button className="firstBtn" onClick={() => addToCart(id)}>
                   Add To <i className="ri-shopping-bag-line"></i>
                 </button>
                 <button className="checkout">
-                  Check Out <i class="ri-bank-card-line"></i>
+                  Check Out <i className="ri-bank-card-line"></i>
                 </button>
               </div>
             </div>
