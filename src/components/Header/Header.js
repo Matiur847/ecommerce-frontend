@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
+import { cartActions } from "../../store/cartSlice.js/cartSlice";
 
 const Header = () => {
+
+  const dispatch = useDispatch()
   const { user, status } = useSelector((state) => state.user);
+  const { cartItem } = useSelector((state) => state.cart);
 
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
@@ -26,6 +30,10 @@ const Header = () => {
       navigate("/products");
     }
   };
+
+  const handleDeletProduct = (id) => {
+    dispatch(cartActions.removeItem(id))
+  }
 
   return (
     <div className="header">
@@ -68,12 +76,26 @@ const Header = () => {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <p>Empty Cart</p>
+                <div className="cart-items">
+                  {cartItem.map((item) => (
+                    <div className="cart-items-details" >
+                      <p>Name: {item.name}</p>
+                      <p>Price: {item.price}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      <button onClick={() => handleDeletProduct(item.id)}>Remove</button>
+                    </div>
+                  ))}
+                </div>
               </Modal.Body>
             </Modal>
             <div className="user-component">
               {status === "loading" ? (
-                <Spinner animation="border" role="status" size="sm" variant="primary">
+                <Spinner
+                  animation="border"
+                  role="status"
+                  size="sm"
+                  variant="primary"
+                >
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
               ) : (

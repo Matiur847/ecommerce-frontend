@@ -1,6 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItem: [],

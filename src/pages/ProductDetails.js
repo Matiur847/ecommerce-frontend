@@ -24,8 +24,6 @@ const ProductDetails = () => {
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [id, dispatch]);
-  const cartItem = useSelector((state) => state.cart);
-  console.log("cartItem", cartItem);
 
   const image = [
     {
@@ -45,7 +43,7 @@ const ProductDetails = () => {
   const [showText, setShowText] = useState(false);
   const hoverText = "Click To preview";
 
-  const addToCart = (id) => {
+  const addToCart = () => {
     dispatch(
       cartActions.addItem({
         id,
@@ -160,7 +158,7 @@ const ProductDetails = () => {
                 <i className="ri-add-line" onClick={increaseQuantity}></i>
               </div> */}
               <div className="addCart-btn mt-3 mb-5">
-                <button className="firstBtn" onClick={() => addToCart(id)}>
+                <button className="firstBtn" onClick={addToCart}>
                   Add To <i className="ri-shopping-bag-line"></i>
                 </button>
                 <button className="checkout">

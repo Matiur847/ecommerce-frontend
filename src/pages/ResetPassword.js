@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { resetPassword } from "../store/profileSlice/profileSlice";
 
 const ResetPassword = () => {
-  const { profile, status, error } = useSelector((state) => state.profile);
+  const { profile, status } = useSelector((state) => state.profile);
 
   console.log("Profile", profile);
 
