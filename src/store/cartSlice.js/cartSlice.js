@@ -2,33 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-// export const addToCartItems = createAsyncThunk(
-//   "/add-item",
-//   async (props, dispatch) => {
-//     try {
-//       console.log("Hello");
-//       const { id, quantity } = props;
-//       const { data } = await axios.get(
-//         `/api/v1/product/65d9e1db0860ab3476167710`
-//       );
-//       // dispatch(
-//       //   cartActions.addItem({
-//       //     id: data.product._id,
-//       //     name: data.product.name,
-//       //     price: data.product.price,
-//       //     image: data.product.images[0]?.url,
-//       //     // stock: data.product.stock,
-//       //     quantity: quantity,
-//       //   })
-//       // );
-
-//       dispatch(cartActions.addItem("hello"));
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
-// );
-
 const initialState = {
   cartItem: [],
   totalQuantity: 0,
