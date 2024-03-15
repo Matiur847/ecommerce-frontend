@@ -43,15 +43,15 @@ const ProductDetails = () => {
   const [showText, setShowText] = useState(false);
   const hoverText = "Click To preview";
 
-  const addToCart = () => {
+  const addToCart = (id) => {
     dispatch(
       cartActions.addItem({
-        id,
+        id: id,
         name: product.product.name,
         image: product.product.images[0].url,
         price: product.product.price,
         category: product.product.category,
-        stock: product.product.stock
+        stock: product.product.stock,
       })
     );
   };
@@ -155,7 +155,10 @@ const ProductDetails = () => {
               {/* <p>Quantity</p>
                */}
               <div className="addCart-btn mt-3 mb-5">
-                <button className="firstBtn" onClick={addToCart}>
+                <button
+                  className="firstBtn"
+                  onClick={() => addToCart(product.product._id)}
+                >
                   Add To <i className="ri-shopping-bag-line"></i>
                 </button>
                 <button className="checkout">

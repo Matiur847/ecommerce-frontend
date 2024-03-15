@@ -7,12 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 import { cartActions } from "../../store/cartSlice.js/cartSlice";
 import laptop from "../../img/laptop.jpg";
+import Cart from "../../pages/Cart";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.user);
-  const { cartItem, totalQuantity } = useSelector((state) => state.cart);
-  console.log(totalQuantity);
+  const { cartItem, totalQuantity, totalAmount } = useSelector(
+    (state) => state.cart
+  );
+
+  // console.log("cartItem", cartItem);
 
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
@@ -32,9 +36,19 @@ const Header = () => {
     }
   };
 
-  const handleDeletProduct = (id) => {
-    dispatch(cartActions.removeItem(id));
-  };
+  const [productStock, setProductStock] = useState(0);
+  const [allItem, setAllItem] = useState({});
+  const [currentId, setCurrentId] = useState(0);
+
+  // useEffect(() => {
+  //   const stock = cartItem.find((item) => item.id === currentId);
+  //   setProductStock(stock?.stock);
+  //   setAllItem(stock);
+  // }, [cartItem, currentId]);
+
+  
+
+  // console.log("allItem", allItem);
 
   return (
     <div className="header">
@@ -76,52 +90,7 @@ const Header = () => {
                   Cart
                 </Modal.Title>
               </Modal.Header>
-              <Modal.Body>
-                <div className="cart-items">
-                  {cartItem.length === 0 ? (
-                    <p className="text-center mt-3 mb-3">Empty Cart</p>
-                  ) : (
-                    cartItem.map((item) => (
-                      <div className="cart-items-details d-flex align-items-center justify-content-around mt-2 mb-4">
-                        <div className="cartItem-img">
-                          <img className="w-75" src={laptop} alt="Product" />
-                        </div>
-                        <div className="cartItem-product-deatils">
-                          <p className="m-0 mb-1">{item.name}</p>
-                          <span>Price: {item.price}</span> <br />
-                          <span>Quantity: {item.quantity}</span> <br />
-                          <div className="isIncrease-removeBtn mt-2">
-                            <div className="quantityBox">
-                              <i
-                                className="ri-subtract-line"
-                                onClick={"decreaseQuantity"}
-                              ></i>
-                              <span>0</span>
-                              <i
-                                className="ri-add-line"
-                                onClick={"increaseQuantity"}
-                              ></i>
-                            </div>{" "}
-                            <button
-                              className="handleRemoveBtn mt-2"
-                              onClick={() => handleDeletProduct(item.id)}
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  )}
-
-                  <div className="borderDiv"></div>
-                  <div className="cart-detils-btn text-center mt-3">
-                    <Link to={"/cart"}>
-                      <button className="handleRemoveBtn">Check Out</button>
-                    </Link>
-                  </div>
-                </div>
-              </Modal.Body>
+              <Modal.Body>{show && <Cart />}</Modal.Body>
             </Modal>
             <div className="user-component">
               {status === "loading" ? (

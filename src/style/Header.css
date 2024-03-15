@@ -149,7 +149,7 @@ span sup {
     display: inline-block;
     background-color: rgb(232, 235, 235);
     border-radius: 5px;
-    padding: 0px 17px;
+    padding: 2px 13px;
 }
 
 .quantityBox i {
@@ -187,6 +187,17 @@ span sup {
 
 .cart-detils-btn {
     margin-top: 5px;
+}
+
+.subTotalAmount {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.subTotalAmount span {
+    font-size: 18px;
+    color: #4b1a13c7;
 }
 
 @media only screen and (max-width: 992px) {

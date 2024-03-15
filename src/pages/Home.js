@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Helmet from "../components/Helmet/Helmet";
@@ -14,17 +13,16 @@ import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
 import laptop from "../img/laptop.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProduct,
-} from "../store/productSlice/productSlice";
+import { fetchProduct } from "../store/productSlice/productSlice";
 import HashLoader from "react-spinners/HashLoader";
+import { cartActions } from "../store/cartSlice.js/cartSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.product)
+  const { products, status, error } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchProduct('keyword'));
+    dispatch(fetchProduct("keyword"));
   }, [dispatch]);
 
   const bannerData = [
@@ -53,6 +51,20 @@ const Home = () => {
     },
   ];
 
+  const addToCart = (item) => {
+    const id = item._id;
+    dispatch(
+      cartActions.addItem({
+        id,
+        name: item.name,
+        image: item.images[0].url,
+        price: item.price,
+        category: item.category,
+        stock: item.stock,
+      })
+    );
+  };
+
   let data;
   if (status === "loading") {
     data = (
@@ -64,16 +76,16 @@ const Home = () => {
     data = products.allProduct?.map((product, index) => (
       <Col lg="3" md="4" sm="6" xs="6" key={index}>
         <div className="product-card-container mb-3">
-          <Card sx={{zIndex: 1}}>
+          <Card sx={{ zIndex: 1 }}>
             <CardOverflow>
               <AspectRatio>
                 <Link to={`/product/${product._id}`}>
-                <img
-                  src={laptop}
-                  loading="lazy"
-                  alt={product.name}
-                  className="productImg"
-                />
+                  <img
+                    src={laptop}
+                    loading="lazy"
+                    alt={product.name}
+                    className="productImg"
+                  />
                 </Link>
               </AspectRatio>
             </CardOverflow>
@@ -102,7 +114,7 @@ const Home = () => {
               </Typography>
             </CardContent>
             <div className="add-cart">
-              <button>
+              <button onClick={() => addToCart(product)}>
                 Add To <i className="ri-shopping-cart-line"></i>
               </button>
             </div>
