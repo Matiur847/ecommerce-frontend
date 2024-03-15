@@ -131,6 +131,64 @@ span sup {
     cursor: pointer;
 }
 
+/* -------------------- cart items -------------------- */
+
+.cartItem-product-deatils p {
+    color: #1d1b1bdc;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.cartItem-product-deatils span {
+    font-weight: 600;
+    color: #1d1b1bdc;
+    font-size: 15px;
+}
+
+.quantityBox {
+    display: inline-block;
+    background-color: rgb(232, 235, 235);
+    border-radius: 5px;
+    padding: 0px 17px;
+}
+
+.quantityBox i {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.quantityBox span {
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+}
+
+.handleRemoveBtn {
+    background-color: #e05240;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffff;
+    border: none;
+    width: 60%;
+    border-radius: 2px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.handleRemoveBtn:hover {
+    background-color: #4b1a13c7;
+}
+
+.borderDiv {
+    border: 1px solid rgba(255, 0, 0, 0.137);
+}
+
+.cart-detils-btn {
+    margin-top: 5px;
+}
+
 @media only screen and (max-width: 992px) {
     .mobile-menu {
         display: block;

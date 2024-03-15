@@ -70,23 +70,7 @@
     padding-left: 2px;
 }
 
-.quantityBox {
-    display: inline-block;
-    background-color: azure;
-}
 
-.quantityBox i {
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 5px 10px;
-}
-
-.quantityBox span {
-    font-size: 18px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 600;
-}
 
 .firstBtn {
     background-color: black;

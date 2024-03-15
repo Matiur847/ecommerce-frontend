@@ -6,12 +6,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 import { cartActions } from "../../store/cartSlice.js/cartSlice";
+import laptop from "../../img/laptop.jpg";
 
 const Header = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.user);
-  const { cartItem } = useSelector((state) => state.cart);
+  const { cartItem, totalQuantity } = useSelector((state) => state.cart);
+  console.log(totalQuantity);
 
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
@@ -32,8 +33,8 @@ const Header = () => {
   };
 
   const handleDeletProduct = (id) => {
-    dispatch(cartActions.removeItem(id))
-  }
+    dispatch(cartActions.removeItem(id));
+  };
 
   return (
     <div className="header">
@@ -62,7 +63,7 @@ const Header = () => {
           <div className="user-icon d-flex align-items-center justify-content-center">
             <span className="cart-icon" onClick={() => setShow(true)}>
               <i className="ri-shopping-bag-line"></i>
-              <sup>0</sup>
+              <sup>{totalQuantity}</sup>
             </span>
             <Modal
               show={show}
@@ -77,14 +78,48 @@ const Header = () => {
               </Modal.Header>
               <Modal.Body>
                 <div className="cart-items">
-                  {cartItem.map((item) => (
-                    <div className="cart-items-details" >
-                      <p>Name: {item.name}</p>
-                      <p>Price: {item.price}</p>
-                      <p>Quantity: {item.quantity}</p>
-                      <button onClick={() => handleDeletProduct(item.id)}>Remove</button>
-                    </div>
-                  ))}
+                  {cartItem.length === 0 ? (
+                    <p className="text-center mt-3 mb-3">Empty Cart</p>
+                  ) : (
+                    cartItem.map((item) => (
+                      <div className="cart-items-details d-flex align-items-center justify-content-around mt-2 mb-4">
+                        <div className="cartItem-img">
+                          <img className="w-75" src={laptop} alt="Product" />
+                        </div>
+                        <div className="cartItem-product-deatils">
+                          <p className="m-0 mb-1">{item.name}</p>
+                          <span>Price: {item.price}</span> <br />
+                          <span>Quantity: {item.quantity}</span> <br />
+                          <div className="isIncrease-removeBtn mt-2">
+                            <div className="quantityBox">
+                              <i
+                                className="ri-subtract-line"
+                                onClick={"decreaseQuantity"}
+                              ></i>
+                              <span>0</span>
+                              <i
+                                className="ri-add-line"
+                                onClick={"increaseQuantity"}
+                              ></i>
+                            </div>{" "}
+                            <button
+                              className="handleRemoveBtn mt-2"
+                              onClick={() => handleDeletProduct(item.id)}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+
+                  <div className="borderDiv"></div>
+                  <div className="cart-detils-btn text-center mt-3">
+                    <Link to={"/cart"}>
+                      <button className="handleRemoveBtn">Check Out</button>
+                    </Link>
+                  </div>
                 </div>
               </Modal.Body>
             </Modal>

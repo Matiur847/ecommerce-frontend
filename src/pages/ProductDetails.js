@@ -50,7 +50,8 @@ const ProductDetails = () => {
         name: product.product.name,
         image: product.product.images[0].url,
         price: product.product.price,
-        category: product.product.category
+        category: product.product.category,
+        stock: product.product.stock
       })
     );
   };
@@ -152,11 +153,7 @@ const ProductDetails = () => {
 
             <div className="productDetils-order">
               {/* <p>Quantity</p>
-              <div className="quantityBox">
-                <i className="ri-subtract-line" onClick={decreaseQuantity}></i>
-                <span>{quantity}</span>
-                <i className="ri-add-line" onClick={increaseQuantity}></i>
-              </div> */}
+               */}
               <div className="addCart-btn mt-3 mb-5">
                 <button className="firstBtn" onClick={addToCart}>
                   Add To <i className="ri-shopping-bag-line"></i>
