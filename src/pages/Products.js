@@ -20,6 +20,8 @@ import "react-range-slider-input/dist/style.css";
 
 import ReactSlider from "react-bootstrap-range-slider";
 import Helmet from "../components/Helmet/Helmet";
+import { toast } from "react-toastify";
+import { cartActions } from "../store/cartSlice.js/cartSlice";
 
 const categoryes = ["mobile", "Laptop", "Gadgets"];
 
@@ -50,6 +52,38 @@ const Products = () => {
   useEffect(() => {
     dispatch(fetchProduct({ keyword, currentPage, price, category, ratings }));
   }, [dispatch, keyword, currentPage, price, category, ratings]);
+
+  const { cartItem } = useSelector((state) => state.cart);
+
+  const [itemId, setItemId] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+
+  // get specific item current quantity
+  useEffect(() => {
+    const stockCount = cartItem.find((item) => item.id === itemId);
+    setQuantity(stockCount?.quantity);
+  }, [cartItem, itemId]);
+
+  const addToCart = (item) => {
+    if (item.stock <= quantity) {
+      toast.warning(`Max Item Stock ${item.stock}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
+    const id = item._id;
+    dispatch(
+      cartActions.addItem({
+        id,
+        name: item.name,
+        image: item.images[0].url,
+        price: item.price,
+        category: item.category,
+        stock: item.stock,
+      })
+    );
+  };
 
   let data;
   if (status === "loading") {
@@ -100,7 +134,12 @@ const Products = () => {
               </Typography>
             </CardContent>
             <div className="add-cart">
-              <button>
+              <button
+                onClick={() => {
+                  addToCart(product);
+                  setItemId(product._id);
+                }}
+              >
                 Add To <i className="ri-shopping-cart-line"></i>
               </button>
             </div>
@@ -118,7 +157,7 @@ const Products = () => {
   }
 
   return (
-    <Helmet title='Products'>
+    <Helmet title="Products">
       <div className="products-section">
         <Container>
           <Row>

@@ -1,0 +1,8 @@
+.login-inputField select {
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+    padding: 8px 40px;
+    margin: 10px 0px;
+    outline: none;
+    width: 100%;
+}

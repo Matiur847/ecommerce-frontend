@@ -9,7 +9,9 @@ import Cart from "../../pages/Cart";
 
 const Header = () => {
   const { user, status } = useSelector((state) => state.user);
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const { totalQuantity } = useSelector(
+    (state) => state.cart
+  );
 
   // console.log("cartItem", cartItem);
 

@@ -12,17 +12,28 @@ const totalAmount =
   localStorage.getItem("totalAmount") !== null
     ? JSON.parse(localStorage.getItem("totalAmount"))
     : 0;
+const shippingInfo =
+  localStorage.getItem("shippingInfo") !== null
+    ? JSON.parse(localStorage.getItem("shippingInfo"))
+    : {};
 
-const saveDataToLocalStorage = (item, totalQuantity, totalAmount) => {
+const saveDataToLocalStorage = (
+  item,
+  totalQuantity,
+  totalAmount,
+  shippingInfo
+) => {
   localStorage.setItem("cartItems", JSON.stringify(item));
   localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
   localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
+  localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
 };
 
 const initialState = {
   cartItem: items,
   totalQuantity: totalQuantity,
   totalAmount: totalAmount,
+  shippingInfo: shippingInfo,
 };
 
 const cartSlice = createSlice({
@@ -32,10 +43,8 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const newItem = action.payload;
-      const id = action.payload.id
-      const existingItem = state.cartItem.find(
-        (item) => item.id === id
-      );
+      const id = action.payload.id;
+      const existingItem = state.cartItem.find((item) => item.id === id);
       state.totalQuantity++;
 
       if (!existingItem) {
@@ -108,6 +117,16 @@ const cartSlice = createSlice({
         state.cartItem.map((item) => item),
         state.totalQuantity,
         state.totalAmount
+      );
+    },
+    shippingDetails(state, action) {
+      state.shippingInfo = action.payload;
+
+      saveDataToLocalStorage(
+        state.cartItem.map((item) => item),
+        state.totalQuantity,
+        state.totalAmount,
+        state.shippingInfo
       );
     },
   },

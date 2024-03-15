@@ -3,7 +3,7 @@ import "../style/IsAuthUser.css";
 import SpeedDial from "@mui/material/SpeedDial";
 import profileUser from "../img/profile-user.png";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loggedOut } from "../store/userSlice/userSlice";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import Backdrop from "@mui/material/Backdrop";
 // import Box from "@mui/material/Box";
 
 const IsAuthUser = ({ user }) => {
+  const { cartItem } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -27,10 +28,10 @@ const IsAuthUser = ({ user }) => {
       icon: (
         <i
           className="ri-luggage-cart-fill"
-          style={{ color: "cartItems.length" > 0 ? "tomato" : "unset" }}
+          style={{ color: `${cartItem.length}` > 0 ? "tomato" : "unset" }}
         ></i>
       ),
-      name: `Cart(${"cartItems.length"})`,
+      name: `Cart(${cartItem.length})`,
       func: cart,
     },
     {
@@ -58,12 +59,10 @@ const IsAuthUser = ({ user }) => {
   function account() {
     navigate("/profile");
   }
-  function cart() {
-    navigate("/cart");
-  }
+  function cart() {}
   function logoutUser() {
     dispatch(loggedOut(null));
-    navigate('/register')
+    navigate("/register");
     toast.success("Logout Succesfully", {
       position: "top-right",
       autoClose: 2000,

@@ -26,7 +26,7 @@ const Home = () => {
   const [itemId, setItemId] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
-  
+
   useEffect(() => {
     dispatch(fetchProduct("keyword"));
   }, [dispatch]);

@@ -11,6 +11,7 @@ import UpdatePassword from "../pages/UpdatePassword";
 import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import ResetPassword from "../pages/ResetPassword";
+import Shipping from "../pages/Shipping";
 // import { useSelector } from "react-redux";
 
 const Routers = () => {
@@ -27,6 +28,8 @@ const Routers = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/update" element={<ProfileUpdate />} />
       <Route path="/password/forgot" element={<ForgotPassword />} />
+      <Route path="/password/reset/:token" element={<ResetPassword />} />
+
 
       {/* Protected Route */}
       <Route
@@ -37,7 +40,14 @@ const Routers = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/password/reset/:token" element={<ResetPassword />} />
+      <Route
+        path="/shipping"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <Shipping />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };

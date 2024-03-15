@@ -6,7 +6,9 @@ import laptop from "../img/laptop.jpg";
 import { toast } from "react-toastify";
 
 const Cart = () => {
+  const { user } = useSelector((state) => state.user);
   const { cartItem, totalAmount } = useSelector((state) => state.cart);
+  console.log(user);
 
   const dispatch = useDispatch();
 
@@ -17,10 +19,10 @@ const Cart = () => {
   const handleIncreaseProduct = (item) => {
     if (item.stock <= item.quantity) {
       toast.warning(`Max Item Stock ${item.stock}`, {
-        position: 'top-right',
-        autoClose: 2000
-      })
-      return
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
     }
     const id = item.id;
     dispatch(
@@ -38,6 +40,8 @@ const Cart = () => {
   const handleDecreaseProduct = (id) => {
     dispatch(cartActions.removeItem(id));
   };
+
+  // const checkOutHandler = () => {};
 
   return (
     <div>
@@ -84,7 +88,7 @@ const Cart = () => {
           <p className="subTotalAmount">
             Sub Total: <span>{totalAmount}</span>
           </p>
-          <Link to={"/cart"}>
+          <Link to={"/shipping"}>
             <button className="handleRemoveBtn">Check Out</button>
           </Link>
         </div>
