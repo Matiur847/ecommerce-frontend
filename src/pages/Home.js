@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Helmet from "../components/Helmet/Helmet";
 import "../style/Home.css";
@@ -16,14 +16,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../store/productSlice/productSlice";
 import HashLoader from "react-spinners/HashLoader";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.product);
+  const { cartItem } = useSelector((state) => state.cart);
 
+  const [itemId, setItemId] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+
+  
   useEffect(() => {
     dispatch(fetchProduct("keyword"));
   }, [dispatch]);
+
+  // get specific item current quantity 
+  useEffect(() => {
+    const stockCount = cartItem.find((item) => item.id === itemId);
+    setQuantity(stockCount?.quantity);
+  }, [cartItem, itemId]);
 
   const bannerData = [
     {
@@ -52,6 +64,13 @@ const Home = () => {
   ];
 
   const addToCart = (item) => {
+    if (item.stock <= quantity) {
+      toast.warning(`Max Item Stock ${item.stock}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
     const id = item._id;
     dispatch(
       cartActions.addItem({
@@ -114,7 +133,12 @@ const Home = () => {
               </Typography>
             </CardContent>
             <div className="add-cart">
-              <button onClick={() => addToCart(product)}>
+              <button
+                onClick={() => {
+                  addToCart(product);
+                  setItemId(product._id);
+                }}
+              >
                 Add To <i className="ri-shopping-cart-line"></i>
               </button>
             </div>

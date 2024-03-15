@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
 import { Link } from "react-router-dom";
 import laptop from "../img/laptop.jpg";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cartItem, totalAmount } = useSelector((state) => state.cart);
@@ -14,7 +15,13 @@ const Cart = () => {
   };
 
   const handleIncreaseProduct = (item) => {
-    console.log(item);
+    if (item.stock <= item.quantity) {
+      toast.warning(`Max Item Stock ${item.stock}`, {
+        position: 'top-right',
+        autoClose: 2000
+      })
+      return
+    }
     const id = item.id;
     dispatch(
       cartActions.addItem({
