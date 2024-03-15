@@ -2,12 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
 import { Link } from "react-router-dom";
-import laptop from "../img/laptop.jpg"
+import laptop from "../img/laptop.jpg";
 
 const Cart = () => {
-  const { cartItem, totalAmount } = useSelector(
-    (state) => state.cart
-  );
+  const { cartItem, totalAmount } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -16,7 +14,18 @@ const Cart = () => {
   };
 
   const handleIncreaseProduct = (item) => {
-    dispatch(cartActions.addItem(item.id));
+    console.log(item);
+    const id = item.id;
+    dispatch(
+      cartActions.addItem({
+        id,
+        name: item.name,
+        image: item.image,
+        price: item.price,
+        category: item.category,
+        stock: item.stock,
+      })
+    );
   };
 
   const handleDecreaseProduct = (id) => {
@@ -35,10 +44,7 @@ const Cart = () => {
                 <img className="w-75" src={laptop} alt="Product" />
               </div>
               <div className="cartItem-product-deatils">
-                <p className="m-0 mb-1">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Vitae, vel!
-                </p>
+                <p className="m-0 mb-1">{item.name}</p>
                 <span>Price: {item.price}</span> <br />
                 <div className="isIncrease-removeBtn mt-2">
                   <div className="quantityBox">

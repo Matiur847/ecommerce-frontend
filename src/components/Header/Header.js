@@ -3,18 +3,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
-import { cartActions } from "../../store/cartSlice.js/cartSlice";
-import laptop from "../../img/laptop.jpg";
 import Cart from "../../pages/Cart";
 
 const Header = () => {
-  const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.user);
-  const { cartItem, totalQuantity, totalAmount } = useSelector(
-    (state) => state.cart
-  );
+  const { totalQuantity } = useSelector((state) => state.cart);
 
   // console.log("cartItem", cartItem);
 
@@ -35,20 +30,6 @@ const Header = () => {
       navigate("/products");
     }
   };
-
-  const [productStock, setProductStock] = useState(0);
-  const [allItem, setAllItem] = useState({});
-  const [currentId, setCurrentId] = useState(0);
-
-  // useEffect(() => {
-  //   const stock = cartItem.find((item) => item.id === currentId);
-  //   setProductStock(stock?.stock);
-  //   setAllItem(stock);
-  // }, [cartItem, currentId]);
-
-  
-
-  // console.log("allItem", allItem);
 
   return (
     <div className="header">
