@@ -26,12 +26,11 @@ const Home = () => {
   const [itemId, setItemId] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
-
   useEffect(() => {
     dispatch(fetchProduct("keyword"));
   }, [dispatch]);
 
-  // get specific item current quantity 
+  // get specific item current quantity
   useEffect(() => {
     const stockCount = cartItem.find((item) => item.id === itemId);
     setQuantity(stockCount?.quantity);
@@ -65,7 +64,7 @@ const Home = () => {
 
   const addToCart = (item) => {
     if (item.stock <= quantity) {
-      toast.warning(`Max Item Stock ${item.stock}`, {
+      toast.warning(`Stock Limit ${item.stock}`, {
         position: "top-right",
         autoClose: 2000,
       });

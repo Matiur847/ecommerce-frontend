@@ -66,7 +66,7 @@ const Products = () => {
 
   const addToCart = (item) => {
     if (item.stock <= quantity) {
-      toast.warning(`Max Item Stock ${item.stock}`, {
+      toast.warning(`Stock Limit ${item.stock}`, {
         position: "top-right",
         autoClose: 2000,
       });

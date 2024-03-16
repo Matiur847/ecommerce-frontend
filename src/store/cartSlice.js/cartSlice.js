@@ -12,21 +12,19 @@ const totalAmount =
   localStorage.getItem("totalAmount") !== null
     ? JSON.parse(localStorage.getItem("totalAmount"))
     : 0;
-const shippingInfo =
-  localStorage.getItem("shippingInfo") !== null
-    ? JSON.parse(localStorage.getItem("shippingInfo"))
-    : {};
 
-const saveDataToLocalStorage = (
-  item,
-  totalQuantity,
-  totalAmount,
-  shippingInfo
-) => {
+const saveDataToLocalStorage = (item, totalQuantity, totalAmount) => {
   localStorage.setItem("cartItems", JSON.stringify(item));
   localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
   localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
-  localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
+};
+
+const shippingInfo = localStorage.getItem("shippingInfo")
+  ? JSON.parse(localStorage.getItem("shippingInfo"))
+  : {};
+
+const shipDataLocalStore = (shipInfo) => {
+  localStorage.setItem("shippingInfo", JSON.stringify(shipInfo));
 };
 
 const initialState = {
@@ -122,12 +120,7 @@ const cartSlice = createSlice({
     shippingDetails(state, action) {
       state.shippingInfo = action.payload;
 
-      saveDataToLocalStorage(
-        state.cartItem.map((item) => item),
-        state.totalQuantity,
-        state.totalAmount,
-        state.shippingInfo
-      );
+      shipDataLocalStore(state.shippingInfo);
     },
   },
 });

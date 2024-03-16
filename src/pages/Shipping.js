@@ -1,25 +1,58 @@
 import React, { useState } from "react";
 import "../style/Shipping.css";
 import Helmet from "../components/Helmet/Helmet";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Country, State } from "country-state-city";
+import CheckPointStep from "./CheckPointStep";
+import { toast } from "react-toastify";
+import { cartActions } from "../store/cartSlice.js/cartSlice";
 
 const Shipping = () => {
+  const dispatch = useDispatch();
   const { shippingInfo } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
-  const [address, setAddress] = useState(shippingInfo.address);
-  const [city, setCity] = useState(shippingInfo.city);
-  const [state, setState] = useState(shippingInfo.state);
-  const [country, setCountry] = useState(shippingInfo.country);
-  const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
+  const [address, setAddress] = useState(shippingInfo?.address);
+  const [city, setCity] = useState(shippingInfo?.city);
+  const [state, setState] = useState(shippingInfo?.state);
+  const [country, setCountry] = useState(shippingInfo?.country);
+  const [postCode, setPostCode] = useState(shippingInfo?.postCode);
+  const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo);
+
+  const shippingHandler = (e) => {
+    e.preventDefault();
+
+    if (phoneNo?.length < 10 || phoneNo?.length > 10) {
+      toast.warning("Number Should be 10 digits long", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
+    dispatch(
+      cartActions.shippingDetails({
+        address,
+        city,
+        state,
+        country,
+        postCode,
+        phoneNo,
+      })
+    );
+    navigate("/order/confirm");
+  };
 
   return (
     <Helmet title="Shipping">
       <div className="loginComp">
         <Container>
+          <Row className="d-flex align-items-center justify-content-center">
+            <Col md="12">
+              <CheckPointStep activeStep={0} />
+            </Col>
+          </Row>
           <Row className="d-flex align-items-center justify-content-center">
             <Col
               md="6"
@@ -33,7 +66,7 @@ const Shipping = () => {
                   </div>
                   <div className="login-inputField">
                     <form
-                      onSubmit={"loginSubmitHandler"}
+                      onSubmit={shippingHandler}
                       encType="multipart/form-data"
                     >
                       <input
@@ -45,11 +78,19 @@ const Shipping = () => {
                       />{" "}
                       <br />
                       <input
-                        type="number"
-                        placeholder="Pin Code"
+                        type="text"
+                        placeholder="City"
                         required
-                        value={pinCode}
-                        onChange={(e) => setPinCode(e.target.value)}
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                      />{" "}
+                      <br />
+                      <input
+                        type="number"
+                        placeholder="Post Code"
+                        required
+                        value={postCode}
+                        onChange={(e) => setPostCode(e.target.value)}
                       />{" "}
                       <br />
                       <input
