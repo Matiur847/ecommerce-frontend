@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const createOrder = createAsyncThunk("create/order", async (order) => {
   try {
-    console.log(order)
     const config = { Headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post("/api/v1/order/new", order, config);
     return data;

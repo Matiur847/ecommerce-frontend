@@ -4,6 +4,7 @@ import userSlice from "./userSlice/userSlice";
 import profileSlice from "./profileSlice/profileSlice";
 import cartSlice from "./cartSlice.js/cartSlice";
 import newOrder from "./orderSlice/orderSlice";
+import myOrder from "./myOrders/myOrders";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     profile: profileSlice.reducer,
     cart: cartSlice.reducer,
     newOrder: newOrder.reducer,
+    myOrders: myOrder.reducer,
   },
 });
 
