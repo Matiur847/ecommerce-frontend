@@ -1,0 +1,27 @@
+.paymentForm>div {
+    display: flex;
+    align-items: center;
+    margin: 1.5vmax 0;
+}
+
+.payInput {
+    padding: 15px;
+    padding-right: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    outline: none;
+}
+
+.paymentForm>div>i {
+    position: absolute;
+    transform: translateX(1vmax);
+    font-size: 1.6vmax;
+    color: rgba(0, 0, 0, 0.623);
+}
+
+.payBtn {
+    width: 100% !important;
+    padding: 5px;
+}

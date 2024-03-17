@@ -6,11 +6,11 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-const steps = ["Shipping Details", "Confire Order", "Payment"];
+const steps = ["Shipping Details", "Confirm Order", "Payment"];
 
 const CheckPointStep = ({ activeStep }) => {
   return (
-    <div className="mt-3">
+    <div className="mt-4">
       <Box sx={{ width: "100%" }}>
         <Box sx={{ width: "100%" }}>
           <Stepper activeStep={activeStep} alternativeLabel>

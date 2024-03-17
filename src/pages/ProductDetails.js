@@ -14,7 +14,6 @@ import mobile from "../img/mobile.jpg";
 import gadget from "../img/gadget.jpg";
 import Review from "./Review";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
-import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const id = useParams();

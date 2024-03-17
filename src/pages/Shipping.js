@@ -3,7 +3,7 @@ import "../style/Shipping.css";
 import Helmet from "../components/Helmet/Helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Country, State } from "country-state-city";
 import CheckPointStep from "./CheckPointStep";
 import { toast } from "react-toastify";

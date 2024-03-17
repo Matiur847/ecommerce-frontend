@@ -88,9 +88,13 @@ const Cart = () => {
           <p className="subTotalAmount">
             Sub Total: <span>{totalAmount}</span>
           </p>
-          <Link to={"/shipping"}>
-            <button className="handleRemoveBtn">Check Out</button>
-          </Link>
+          {cartItem.length > 0 ? (
+            <Link to={"/shipping"}>
+              <button className="handleRemoveBtn">Check Out</button>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
