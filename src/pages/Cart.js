@@ -6,9 +6,8 @@ import laptop from "../img/laptop.jpg";
 import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
   const { cartItem, totalAmount } = useSelector((state) => state.cart);
-  console.log(user);
 
   const dispatch = useDispatch();
 

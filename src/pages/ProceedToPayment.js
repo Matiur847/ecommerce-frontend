@@ -10,14 +10,20 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import { createOrder } from "../store/orderSlice/orderSlice";
 
 const ProceedToPayment = () => {
-  const { shippingInfo } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const { shippingInfo, cartItem, totalAmount } = useSelector(
+    (state) => state.cart
+  );
+  console.log(cartItem)
+  // const newOrder = useSelector((state) => state.newOrder);
   const { user } = useSelector((state) => state.user);
 
   const [loading, setLoading] = useState(false);
@@ -30,6 +36,14 @@ const ProceedToPayment = () => {
 
   const paymentData = {
     amount: Math.round(orderInfo.totalAmounts * 100),
+  };
+
+  const order = {
+    shippingPrice: orderInfo.shippingPrice,
+    shippingInfo,
+    totalPrice: orderInfo.totalAmounts,
+    orderItems: cartItem,
+    itemsPrice: totalAmount,
   };
 
   const paySubmitHandler = async (e) => {
@@ -73,6 +87,11 @@ const ProceedToPayment = () => {
         });
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrder(order));
           navigate("/success");
         } else {
           toast.warning("Some issue cannot proceed to pay", {

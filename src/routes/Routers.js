@@ -18,6 +18,7 @@ import ProceedToPayment from "../pages/ProceedToPayment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import Success from "../pages/Success";
 
 // import { useSelector } from "react-redux";
 
@@ -25,7 +26,6 @@ const Routers = () => {
   // const { user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
-  console.log('stripeApiKey', stripeApiKey)
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeApiKey");
@@ -83,6 +83,14 @@ const Routers = () => {
               <ProceedToPayment />
             </ProtectedRoute>
           </Elements>
+        }
+      />
+      <Route
+        path="/success"
+        element={
+          <ProtectedRoute>
+            <Success />
+          </ProtectedRoute>
         }
       />
     </Routes>

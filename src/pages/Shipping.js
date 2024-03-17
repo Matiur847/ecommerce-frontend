@@ -18,7 +18,7 @@ const Shipping = () => {
   const [city, setCity] = useState(shippingInfo?.city);
   const [state, setState] = useState(shippingInfo?.state);
   const [country, setCountry] = useState(shippingInfo?.country);
-  const [postCode, setPostCode] = useState(shippingInfo?.postCode);
+  const [pinCode, setPinCode] = useState(shippingInfo?.pinCode);
   const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo);
 
   const shippingHandler = (e) => {
@@ -37,7 +37,7 @@ const Shipping = () => {
         city,
         state,
         country,
-        postCode,
+        pinCode,
         phoneNo,
       })
     );
@@ -89,8 +89,8 @@ const Shipping = () => {
                         type="number"
                         placeholder="Post Code"
                         required
-                        value={postCode}
-                        onChange={(e) => setPostCode(e.target.value)}
+                        value={pinCode}
+                        onChange={(e) => setPinCode(e.target.value)}
                       />{" "}
                       <br />
                       <input

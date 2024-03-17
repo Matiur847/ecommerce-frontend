@@ -14,12 +14,13 @@ const OrderConfirm = () => {
   );
   const { user } = useSelector((state) => state.user);
 
-  const shippingCost = 99;
-  const totalAmounts = totalAmount + shippingCost
+  const shippingPrice = 99;
+  const totalAmounts = totalAmount + shippingPrice
 
   const proceedToPayment = () => {
     const paymentData = {
-      totalAmounts
+      totalAmounts,
+      shippingPrice,
     };
     sessionStorage.setItem("payInfo", JSON.stringify(paymentData));
     navigate("/proceed/payment");
@@ -54,8 +55,8 @@ const OrderConfirm = () => {
                 <div className="order-cart-items mt-3">
                   <h3>Your Cart Items</h3>
                   <div className="order-confirm-product-details">
-                    {cartItem.map((item) => (
-                      <div className="order-confirm-single-order d-flex justify-content-between">
+                    {cartItem.map((item, index) => (
+                      <div className="order-confirm-single-order d-flex justify-content-between" key={index}>
                         <div className="img d-flex gap-3 align-alitem-center text-center">
                           <img className="w-25" src={laptop} alt="" />
                           <p className="d-flex align-items-center confirm-product-name">
@@ -87,7 +88,7 @@ const OrderConfirm = () => {
                     Subtotal: <span>{totalAmount} BDT</span>
                   </p>
                   <p>
-                    Shipping Cost: <span>{shippingCost} BDT</span>
+                    Shipping Cost: <span>{shippingPrice} BDT</span>
                   </p>
                 </div>
                 <div className="totalAmount">
