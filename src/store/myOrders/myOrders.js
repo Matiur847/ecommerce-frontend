@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const orders = createAsyncThunk("/myOrders", async (order) => {
+export const allOrders = createAsyncThunk("/myOrders", async (order) => {
   try {
     const { data } = await axios.get("/api/v1/my/orders");
     return data;
@@ -23,15 +23,14 @@ const myOrder = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(orders.pending, (state) => {
+      .addCase(allOrders.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(orders.fulfilled, (state, action) => {
+      .addCase(allOrders.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("action.payload", action.payload);
         state.orders = action.payload;
       })
-      .addCase(orders.rejected, (state, action) => {
+      .addCase(allOrders.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
