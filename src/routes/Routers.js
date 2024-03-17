@@ -75,16 +75,18 @@ const Routers = () => {
         }
       />
 
-      <Route
-        path="/proceed/payment"
-        element={
-          <Elements stripe={loadStripe(stripeApiKey)}>
-            <ProtectedRoute>
-              <ProceedToPayment />
-            </ProtectedRoute>
-          </Elements>
-        }
-      />
+      {stripeApiKey && (
+        <Route
+          path="/proceed/payment"
+          element={
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtectedRoute>
+                <ProceedToPayment />
+              </ProtectedRoute>
+            </Elements>
+          }
+        />
+      )}
       <Route
         path="/success"
         element={

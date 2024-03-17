@@ -48,8 +48,11 @@ const Cart = () => {
         {cartItem.length === 0 ? (
           <p className="text-center mt-3 mb-3">Empty Cart</p>
         ) : (
-          cartItem.map((item) => (
-            <div className="cart-items-details d-flex align-items-center justify-content-around mt-2 mb-4">
+          cartItem.map((item, index) => (
+            <div
+              className="cart-items-details d-flex align-items-center justify-content-around mt-2 mb-4"
+              key={index}
+            >
               <div className="cartItem-img">
                 <img className="w-75" src={laptop} alt="Product" />
               </div>

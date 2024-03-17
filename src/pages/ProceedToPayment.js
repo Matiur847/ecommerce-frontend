@@ -22,7 +22,6 @@ const ProceedToPayment = () => {
   const { shippingInfo, cartItem, totalAmount } = useSelector(
     (state) => state.cart
   );
-  console.log(cartItem)
   // const newOrder = useSelector((state) => state.newOrder);
   const { user } = useSelector((state) => state.user);
 
