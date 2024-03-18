@@ -1,0 +1,49 @@
+.myOrder-section {
+    margin: 50px 0px;
+}
+
+.myOrders-table {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.order-forward-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.order-forward-icon:hover {
+    color: blue;
+}
+
+.colorRed {
+    font-weight: 600;
+    color: red;
+}
+
+.greenColor {
+    color: rgb(98, 155, 13);
+}
+
+.idClassName {
+    color: rgba(143, 63, 63, 0.466);
+}
+
+.css-1iyq7zh-MuiDataGrid-columnHeaders {
+    background-color: rgba(85, 107, 47, 0.863);
+}
+
+.MuiDataGrid-columnHeaderTitle.css-t89xny-MuiDataGrid-columnHeaderTitle {
+    font-weight: 600 !important;
+    color: white;
+}
+
+.css-1iyq7zh-MuiDataGrid-columnHeaders path {
+    color: white !important;
+}
+
+.owner-order-titel {
+    color: #383636dc;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -83,14 +83,14 @@ const Home = () => {
     );
   };
 
-  let data;
-  if (status === "loading") {
-    data = (
-      <div className="loading-spinner">
-        <HashLoader color="#000000" />
-      </div>
-    );
-  } else if (status === "succeeded") {
+let data;
+if (status === "loading") {
+  data = (
+    <div className="loading-spinner">
+      <HashLoader color="#000000" />
+    </div>
+  );
+} else if (status === "succeeded") {
     data = products.allProduct?.map((product, index) => (
       <Col lg="3" md="4" sm="6" xs="6" key={index}>
         <div className="product-card-container mb-3">
