@@ -20,6 +20,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import Success from "../pages/Success";
 import MyOrders from "../pages/MyOrders";
+import CompleteOrderDetails from "../pages/CompleteOrderDetails";
 
 // import { useSelector } from "react-redux";
 
@@ -101,6 +102,14 @@ const Routers = () => {
         element={
           <ProtectedRoute>
             <MyOrders />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order/:id"
+        element={
+          <ProtectedRoute>
+            <CompleteOrderDetails />
           </ProtectedRoute>
         }
       />

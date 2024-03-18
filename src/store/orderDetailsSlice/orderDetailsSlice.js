@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const orderDetails = createAsyncThunk("/order/details", async (id) => {
-  try {
-    const { data } = await axios.get(`/api/v1/order/${id}`);
-    return data;
-  } catch (error) {
-    throw error;
+export const orderDetails = createAsyncThunk(
+  "/order/details",
+  async (allData) => {
+    try {
+      const { id } = allData;
+      const { data } = await axios.get(`/api/v1/order/${id}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
-});
+);
 
 const initialState = {
   order: {},
@@ -17,7 +21,7 @@ const initialState = {
 };
 
 const completeOrderDetails = createSlice({
-  name: "orders",
+  name: "orderDetails",
   initialState,
   reducers: {},
 

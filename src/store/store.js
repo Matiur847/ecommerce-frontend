@@ -5,7 +5,7 @@ import profileSlice from "./profileSlice/profileSlice";
 import cartSlice from "./cartSlice.js/cartSlice";
 import newOrder from "./orderSlice/orderSlice";
 import myOrder from "./myOrders/myOrders";
-import completeOrderDetails from "./orderDetails/orderDetails";
+import completeOrderDetails from "./orderDetailsSlice/orderDetailsSlice";
 
 const store = configureStore({
   reducer: {
