@@ -27,7 +27,7 @@ const Success = () => {
                       ></i>
                       <h3>Order has been placed Successfully!</h3>
                       <Link to="/orders">
-                        <input className="login-btn" type="submit" value="Continue Shopping" />
+                        <input className="login-btn" type="submit" value="View Orders" />
                       </Link>
                     </form>
                   </div>
