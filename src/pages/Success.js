@@ -26,7 +26,7 @@ const Success = () => {
                         className="ri-checkbox-circle-line"
                       ></i>
                       <h3>Order has been placed Successfully!</h3>
-                      <Link to="/products">
+                      <Link to="/orders">
                         <input className="login-btn" type="submit" value="Continue Shopping" />
                       </Link>
                     </form>
