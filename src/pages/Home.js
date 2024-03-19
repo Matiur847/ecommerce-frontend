@@ -22,7 +22,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.product);
   const { cartItem } = useSelector((state) => state.cart);
-
+  
   const [itemId, setItemId] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
@@ -83,14 +83,14 @@ const Home = () => {
     );
   };
 
-let data;
-if (status === "loading") {
-  data = (
-    <div className="loading-spinner">
-      <HashLoader color="#000000" />
-    </div>
-  );
-} else if (status === "succeeded") {
+  let data;
+  if (status === "loading") {
+    data = (
+      <div className="loading-spinner">
+        <HashLoader color="#000000" />
+      </div>
+    );
+  } else if (status === "succeeded") {
     data = products.allProduct?.map((product, index) => (
       <Col lg="3" md="4" sm="6" xs="6" key={index}>
         <div className="product-card-container mb-3">
@@ -124,6 +124,7 @@ if (status === "loading") {
                     <ReactStars
                       value={product.ratings}
                       edit={false}
+                      size={20}
                       isHalf={true}
                     />{" "}
                     <span>{`(${product.numOfReview})`}</span>
@@ -133,6 +134,7 @@ if (status === "loading") {
             </CardContent>
             <div className="add-cart">
               <button
+                disabled={product.stock < 1}
                 onClick={() => {
                   addToCart(product);
                   setItemId(product._id);

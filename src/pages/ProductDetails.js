@@ -176,11 +176,9 @@ const ProductDetails = () => {
                 <button
                   className="firstBtn"
                   onClick={() => addToCart(product.product._id)}
+                  disabled={product.product?.stock < 1}
                 >
                   Add To <i className="ri-shopping-bag-line"></i>
-                </button>
-                <button className="checkout">
-                  Check Out <i className="ri-bank-card-line"></i>
                 </button>
               </div>
             </div>

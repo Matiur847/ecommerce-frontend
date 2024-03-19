@@ -135,6 +135,7 @@ const Products = () => {
             </CardContent>
             <div className="add-cart">
               <button
+                disabled={product.stock < 1}
                 onClick={() => {
                   addToCart(product);
                   setItemId(product._id);

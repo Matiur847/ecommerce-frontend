@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { orderDetails } from "../store/orderDetailsSlice/orderDetailsSlice";
 import Helmet from "../components/Helmet/Helmet";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import HashLoader from "react-spinners/HashLoader";
 import laptop from "../img/laptop.jpg";
 
 const CompleteOrderDetails = () => {
   const dispatch = useDispatch();
   const { order, status, error } = useSelector((state) => state.orderDetails);
+  console.log('orders', order);
   const { user } = useSelector((state) => state.user);
-  console.log(order);
   const id = useParams();
 
   useEffect(() => {
@@ -69,6 +69,11 @@ const CompleteOrderDetails = () => {
                   </div>
                 ))}
             </div>
+            {
+              order.order.orderStatus === "Delivered" ? <Button className="addReviewBtn" variant="danger">
+                Submit Review
+              </Button> : <h4>When your oreder has been delivered successfully then you submit a review!</h4>
+            }
           </div>
         </Col>
       </Row>
