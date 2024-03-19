@@ -11,7 +11,6 @@ import laptop from "../img/laptop.jpg";
 const CompleteOrderDetails = () => {
   const dispatch = useDispatch();
   const { order, status, error } = useSelector((state) => state.orderDetails);
-  console.log('orders', order);
   const { user } = useSelector((state) => state.user);
   const id = useParams();
 

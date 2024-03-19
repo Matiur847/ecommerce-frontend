@@ -55,7 +55,7 @@ const Routers = () => {
       <Route
         path="/change-password"
         element={
-          <ProtectedRoute isAdmin={true}>
+          <ProtectedRoute>
             <UpdatePassword />
           </ProtectedRoute>
         }
