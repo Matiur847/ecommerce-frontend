@@ -22,6 +22,7 @@ import Success from "../pages/Success";
 import MyOrders from "../pages/MyOrders";
 import CompleteOrderDetails from "../pages/CompleteOrderDetails";
 import Dashboard from "../pages/Dashboard";
+import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
 const Routers = () => {
@@ -118,6 +119,14 @@ const Routers = () => {
         element={
           <ProtectedRoute isAdmin={true}>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/products"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <AdminProductList />
           </ProtectedRoute>
         }
       />
