@@ -21,7 +21,7 @@ import axios from "axios";
 import Success from "../pages/Success";
 import MyOrders from "../pages/MyOrders";
 import CompleteOrderDetails from "../pages/CompleteOrderDetails";
-
+import Dashboard from "../pages/Dashboard";
 // import { useSelector } from "react-redux";
 
 const Routers = () => {
@@ -110,6 +110,14 @@ const Routers = () => {
         element={
           <ProtectedRoute>
             <CompleteOrderDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <Dashboard />
           </ProtectedRoute>
         }
       />

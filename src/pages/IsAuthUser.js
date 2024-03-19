@@ -50,7 +50,7 @@ const IsAuthUser = ({ user }) => {
   }
 
   function dashboard() {
-    navigate("/admin/users");
+    navigate("/admin/dashboard");
   }
 
   function orders() {
