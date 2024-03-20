@@ -1,15 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const createProduct = createAsyncThunk(
-  "/user-detail",
-  async (allData) => {
+export const newProductCreate = createAsyncThunk(
+  "/crate/product",
+  async (myForm) => {
     try {
-      const { product } = allData;
+      // const { myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post("/api/v1/product/new", product, config);
+      const { data } = await axios.post("/api/v1/product/new", myForm, config);
+      console.log('data', data)
       return data;
     } catch (error) {
+      console.log('error', error)
       throw error;
     }
   }
@@ -28,14 +30,14 @@ const newProductSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(createProduct.pending, (state) => {
+      .addCase(newProductCreate.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createProduct.fulfilled, (state, action) => {
+      .addCase(newProductCreate.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.product = action.payload;
       })
-      .addCase(createProduct.rejected, (state, action) => {
+      .addCase(newProductCreate.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

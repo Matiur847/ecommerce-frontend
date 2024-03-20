@@ -4,16 +4,21 @@ import { Col, Container, Row } from "react-bootstrap";
 import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import Helmet from "../components/Helmet/Helmet";
-import { createProduct } from "../store/createProductAdmin/createProductAdminSlice";
+import { toast } from "react-toastify";
+import { newProductCreate } from "../store/createProductAdmin/createProductAdminSlice";
+import Spinner from "react-bootstrap/Spinner";
 
 const CreateProductAdmin = () => {
   const dispatch = useDispatch();
+  const { product, status, error } = useSelector(
+    (state) => state.createProduct
+  );
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [Stock, setStock] = useState(0);
+  const [stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
 
   const categories = [
@@ -26,6 +31,22 @@ const CreateProductAdmin = () => {
     "SmartPhones",
   ];
 
+  useEffect(() => {
+    if (error) {
+      toast.warning(error.message, {
+        position: "top-right",
+        autoClose: 200,
+      });
+    }
+
+    if (product?.success === true) {
+      toast.success("Product Created Successfully", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  }, [error, product]);
+
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -35,12 +56,12 @@ const CreateProductAdmin = () => {
     myForm.set("price", price);
     myForm.set("description", description);
     myForm.set("category", category);
-    myForm.set("Stock", Stock);
+    myForm.set("stock", stock);
 
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(createProduct(myForm));
+    dispatch(newProductCreate(myForm));
   };
 
   const createProductImagesChange = (e) => {
@@ -123,12 +144,27 @@ const CreateProductAdmin = () => {
                         type="file"
                         name="avatar"
                         accept="image/*"
+                        required
                         onChange={createProductImagesChange}
                         multiple
                       />{" "}
                       <br />
-                      <button className="login-btn create-product">
-                        Create
+                      <button
+                        className="login-btn create-product"
+                        disabled={status === "loading"}
+                      >
+                        {status === "loading" ? (
+                          <Spinner
+                            animation="border"
+                            role="status"
+                            size="sm"
+                            variant="primary"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </Spinner>
+                        ) : (
+                          "Create"
+                        )}
                       </button>
                     </form>
                   </div>
