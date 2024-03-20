@@ -40,7 +40,6 @@ const Dashboard = () => {
   const { adminProducts, status, error } = useSelector(
     (state) => state.adminAllProduct
   );
-  console.log(adminProducts);
   useEffect(() => {
     dispatch(getAdminProducts());
   }, [dispatch]);
@@ -53,7 +52,6 @@ const Dashboard = () => {
     }
   });
 
-  console.log("outOfStockPro", outOfStock);
 
   const bannerData = [
     {
