@@ -1,17 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const adminProducts = createAsyncThunk("/product", async (id) => {
-  try {
-    const response = await axios.get(`/api/v1/product/${id.id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
+export const getAdminProducts = createAsyncThunk(
+  "/admin/products",
+  async () => {
+    try {
+      const { data } = await axios.get("/api/v1/admin/all/products");
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
-});
+);
 
 const initialState = {
   adminProducts: [],
+  status: "idle",
+  error: null,
 };
 
 const adminAllProducts = createSlice({
@@ -21,18 +26,19 @@ const adminAllProducts = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(adminProducts.pending, (state) => {
+      .addCase(getAdminProducts.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(adminProducts.fulfilled, (state, action) => {
+      .addCase(getAdminProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.adminProducts = action.payload;
       })
-      .addCase(adminProducts.rejected, (state, action) => {
+      .addCase(getAdminProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
   },
 });
 
+export const adminAllProductSlice = adminAllProducts.actions;
 export default adminAllProducts;

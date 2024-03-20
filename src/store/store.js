@@ -6,7 +6,7 @@ import cartSlice from "./cartSlice.js/cartSlice";
 import newOrder from "./orderSlice/orderSlice";
 import myOrder from "./myOrders/myOrders";
 import completeOrderDetails from "./orderDetailsSlice/orderDetailsSlice";
-import adminAllProducts from "./adminProducts/adminProducts";
+import adminAllProducts from "./adminProducts/adminProductSlice";
 
 const store = configureStore({
   reducer: {
