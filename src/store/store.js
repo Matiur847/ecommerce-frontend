@@ -6,6 +6,7 @@ import cartSlice from "./cartSlice.js/cartSlice";
 import newOrder from "./orderSlice/orderSlice";
 import myOrder from "./myOrders/myOrders";
 import completeOrderDetails from "./orderDetailsSlice/orderDetailsSlice";
+import adminAllProducts from "./adminProducts/adminProducts";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     newOrder: newOrder.reducer,
     myOrders: myOrder.reducer,
     orderDetails: completeOrderDetails.reducer,
+    adminAllProduct: adminAllProducts.reducer,
   },
 });
 

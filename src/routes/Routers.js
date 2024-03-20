@@ -23,12 +23,13 @@ import MyOrders from "../pages/MyOrders";
 import CompleteOrderDetails from "../pages/CompleteOrderDetails";
 import Dashboard from "../pages/Dashboard";
 import AdminProductList from "../pages/AdminProductList";
+// import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
 const Routers = () => {
   // const { user } = useSelector((state) => state.user);
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  const [stripeApiKey, setStripeApiKey] = useState(null);
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeApiKey");
