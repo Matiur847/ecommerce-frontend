@@ -43,25 +43,7 @@ const ProductDetails = () => {
   const [showText, setShowText] = useState(false);
   const hoverText = "Click To preview";
 
-  // const { cartItem } = useSelector((state) => state.cart);
-
-  // const [itemId, setItemId] = useState(0);
-  // const [quantity, setQuantity] = useState(0);
-
-  // // get specific item current quantity
-  // useEffect(() => {
-  //   const stockCount = cartItem.find((item) => item.id === itemId);
-  //   setQuantity(stockCount?.quantity);
-  // }, [cartItem, itemId]);
-
   const addToCart = (id) => {
-    // if (product.product.stock <= quantity || null) {
-    //   toast.warning(`Stock Limit ${product.product.stock}`, {
-    //     position: "top-right",
-    //     autoClose: 2000,
-    //   });
-    //   return;
-    // }
     dispatch(
       cartActions.addItem({
         id: id,

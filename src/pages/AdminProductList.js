@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import "../style/AdminProductList.css";
-import SideBar from "./SideBar";
 import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import HashLoader from "react-spinners/HashLoader";
 
@@ -11,7 +10,6 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { getAdminProducts } from "../store/adminProducts/adminProductSlice";
-import axios from "axios";
 
 const AdminProductList = () => {
   const dispatch = useDispatch();
@@ -58,16 +56,10 @@ const AdminProductList = () => {
         return (
           <div>
             <Link to={`/admin/product/${params.id}`}>
-              <FaEdit />
+              <FaEdit className="admin-svgBtn" />
             </Link>
 
-            <Button
-            // onClick={() =>
-            //   deleteProductHandler(params.getValue(params.id, "id"))
-            // }
-            >
-              <MdDelete />
-            </Button>
+            <MdDelete className="admin-svgBtn" />
           </div>
         );
       },
@@ -76,15 +68,15 @@ const AdminProductList = () => {
 
   const rows = [];
 
-  // adminProducts &&
-  //   adminProducts.forEach((item) => {
-  //     rows.push({
-  //       id: item._id,
-  //       stock: item.Stock,
-  //       price: item.price,
-  //       name: item.name,
-  //     });
-  //   });
+  adminProducts.products &&
+    adminProducts.products.forEach((item) => {
+      rows.push({
+        id: item._id,
+        stock: `${item.stock}x`,
+        price: `৳ ${item.price}`,
+        name: item.name,
+      });
+    });
 
   let data;
   if (status === "loading") {
@@ -95,8 +87,10 @@ const AdminProductList = () => {
     );
   } else if (status === "succeeded") {
     data = (
-      <div style={{ height: 400, width: "100%" }} className="myOrders-table">
-        {/* <h4 className="text-center mt-2 mb-3 owner-order-titel">{`${user.user?.name} Your Orders`}</h4> */}
+      <div className="myOrders-table">
+        <h4 className="text-center mt-2 mb-3 owner-order-titel">
+          Product List
+        </h4>
         <DataGrid
           getRowHeight={() => "auto"}
           rows={rows}
@@ -119,15 +113,12 @@ const AdminProductList = () => {
   }
   return (
     <Helmet title="ADMIN Products">
-      <div>
-        <SideBar />
-        <div className="myOrder-section admin-productList">
-          <Container>
-            <Row>
-              <Col md="12">{data}</Col>
-            </Row>
-          </Container>
-        </div>
+      <div className="myOrder-section">
+        <Container>
+          <Row>
+            <Col md="12">{data}</Col>
+          </Row>
+        </Container>
       </div>
     </Helmet>
   );

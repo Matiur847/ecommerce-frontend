@@ -1,3 +1,12 @@
 .admin-productList {
     margin: 0;
 }
+
+.admin-svgBtn {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.MuiDataGrid-cell--withRenderer.MuiDataGrid-cell.MuiDataGrid-cell--textRight.MuiDataGrid-withBorderColor a {
+    margin-right: 20px !important;
+}
