@@ -24,6 +24,7 @@ import CompleteOrderDetails from "../pages/CompleteOrderDetails";
 import Dashboard from "../pages/Dashboard";
 import AdminProductList from "../pages/AdminProductList";
 import CreateProductAdmin from "../pages/CreateProductAdmin";
+import UpdateProductAdmin from "../pages/UpdateProductAdmin";
 // import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
@@ -137,6 +138,14 @@ const Routers = () => {
         element={
           <ProtectedRoute isAdmin={true}>
             <CreateProductAdmin />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/product/:id"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <UpdateProductAdmin />
           </ProtectedRoute>
         }
       />
