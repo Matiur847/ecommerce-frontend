@@ -11,7 +11,6 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
-import laptop from "../img/laptop.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../store/productSlice/productSlice";
 import HashLoader from "react-spinners/HashLoader";

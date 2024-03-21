@@ -12,7 +12,6 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import ReactStars from "react-rating-stars-component";
 import { Col, Container, Row } from "react-bootstrap";
-import laptop from "../img/laptop.jpg";
 import Pagination from "react-js-pagination";
 
 import RangeSlider from "react-range-slider-input";

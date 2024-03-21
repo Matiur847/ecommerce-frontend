@@ -10,15 +10,24 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { getAdminProducts } from "../store/adminProducts/adminProductSlice";
+import { deleteProduct } from "../store/deleteProductSlice/deleteProductSlice";
+import { toast } from "react-toastify";
 
 const AdminProductList = () => {
   const dispatch = useDispatch();
   const { adminProducts, status, error } = useSelector(
     (state) => state.adminAllProduct
   );
+  const { isDelete } = useSelector((state) => state.deletProduct);
+  console.log(isDelete);
+
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   useEffect(() => {
     dispatch(getAdminProducts());
-  }, [dispatch]);
+  }, [dispatch, isDelete]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -59,7 +68,10 @@ const AdminProductList = () => {
               <FaEdit className="admin-svgBtn" />
             </Link>
 
-            <MdDelete className="admin-svgBtn" />
+            <MdDelete
+              className="admin-svgBtn"
+              onClick={() => handleDeleteProduct(params.id)}
+            />
           </div>
         );
       },

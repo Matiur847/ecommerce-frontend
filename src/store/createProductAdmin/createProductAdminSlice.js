@@ -8,7 +8,6 @@ export const newProductCreate = createAsyncThunk(
       // const { myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
       const { data } = await axios.post("/api/v1/product/new", myForm, config);
-      console.log('data', data)
       return data;
     } catch (error) {
       console.log('error', error)

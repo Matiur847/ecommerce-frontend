@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
 import { Link } from "react-router-dom";
-import laptop from "../img/laptop.jpg";
 import { toast } from "react-toastify";
 
 const Cart = () => {
