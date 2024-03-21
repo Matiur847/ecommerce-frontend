@@ -6,8 +6,12 @@ export const updateProduct = createAsyncThunk(
   async (allData) => {
     try {
       const { id, myForm } = allData;
-      //   const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(`/api/v1/product/${id}`);
+      const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `/api/v1/product/${id.id}`,
+        myForm,
+        config
+      );
       return data;
     } catch (error) {
       throw error;
@@ -16,6 +20,7 @@ export const updateProduct = createAsyncThunk(
 );
 
 const initialState = {
+  isUpdateProduct: {},
   status: "idle",
   error: null,
 };
@@ -32,7 +37,7 @@ const productUpdate = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state = action.payload;
+        state.isUpdateProduct = action.payload;
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.status = "failed";

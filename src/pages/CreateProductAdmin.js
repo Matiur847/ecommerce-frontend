@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../style/createProductAdmin.css";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import "../style/Register.css";
 import { useDispatch, useSelector } from "react-redux";
 import Helmet from "../components/Helmet/Helmet";
 import { createProduct } from "../store/createProductAdmin/createProductAdminSlice";
