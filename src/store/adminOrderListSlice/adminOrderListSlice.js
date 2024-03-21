@@ -14,6 +14,22 @@ export const adminOrderList = createAsyncThunk(
   }
 );
 
+export const adminUpdateOrder = createAsyncThunk(
+  "/admin/update-order",
+  async (allData) => {
+    try {
+      const { id } = allData;
+      //   const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(`/api/v1//admin/order/${id}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+
+
 const initialState = {
   adminOrders: [],
   status: "idle",
