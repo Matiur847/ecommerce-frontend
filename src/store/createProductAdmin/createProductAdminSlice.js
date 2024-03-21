@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const createProduct = createAsyncThunk(
-  "/user-detail",
-  async (allData) => {
+  "/create-product",
+  async (myForm) => {
     try {
-      const { product } = allData;
+      // const { myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post("/api/v1/product/new", product, config);
+      const { data } = await axios.post("/api/v1/product/new", myForm, config);
       return data;
     } catch (error) {
       throw error;

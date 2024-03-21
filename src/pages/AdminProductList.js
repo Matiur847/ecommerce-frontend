@@ -19,13 +19,19 @@ const AdminProductList = () => {
     (state) => state.adminAllProduct
   );
   const { isDelete } = useSelector((state) => state.deletProduct);
-  console.log(isDelete);
 
   const handleDeleteProduct = (id) => {
     dispatch(deleteProduct(id));
   };
 
   useEffect(() => {
+    if (isDelete?.success === true) {
+      toast.success("Product Delete Successfully", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+
     dispatch(getAdminProducts());
   }, [dispatch, isDelete]);
 

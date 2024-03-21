@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const fetchProduct = createAsyncThunk('/products', async (data) => {
+export const fetchProduct = createAsyncThunk('/products', async (data) => {
   try {
     const { keyword = '', currentPage, price = [0, 25000], category, ratings = 0} = data;
     let link = `/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
@@ -74,5 +74,4 @@ const productSlice = createSlice({
 });
 
 export const productActions = productSlice.actions;
-export { fetchProduct };
 export default productSlice;
