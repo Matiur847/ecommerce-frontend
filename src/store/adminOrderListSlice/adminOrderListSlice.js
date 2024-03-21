@@ -1,0 +1,45 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const adminOrderList = createAsyncThunk(
+  "/admin/order-list",
+  async () => {
+    try {
+      //   const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.get("/api/v1/admin/orders");
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+const initialState = {
+  adminOrders: [],
+  status: "idle",
+  error: null,
+};
+
+const adminOrders = createSlice({
+  name: "adminOrders",
+  initialState,
+  reducers: {},
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(adminOrderList.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(adminOrderList.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.adminOrders = action.payload;
+        state = action.payload;
+      })
+      .addCase(adminOrderList.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default adminOrders;
