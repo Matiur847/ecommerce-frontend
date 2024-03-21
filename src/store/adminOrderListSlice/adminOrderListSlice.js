@@ -61,9 +61,32 @@ const adminOrders = createSlice({
       .addCase(adminOrderList.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.adminOrders = action.payload;
-        state = action.payload;
       })
       .addCase(adminOrderList.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(adminUpdateOrder.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(adminUpdateOrder.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state = action.payload;
+      })
+      .addCase(adminUpdateOrder.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(adminDeletOrder.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(adminDeletOrder.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state = action.payload;
+      })
+      .addCase(adminDeletOrder.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
