@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../style/AdminProductList.css";
 import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import HashLoader from "react-spinners/HashLoader";
 
@@ -18,7 +18,8 @@ const AdminProductList = () => {
   const { adminProducts, status, error } = useSelector(
     (state) => state.adminAllProduct
   );
-  const { isDelete } = useSelector((state) => state.deletProduct);
+  const isDelete = useSelector((state) => state.deletProduct);
+
 
   const handleDeleteProduct = (id) => {
     dispatch(deleteProduct(id));
@@ -74,10 +75,21 @@ const AdminProductList = () => {
               <FaEdit className="admin-svgBtn" />
             </Link>
 
-            <MdDelete
-              className="admin-svgBtn"
-              onClick={() => handleDeleteProduct(params.id)}
-            />
+            {isDelete.status === "loading" ? (
+              <Spinner
+                animation="border"
+                role="status"
+                size="sm"
+                variant="primary"
+              >
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            ) : (
+              <MdDelete
+                className="admin-svgBtn"
+                onClick={() => handleDeleteProduct(params.id)}
+              />
+            )}
           </div>
         );
       },
@@ -107,7 +119,7 @@ const AdminProductList = () => {
     data = (
       <div className="myOrders-table">
         <h4 className="text-center mt-2 mb-3 owner-order-titel">
-          Product List
+          Product List {adminProducts.products?.length}
         </h4>
         <div className="admin-path">
           <Link to="/admin/dashboard">/dashboard</Link>

@@ -150,6 +150,7 @@ const CreateProductAdmin = () => {
                         type="file"
                         name="avatar"
                         accept="image/*"
+                        required
                         onChange={createProductImagesChange}
                         multiple
                       />{" "}
@@ -163,7 +164,7 @@ const CreateProductAdmin = () => {
                             animation="border"
                             role="status"
                             size="sm"
-                            variant="primary"
+                            variant="light"
                           >
                             <span className="visually-hidden">Loading...</span>
                           </Spinner>

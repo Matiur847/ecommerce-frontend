@@ -152,7 +152,7 @@ const ProceedToPayment = () => {
                             animation="border"
                             role="status"
                             size="sm"
-                            variant="primary"
+                            variant="light"
                           >
                             <span className="visually-hidden">Loading...</span>
                           </Spinner>
