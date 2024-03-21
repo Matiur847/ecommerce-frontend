@@ -20,9 +20,13 @@ const ProductDetails = () => {
   const { product, status, error } = useSelector((state) => state.product);
   const { cartItem } = useSelector((state) => state.cart);
   const [itemId, setItemId] = useState(0);
-  
+  const [quantity, setQuantity] = useState(0);
 
-  
+  // get specific item current quantity
+  useEffect(() => {
+    const stockCount = cartItem.find((item) => item.id === itemId);
+    setQuantity(stockCount?.quantity);
+  }, [cartItem, itemId]);
 
   useEffect(() => {
     dispatch(detailsProduct(id));
@@ -32,7 +36,13 @@ const ProductDetails = () => {
   const hoverText = "Click To preview";
 
   const addToCart = (id) => {
-    
+    if (product.product.stock <= quantity) {
+      toast.warning(`Stock Limit ${product.product.stock}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
     dispatch(
       cartActions.addItem({
         id: id,
@@ -148,6 +158,7 @@ const ProductDetails = () => {
                   className="firstBtn"
                   onClick={() => {
                     addToCart(product.product._id);
+                    setItemId(product.product._id);
                   }}
                   disabled={product.product?.stock < 1}
                 >
