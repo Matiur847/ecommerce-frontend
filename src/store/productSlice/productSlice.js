@@ -11,6 +11,7 @@ const fetchProduct = createAsyncThunk('/products', async (data) => {
     }
 
     const response = await axios.get(link);
+    // console.log("data", response.da)
     return response.data;
   } catch (error) {
     throw error;
@@ -41,13 +42,8 @@ const productSlice = createSlice({
       state.products = action.payload;
     },
     productDetails: (state, action) => {
-      // const id = action.payload.id
       state.product = action.payload
     },
-    paginationNumber: (state, action) => {
-      const currentPage = action.payload
-      console.log('paginationNumber', currentPage)
-    }
   },
   extraReducers: (builder) => {
     builder

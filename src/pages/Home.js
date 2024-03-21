@@ -22,6 +22,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.product);
   const { cartItem } = useSelector((state) => state.cart);
+  console.log(products)
   
   const [itemId, setItemId] = useState(0);
   const [quantity, setQuantity] = useState(0);

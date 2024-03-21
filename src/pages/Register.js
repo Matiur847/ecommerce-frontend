@@ -31,6 +31,8 @@ const Register = () => {
     myForm.append("email", email);
     myForm.append("password", password);
     myForm.append("avatar", avatar);
+
+    // console.log('users', myForm);
     dispatch(register(myForm));
   };
 

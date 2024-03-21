@@ -8,12 +8,9 @@ import Helmet from "../components/Helmet/Helmet";
 import { Col, Container, Row } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import google from "../img/google.avif";
-import laptop from "../img/laptop.jpg";
-import mobile from "../img/mobile.jpg";
-import gadget from "../img/gadget.jpg";
 import Review from "./Review";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const id = useParams();
@@ -21,29 +18,31 @@ const ProductDetails = () => {
   const [mainImg, setMainImg] = useState("");
 
   const { product, status, error } = useSelector((state) => state.product);
+  const { cartItem } = useSelector((state) => state.cart);
+  const [itemId, setItemId] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+
+  // get specific item current quantity
+  useEffect(() => {
+    const stockCount = cartItem.find((item) => item.id === itemId);
+    setQuantity(stockCount?.quantity);
+  }, [cartItem, itemId]);
+
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [id, dispatch]);
-
-  const image = [
-    {
-      url: google,
-    },
-    {
-      url: laptop,
-    },
-    {
-      url: mobile,
-    },
-    {
-      url: gadget,
-    },
-  ];
 
   const [showText, setShowText] = useState(false);
   const hoverText = "Click To preview";
 
   const addToCart = (id) => {
+    if (product.product.stock <= quantity) {
+      toast.warning(`Stock Limit ${product.product.stock}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
     dispatch(
       cartActions.addItem({
         id: id,
@@ -69,13 +68,13 @@ const ProductDetails = () => {
         <Col md="4" className="detils-sections">
           <div className="product-details-img-container d-flex align-items-center">
             <div className="image3 gap-3 align-items-center">
-              {image.map((item, index) => (
+              {product.product?.images.map((item, index) => (
                 <img
                   style={{ position: "relative", display: "inline-block" }}
                   onMouseOver={() => setShowText(true)}
                   onMouseOut={() => setShowText(false)}
                   src={item.url}
-                  alt={index}
+                  alt={item.public_id}
                   key={index}
                   className="w-50"
                   onClick={() => setMainImg(item)}
@@ -157,7 +156,10 @@ const ProductDetails = () => {
               <div className="addCart-btn mt-3 mb-5">
                 <button
                   className="firstBtn"
-                  onClick={() => addToCart(product.product._id)}
+                  onClick={() => {
+                    addToCart(product.product._id);
+                    setItemId(product.product._id);
+                  }}
                   disabled={product.product?.stock < 1}
                 >
                   Add To <i className="ri-shopping-bag-line"></i>

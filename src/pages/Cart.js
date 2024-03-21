@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
 import { Link } from "react-router-dom";
-import laptop from "../img/laptop.jpg";
 import { toast } from "react-toastify";
 
 const Cart = () => {
@@ -54,7 +53,7 @@ const Cart = () => {
               key={index}
             >
               <div className="cartItem-img">
-                <img className="w-75" src={laptop} alt="Product" />
+                <img className="w-75" src={item.image} alt="Product" />
               </div>
               <div className="cartItem-product-deatils">
                 <p className="m-0 mb-1">{item.name}</p>
