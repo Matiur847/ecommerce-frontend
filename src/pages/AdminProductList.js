@@ -91,6 +91,10 @@ const AdminProductList = () => {
         <h4 className="text-center mt-2 mb-3 owner-order-titel">
           Product List
         </h4>
+        <div className="admin-path">
+          <Link to="/admin/dashboard">/dashboard</Link>
+          <Link to="/admin/create">/create/product</Link>
+        </div>
         <DataGrid
           getRowHeight={() => "auto"}
           rows={rows}

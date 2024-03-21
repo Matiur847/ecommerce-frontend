@@ -10,3 +10,14 @@
 .MuiDataGrid-cell--withRenderer.MuiDataGrid-cell.MuiDataGrid-cell--textRight.MuiDataGrid-withBorderColor a {
     margin-right: 20px !important;
 }
+
+.admin-path {
+    padding: 10px 5px;
+}
+
+.admin-path a {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0px 5px;
+    color: #38363685;
+}

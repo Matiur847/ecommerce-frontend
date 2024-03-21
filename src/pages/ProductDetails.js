@@ -21,6 +21,7 @@ const ProductDetails = () => {
   const [mainImg, setMainImg] = useState("");
 
   const { product, status, error } = useSelector((state) => state.product);
+  console.log(product)
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [id, dispatch]);
@@ -69,13 +70,13 @@ const ProductDetails = () => {
         <Col md="4" className="detils-sections">
           <div className="product-details-img-container d-flex align-items-center">
             <div className="image3 gap-3 align-items-center">
-              {image.map((item, index) => (
+              {product.product.images.map((item, index) => (
                 <img
                   style={{ position: "relative", display: "inline-block" }}
                   onMouseOver={() => setShowText(true)}
                   onMouseOut={() => setShowText(false)}
                   src={item.url}
-                  alt={index}
+                  alt={item.public_id}
                   key={index}
                   className="w-50"
                   onClick={() => setMainImg(item)}

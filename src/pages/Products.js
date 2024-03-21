@@ -101,7 +101,7 @@ const Products = () => {
               <AspectRatio>
                 <Link to={`/product/${product._id}`}>
                   <img
-                    src={laptop}
+                    src={product.images[0].url}
                     loading="lazy"
                     alt={product.name}
                     className="productImg"

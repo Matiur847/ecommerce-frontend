@@ -44,6 +44,13 @@ const CreateProductAdmin = () => {
         position: "top-right",
         autoClose: 2000,
       });
+
+      setName("");
+      setPrice(0);
+      setDescription("");
+      setCategory("");
+      setStock(0);
+      setImages([]);
     }
   }, [error, product]);
 
@@ -120,6 +127,7 @@ const CreateProductAdmin = () => {
                       <textarea
                         placeholder="Product Description"
                         value={description}
+                        required
                         onChange={(e) => setDescription(e.target.value)}
                         cols="30"
                         rows="1"
