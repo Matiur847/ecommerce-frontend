@@ -26,15 +26,6 @@ const AdminProductList = () => {
   };
 
   useEffect(() => {
-    if (isDelete.success === true) {
-      toast.success(isDelete.message, {
-        position: "top-right",
-        autoClose: 2000,
-      });
-    }
-  }, [isDelete]);
-
-  useEffect(() => {
     dispatch(getAdminProducts());
   }, [dispatch, isDelete]);
 
