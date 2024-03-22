@@ -40,6 +40,7 @@ const Dashboard = () => {
   const { adminProducts, status, error } = useSelector(
     (state) => state.adminAllProduct
   );
+  const { adminOrders } = useSelector((state) => state.adminOrderList);
   useEffect(() => {
     dispatch(getAdminProducts());
   }, [dispatch]);
@@ -61,7 +62,7 @@ const Dashboard = () => {
     },
 
     {
-      logo: <i>4</i>,
+      logo: <i>{adminOrders.orders?.length}</i>,
       title: "Orders",
       path: "/admin/orders",
     },

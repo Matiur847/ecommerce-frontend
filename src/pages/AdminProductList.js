@@ -25,7 +25,7 @@ const AdminProductList = () => {
   };
 
   useEffect(() => {
-    if (isDelete?.success === true) {
+    if (isDelete.status === "succeeded") {
       toast.success("Product Delete Successfully", {
         position: "top-right",
         autoClose: 2000,

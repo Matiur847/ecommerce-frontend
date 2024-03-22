@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/AdminProcessOrder.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import laptop from "../img/laptop.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
-import { getOrderDetail } from "../store/adminOrderListSlice/adminOrderListSlice";
+import {
+  adminUpdateOrder,
+  getOrderDetail,
+} from "../store/adminOrderListSlice/adminOrderListSlice";
+import { toast } from "react-toastify";
 
 const AdminProcessOrder = () => {
   const id = useParams();
@@ -16,18 +20,29 @@ const AdminProcessOrder = () => {
   );
   const { user } = useSelector((state) => state.user);
   const { orderDetail } = useSelector((state) => state.adminOrderList);
+  const { adminOrderUpdate, status, error } = useSelector(
+    (state) => state.adminOrderList
+  );
 
-  const shippingPrice = 99;
-  const totalAmounts = totalAmount + shippingPrice;
+  const [orderProcessStatus, setOrderProcessStatus] = useState("");
 
-  const proceedToPayment = () => {
-    const paymentData = {
-      totalAmounts,
-      shippingPrice,
-    };
-    sessionStorage.setItem("payInfo", JSON.stringify(paymentData));
-    navigate("/proceed/payment");
+  const updateOrderSubmitHandler = (e) => {
+    console.log("funcCall");
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("status", orderProcessStatus);
+
+    dispatch(adminUpdateOrder({ id, myForm }));
   };
+
+  if (adminOrderUpdate.success === true) {
+    toast.success(adminOrderUpdate.message, {
+      position: "top-right",
+      autoClose: 2000,
+    });
+  }
 
   useEffect(() => {
     dispatch(getOrderDetail(id));
@@ -90,10 +105,45 @@ const AdminProcessOrder = () => {
                 <h3 className="text-center order-summery adminProcessOrder">
                   Order Summery
                 </h3>
-                <p>Current Order Status: {orderDetail.order.orderStatus}</p>
-                <button className="login-btn mt-3" onClick={proceedToPayment}>
-                  Proceed To Payment
-                </button>
+                <p>
+                  Current Order Status:{" "}
+                  <span>{orderDetail.order?.orderStatus}</span>
+                </p>
+                <form
+                  className="updateOrderForm text-center"
+                  onSubmit={updateOrderSubmitHandler}
+                >
+                  <div className="current-orderStatus ">
+                    <select
+                    className="mt-2"
+                      onChange={(e) => setOrderProcessStatus(e.target.value)}
+                    >
+                      <option value="">Choose Category</option>
+                      {orderDetail.order?.orderStatus === "Processing" && (
+                        <option value="Shipped">Shipped</option>
+                      )}
+
+                      {orderDetail.order?.orderStatus === "Shipped" && (
+                        <option value="Delivered">Delivered</option>
+                      )}
+                    </select>{" "}
+                    <br />
+                    <button type="submit" className="login-btn mt-2 w-100" disabled={orderProcessStatus === ""}>
+                      {status === "loading" ? (
+                        <Spinner
+                          animation="border"
+                          role="status"
+                          size="sm"
+                          variant="light"
+                        >
+                          <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                      ) : (
+                        "Update"
+                      )}
+                    </button>
+                  </div>
+                </form>
               </div>
             </Col>
           </Row>

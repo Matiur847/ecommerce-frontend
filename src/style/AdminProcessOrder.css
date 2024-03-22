@@ -2,3 +2,7 @@
     background: none;
     color: crimson;
 }
+
+.current-orderStatus select {
+    padding: 5px;
+}

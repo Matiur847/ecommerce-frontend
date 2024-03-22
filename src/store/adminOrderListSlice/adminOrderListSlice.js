@@ -31,9 +31,13 @@ export const adminUpdateOrder = createAsyncThunk(
   "/admin/update-order",
   async (allData) => {
     try {
-      const { id } = allData;
-      //   const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.put(`/api/v1//admin/order/${id}`);
+      const { id, myForm } = allData;
+      const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `/api/v1//admin/order/${id.id}`,
+        myForm,
+        config
+      );
       return data;
     } catch (error) {
       throw error;
@@ -57,6 +61,7 @@ export const adminDeletOrder = createAsyncThunk(
 const initialState = {
   adminOrders: [],
   adminDeleteOrder: [],
+  adminOrderUpdate: {},
   orderDetail: [],
   status: "idle",
   error: null,
@@ -98,7 +103,7 @@ const adminOrders = createSlice({
       })
       .addCase(adminUpdateOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state = action.payload;
+        state.adminOrderUpdate = action.payload;
       })
       .addCase(adminUpdateOrder.rejected, (state, action) => {
         state.status = "failed";
