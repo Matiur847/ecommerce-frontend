@@ -6,13 +6,14 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import HashLoader from "react-spinners/HashLoader";
 import { DataGrid } from "@mui/x-data-grid";
 import Helmet from "../components/Helmet/Helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   adminDeletOrder,
   adminOrderList,
 } from "../store/adminOrderListSlice/adminOrderListSlice";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const AdminOrdersList = () => {
   const dispatch = useDispatch();
@@ -20,11 +21,23 @@ const AdminOrdersList = () => {
     (state) => state.adminOrderList
   );
 
-  console.log(adminOrders.orders)
+  const adminDeleteOrder = useSelector((state) => state.adminOrderList);
 
   useEffect(() => {
     dispatch(adminOrderList());
   }, [dispatch]);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (adminDeleteOrder.adminDeleteOrder.success === true) {
+      toast.success("Order Deleted, Reload Page", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  }, [adminDeleteOrder, navigate]);
+
+  console.log(adminDeleteOrder);
 
   const handleDeleteOrder = (id) => {
     dispatch(adminDeletOrder(id));
@@ -41,7 +54,7 @@ const AdminOrdersList = () => {
         return (
           <div>
             <div className="imgField">
-              {/* <img src={row.img} alt="" className="w-50" /> */}
+              <img src={row.img} alt="" className="w-50" />
             </div>
           </div>
         );
@@ -94,7 +107,7 @@ const AdminOrdersList = () => {
               <FaEdit className="admin-svgBtn" />
             </Link>
 
-            {status === "loading" ? (
+            {adminDeleteOrder.status === "loading" ? (
               <Spinner
                 animation="border"
                 role="status"
@@ -125,7 +138,7 @@ const AdminOrdersList = () => {
         id: item._id,
         status: item.orderStatus,
         amount: `৳ ${item.totalPrice}`,
-        orderId: item.orderItems
+        orderId: item.orderItems,
       });
     });
 
@@ -138,7 +151,7 @@ const AdminOrdersList = () => {
     );
   } else if (status === "succeeded") {
     data = (
-      <div style={{ height: 400, width: "100%" }} className="myOrders-table">
+      <div style={{ minHeight: 400, width: "100%" }} className="myOrders-table">
         <h4 className="text-center mt-2 mb-3 owner-order-titel">
           Admin Order List
         </h4>
@@ -149,7 +162,7 @@ const AdminOrdersList = () => {
         </div>
         <DataGrid
           getRowHeight={() => "auto"}
-          getEstimatedRowHeight={() => '50'}
+          getEstimatedRowHeight={() => "50"}
           rows={rows}
           columns={columns}
           disableRowSelectionOnClick
@@ -161,7 +174,6 @@ const AdminOrdersList = () => {
             },
           }}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
         />
       </div>
     );

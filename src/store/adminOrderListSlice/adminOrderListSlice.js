@@ -43,6 +43,7 @@ export const adminDeletOrder = createAsyncThunk(
 
 const initialState = {
   adminOrders: [],
+  adminDeleteOrder: [],
   status: "idle",
   error: null,
 };
@@ -83,7 +84,7 @@ const adminOrders = createSlice({
       })
       .addCase(adminDeletOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state = action.payload;
+        state.adminDeleteOrder = action.payload;
       })
       .addCase(adminDeletOrder.rejected, (state, action) => {
         state.status = "failed";
