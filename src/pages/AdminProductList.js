@@ -140,6 +140,7 @@ const AdminProductList = () => {
           <Link to="/admin/dashboard">/dashboard</Link>
           <Link to="/admin/create">/create/product</Link>
           <Link to="/admin/orders">/orders</Link>
+          <Link to="/admin/users">/users</Link>
         </div>
         <DataGrid
           getRowHeight={() => "auto"}

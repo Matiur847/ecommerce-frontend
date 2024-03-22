@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllUser = createAsyncThunk(
-  "/getAllUser/admin",
+  "/getAllUserAdmin",
   async (order) => {
     try {
       // const config = { Headers: { "Content-Type": "application/json" } };
@@ -15,7 +15,7 @@ export const getAllUser = createAsyncThunk(
 );
 
 const initialState = {
-  getAllUserAdmin: [],
+  users: [],
   status: "idle",
   error: null,
 };
@@ -32,7 +32,7 @@ const allUsers = createSlice({
       })
       .addCase(getAllUser.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.getAllUserAdmin = action.payload;
+        state.users = action.payload;
       })
       .addCase(getAllUser.rejected, (state, action) => {
         state.status = "failed";

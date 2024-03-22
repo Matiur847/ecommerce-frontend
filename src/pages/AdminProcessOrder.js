@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../style/AdminProcessOrder.css";
-import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import laptop from "../img/laptop.jpg";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
 import {
   adminUpdateOrder,
@@ -14,13 +14,10 @@ import { toast } from "react-toastify";
 const AdminProcessOrder = () => {
   const id = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { shippingInfo, cartItem, totalAmount } = useSelector(
-    (state) => state.cart
-  );
+  const { shippingInfo, cartItem } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { orderDetail } = useSelector((state) => state.adminOrderList);
-  const { adminOrderUpdate, status, error } = useSelector(
+  const { adminOrderUpdate, status } = useSelector(
     (state) => state.adminOrderList
   );
 
@@ -115,7 +112,7 @@ const AdminProcessOrder = () => {
                 >
                   <div className="current-orderStatus ">
                     <select
-                    className="mt-2"
+                      className="mt-2"
                       onChange={(e) => setOrderProcessStatus(e.target.value)}
                     >
                       <option value="">Choose Category</option>
@@ -128,7 +125,11 @@ const AdminProcessOrder = () => {
                       )}
                     </select>{" "}
                     <br />
-                    <button type="submit" className="login-btn mt-2 w-100" disabled={orderProcessStatus === ""}>
+                    <button
+                      type="submit"
+                      className="login-btn mt-2 w-100"
+                      disabled={orderProcessStatus === ""}
+                    >
                       {status === "loading" ? (
                         <Spinner
                           animation="border"

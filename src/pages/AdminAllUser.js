@@ -1,45 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import "../style/AdminAllUser.css";
 
-import "../style/AdminOrderList.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
-import HashLoader from "react-spinners/HashLoader";
-import { DataGrid } from "@mui/x-data-grid";
 import Helmet from "../components/Helmet/Helmet";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  adminDeletOrder,
-  adminOrderList,
-} from "../store/adminOrderListSlice/adminOrderListSlice";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import HashLoader from "react-spinners/HashLoader";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
+import { getAllUser } from "../store/UserListAdmin/UserListAdminSlice";
 
-const AdminOrdersList = () => {
+const AdminAllUser = () => {
   const dispatch = useDispatch();
-  const { adminOrders, status, error } = useSelector(
-    (state) => state.adminOrderList
-  );
+  const { users, status, error } = useSelector((state) => state.allUser);
 
-  const adminDeleteOrder = useSelector((state) => state.adminOrderList);
+  //   const [status, error] = useState();
 
   useEffect(() => {
-    dispatch(adminOrderList());
+    dispatch(getAllUser());
   }, [dispatch]);
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (adminDeleteOrder.adminDeleteOrder.success === true) {
-      toast.success("Order Deleted, Reload Page", {
-        position: "top-right",
-        autoClose: 2000,
-      });
-    }
-  }, [adminDeleteOrder, navigate]);
-
-  const handleDeleteOrder = (id) => {
-    dispatch(adminDeletOrder(id));
-  };
 
   const columns = [
     {
@@ -51,44 +32,39 @@ const AdminOrdersList = () => {
       renderCell: ({ row }) => {
         return (
           <div>
-            <div className="imgField">
+            <div className="imgField p-2">
               <img src={row.img} alt="" className="w-50" />
             </div>
           </div>
         );
       },
     },
+    { field: "id", headerName: "User ID", minWidth: 400, flex: 0.8 },
+
     {
-      field: "id",
-      headerName: "Order ID",
-      minWidth: 300,
+      field: "email",
+      headerName: "Email",
+      minWidth: 200,
       flex: 1,
-      cellClassName: "idClassName",
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      minWidth: 150,
+      flex: 0.5,
     },
 
     {
-      field: "status",
-      headerName: "Status",
-      minWidth: 150,
-      flex: 0.5,
-      cellClassName: ({ row }) => {
-        return row.status === "Processing" ? "greenColor" : "colorRed";
-      },
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
+      field: "role",
+      headerName: "Role",
       type: "number",
       minWidth: 150,
       flex: 0.3,
-    },
-
-    {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
+      //   cellClassName: (params) => {
+      //     return params.getValue(params.id, "role") === "admin"
+      //       ? "greenColor"
+      //       : "redColor";
+      //   },
     },
 
     {
@@ -101,11 +77,11 @@ const AdminOrdersList = () => {
       renderCell: (params) => {
         return (
           <div>
-            <Link to={`/admin/order/${params.id}`}>
+            <Link to={`/admin/user/${params.id}`}>
               <FaEdit className="admin-svgBtn" />
             </Link>
 
-            {adminDeleteOrder.status === "loading" ? (
+            {status === "loading" ? (
               <Spinner
                 animation="border"
                 role="status"
@@ -117,7 +93,7 @@ const AdminOrdersList = () => {
             ) : (
               <MdDelete
                 className="admin-svgBtn"
-                onClick={() => handleDeleteOrder(params.id)}
+                // onClick={() => handleDeleteProduct(params.id)}
               />
             )}
           </div>
@@ -128,15 +104,14 @@ const AdminOrdersList = () => {
 
   const rows = [];
 
-  adminOrders.orders &&
-    adminOrders.orders.forEach((item, index) => {
+  users.allUser &&
+    users.allUser.forEach((item) => {
       rows.push({
-        img: item.orderItems[0].image,
-        itemsQty: `${item.orderItems.length}x`,
+        img: item.avatar.url,
         id: item._id,
-        status: item.orderStatus,
-        amount: `৳ ${item.totalPrice}`,
-        orderId: item.orderItems,
+        email: item.email,
+        name: item.name,
+        role: item.role,
       });
     });
 
@@ -149,19 +124,18 @@ const AdminOrdersList = () => {
     );
   } else if (status === "succeeded") {
     data = (
-      <div style={{ minHeight: 400, width: "100%" }} className="myOrders-table">
+      <div className="myOrders-table">
         <h4 className="text-center mt-2 mb-3 owner-order-titel">
-          Admin Order List
+          All Users {users.allUser?.length}
         </h4>
         <div className="admin-path">
           <Link to="/admin/dashboard">/dashboard</Link>
           <Link to="/admin/create">/create/product</Link>
+          <Link to="/admin/orders">/orders</Link>
           <Link to="/admin/products">/products</Link>
-          <Link to="/admin/users">/users</Link>
         </div>
         <DataGrid
           getRowHeight={() => "auto"}
-          getEstimatedRowHeight={() => "50"}
           rows={rows}
           columns={columns}
           disableRowSelectionOnClick
@@ -181,7 +155,7 @@ const AdminOrdersList = () => {
   }
 
   return (
-    <Helmet title="Admin Order List">
+    <Helmet title="All Users Admin">
       <div className="myOrder-section">
         <Container>
           <Row>
@@ -193,4 +167,4 @@ const AdminOrdersList = () => {
   );
 };
 
-export default AdminOrdersList;
+export default AdminAllUser;
