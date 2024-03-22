@@ -11,6 +11,7 @@ import newProductSlice from "./createProductAdmin/createProductAdminSlice";
 import adminDeleteProduct from "./deleteProductSlice/deleteProductSlice";
 import productUpdate from "./updataProductSlice/updataProductSlice";
 import adminOrders from "./adminOrderListSlice/adminOrderListSlice";
+import allUsers from "./UserListAdmin/UserListAdminSlice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
     deletProduct: adminDeleteProduct.reducer,
     productUpdate: productUpdate.reducer,
     adminOrderList: adminOrders.reducer,
+    allUser: allUsers.reducer,
   },
 });
 
