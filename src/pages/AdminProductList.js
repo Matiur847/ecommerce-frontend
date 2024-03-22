@@ -20,7 +20,6 @@ const AdminProductList = () => {
   );
   const isDelete = useSelector((state) => state.deletProduct);
 
-
   const handleDeleteProduct = (id) => {
     dispatch(deleteProduct(id));
   };
@@ -37,12 +36,27 @@ const AdminProductList = () => {
   }, [dispatch, isDelete]);
 
   const columns = [
+    {
+      field: "image",
+      headerName: "IMG",
+      minWidth: 100,
+      flex: 1,
+      sortable: false,
+      renderCell: ({ row }) => {
+        return (
+          <div>
+            <div className="imgField">
+              <img src={row.img} alt="" className="w-75" />
+            </div>
+          </div>
+        );
+      },
+    },
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
-
     {
       field: "name",
       headerName: "Name",
-      minWidth: 350,
+      minWidth: 250,
       flex: 1,
     },
     {
@@ -101,6 +115,7 @@ const AdminProductList = () => {
   adminProducts.products &&
     adminProducts.products.forEach((item) => {
       rows.push({
+        img: item.images[0].url,
         id: item._id,
         stock: `${item.stock}x`,
         price: `৳ ${item.price}`,
@@ -124,6 +139,7 @@ const AdminProductList = () => {
         <div className="admin-path">
           <Link to="/admin/dashboard">/dashboard</Link>
           <Link to="/admin/create">/create/product</Link>
+          <Link to="/admin/orders">/orders</Link>
         </div>
         <DataGrid
           getRowHeight={() => "auto"}
@@ -138,7 +154,6 @@ const AdminProductList = () => {
             },
           }}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
         />
       </div>
     );

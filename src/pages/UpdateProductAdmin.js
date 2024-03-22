@@ -5,15 +5,12 @@ import { useParams } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Helmet from "../components/Helmet/Helmet";
-import { createProduct } from "../store/createProductAdmin/createProductAdminSlice";
 import { toast } from "react-toastify";
 import { detailsProduct } from "../store/productSlice/productSlice";
 import { updateProduct } from "../store/updataProductSlice/updataProductSlice";
-import { getAdminProducts } from "../store/adminProducts/adminProductSlice";
 
 const UpdateProductAdmin = () => {
   const allProduct = useSelector((state) => state.product);
-  // console.log("allProduct", allProduct.product.product.price);
 
   const id = useParams();
 

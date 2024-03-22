@@ -30,11 +30,10 @@ export const adminUpdateOrder = createAsyncThunk(
 
 export const adminDeletOrder = createAsyncThunk(
   "/admin/delete-order",
-  async (allData) => {
+  async (id) => {
     try {
-      const { id } = allData;
       //   const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.delete(`/api/v1//admin/order/${id}`);
+      const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
       return data;
     } catch (error) {
       throw error;

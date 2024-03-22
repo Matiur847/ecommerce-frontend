@@ -24,6 +24,22 @@ const MyOrders = () => {
 
   const columns = [
     {
+      field: "image",
+      headerName: "IMG",
+      minWidth: 100,
+      flex: 1,
+      sortable: false,
+      renderCell: ({ row }) => {
+        return (
+          <div>
+            <div className="imgField">
+              <img src={row.img} alt="" className="w-75" />
+            </div>
+          </div>
+        );
+      },
+    },
+    {
       field: "id",
       headerName: "Order ID",
       minWidth: 300,
@@ -79,6 +95,7 @@ const MyOrders = () => {
   orders.orders &&
     orders.orders.forEach((item, index) => {
       rows.push({
+        img: item.orderItems[0].image,
         itemsQty: `${item.orderItems.length}x`,
         id: item._id,
         status: item.orderStatus,
@@ -95,7 +112,7 @@ const MyOrders = () => {
     );
   } else if (status === "succeeded") {
     data = (
-      <div style={{ height: 400, width: "100%" }} className="myOrders-table">
+      <div style={{ minHeight: 400, width: "100%" }} className="myOrders-table">
         <h4 className="text-center mt-2 mb-3 owner-order-titel">{`${user.user?.name} Your Orders`}</h4>
         <DataGrid
           getRowHeight={() => "auto"}
@@ -110,7 +127,6 @@ const MyOrders = () => {
             },
           }}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
         />
       </div>
     );
