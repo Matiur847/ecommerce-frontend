@@ -45,6 +45,24 @@ export const userUpdateAdmin = createAsyncThunk(
   }
 );
 
+export const userDeleteAdmin = createAsyncThunk(
+  "/adminUpdateUser",
+  async (allData) => {
+    try {
+      const { id, myForm } = allData;
+      const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `/api/v1/admin/update/user/role/${id.id}`,
+        myForm,
+        config
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const initialState = {
   users: [],
   user: {},
@@ -91,6 +109,18 @@ const allUsers = createSlice({
         state.userUpdate = action.payload;
       })
       .addCase(userUpdateAdmin.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(userDeleteAdmin.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(userDeleteAdmin.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.userDelete = action.payload;
+      })
+      .addCase(userDeleteAdmin.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
