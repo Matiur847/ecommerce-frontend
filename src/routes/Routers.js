@@ -28,6 +28,7 @@ import UpdateProductAdmin from "../pages/UpdateProductAdmin";
 import AdminOrdersList from "../pages/AdminOrdersList";
 import AdminProcessOrder from "../pages/AdminProcessOrder";
 import AdminAllUser from "../pages/AdminAllUser";
+import GetSingleUserDetailAdmin from "../pages/GetSingleUserDetailAdmin";
 // import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
@@ -173,6 +174,14 @@ const Routers = () => {
         element={
           <ProtectedRoute isAdmin={true}>
             <AdminAllUser />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/user/:id"
+        element={
+          <ProtectedRoute isAdmin={true}>
+            <GetSingleUserDetailAdmin />
           </ProtectedRoute>
         }
       />
