@@ -47,15 +47,10 @@ export const userUpdateAdmin = createAsyncThunk(
 
 export const userDeleteAdmin = createAsyncThunk(
   "/adminDeleteUser",
-  async (allData) => {
+  async (id) => {
     try {
-      const { id, myForm } = allData;
-      const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.put(
-        `/api/v1/admin/update/user/role/${id.id}`,
-        myForm,
-        config
-      );
+      // const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.delete(`/api/v1/admin/user/delete/${id}`);
       return data;
     } catch (error) {
       throw error;
@@ -66,6 +61,7 @@ export const userDeleteAdmin = createAsyncThunk(
 const initialState = {
   users: [],
   user: {},
+  userDelete: {},
   status: "idle",
   error: null,
 };

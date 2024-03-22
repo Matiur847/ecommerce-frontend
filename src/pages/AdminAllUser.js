@@ -10,17 +10,30 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
-import { getAllUsers } from "../store/UserListAdmin/UserListAdminSlice";
+import {
+  getAllUsers,
+  userDeleteAdmin,
+} from "../store/UserListAdmin/UserListAdminSlice";
 
 const AdminAllUser = () => {
   const dispatch = useDispatch();
   const { users, status, error } = useSelector((state) => state.allUser);
-
-  //   const [status, error] = useState();
+  const { userDelete } = useSelector((state) => state.allUser);
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
+
+  if (userDelete.success === true) {
+    toast.success("User Was Delete, Reload Page", {
+      position: "top-right",
+      autoClose: 2000,
+    });
+  }
+
+  const handledeleteUser = (id) => {
+    dispatch(userDeleteAdmin(id));
+  };
 
   const columns = [
     {
@@ -60,11 +73,9 @@ const AdminAllUser = () => {
       type: "number",
       minWidth: 150,
       flex: 0.3,
-      //   cellClassName: (params) => {
-      //     return params.getValue(params.id, "role") === "admin"
-      //       ? "greenColor"
-      //       : "redColor";
-      //   },
+      cellClassName: ({ row }) => {
+        return row.role === "admin" ? "colorRed" : "greenColor";
+      },
     },
 
     {
@@ -93,7 +104,7 @@ const AdminAllUser = () => {
             ) : (
               <MdDelete
                 className="admin-svgBtn"
-                // onClick={() => handleDeleteProduct(params.id)}
+                onClick={() => handledeleteUser(params.id)}
               />
             )}
           </div>
