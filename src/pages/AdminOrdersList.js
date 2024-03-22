@@ -37,8 +37,6 @@ const AdminOrdersList = () => {
     }
   }, [adminDeleteOrder, navigate]);
 
-  console.log(adminDeleteOrder);
-
   const handleDeleteOrder = (id) => {
     dispatch(adminDeletOrder(id));
   };
@@ -103,7 +101,7 @@ const AdminOrdersList = () => {
       renderCell: (params) => {
         return (
           <div>
-            <Link to={`/admin/orders/${params.id}`}>
+            <Link to={`/admin/order/${params.id}`}>
               <FaEdit className="admin-svgBtn" />
             </Link>
 
