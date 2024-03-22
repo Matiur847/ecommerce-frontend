@@ -15,20 +15,27 @@ const GetSingleUserDetailAdmin = () => {
   const id = useParams();
   const { user, status, error } = useSelector((state) => state.allUser);
   const { userUpdate } = useSelector((state) => state.allUser);
-  console.log(userUpdate);
 
-  const [name, setName] = useState(user.user?.name);
-  const [email, setEmail] = useState(user.user?.email);
-  const [role, setRole] = useState(user.user?.role);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
+    if (user.user?._id !== id.id) {
+      dispatch(userDetailAdmin(id));
+    } else {
+      setName(user.user?.name);
+      setEmail(user.user?.email);
+      setRole(user.user?.role);
+    }
+
     if (userUpdate?.success === true) {
       toast.success("User Was Update", {
         position: "top-right",
         autoClose: 2000,
       });
     }
-  }, [error, userUpdate]);
+  }, [error, userUpdate, user, id, dispatch]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();

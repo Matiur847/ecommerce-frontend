@@ -46,7 +46,7 @@ export const userUpdateAdmin = createAsyncThunk(
 );
 
 export const userDeleteAdmin = createAsyncThunk(
-  "/adminUpdateUser",
+  "/adminDeleteUser",
   async (allData) => {
     try {
       const { id, myForm } = allData;
