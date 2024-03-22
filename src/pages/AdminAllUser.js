@@ -10,7 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
-import { getAllUser } from "../store/UserListAdmin/UserListAdminSlice";
+import { getAllUsers } from "../store/UserListAdmin/UserListAdminSlice";
 
 const AdminAllUser = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const AdminAllUser = () => {
   //   const [status, error] = useState();
 
   useEffect(() => {
-    dispatch(getAllUser());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const columns = [

@@ -46,7 +46,7 @@ const Profile = () => {
                       <Link to={'/profile/update'}>
                         <button className="profile-btn">Edit Profile</button>
                       </Link>
-                      <Link>
+                      <Link to={'/orders'}>
                         <button className="profile-btn">Orders</button>
                       </Link>
                       <Link to={'/change-password'}>

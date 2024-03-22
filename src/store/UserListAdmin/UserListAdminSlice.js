@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllUser = createAsyncThunk(
+export const getAllUsers = createAsyncThunk(
   "/getAllUserAdmin",
   async (order) => {
     try {
@@ -27,6 +27,24 @@ export const userDetailAdmin = createAsyncThunk(
   }
 );
 
+export const userUpdateAdmin = createAsyncThunk(
+  "/adminUpdateUser",
+  async (allData) => {
+    try {
+      const { id, myForm } = allData;
+      const config = { Headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `/api/v1/admin/update/user/role/${id.id}`,
+        myForm,
+        config
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const initialState = {
   users: [],
   user: {},
@@ -41,14 +59,14 @@ const allUsers = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getAllUser.pending, (state) => {
+      .addCase(getAllUsers.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getAllUser.fulfilled, (state, action) => {
+      .addCase(getAllUsers.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.users = action.payload;
       })
-      .addCase(getAllUser.rejected, (state, action) => {
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -61,6 +79,18 @@ const allUsers = createSlice({
         state.user = action.payload;
       })
       .addCase(userDetailAdmin.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(userUpdateAdmin.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(userUpdateAdmin.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.userUpdate = action.payload;
+      })
+      .addCase(userUpdateAdmin.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

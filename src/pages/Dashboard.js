@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../store/adminProducts/adminProductSlice";
 import HashLoader from "react-spinners/HashLoader";
+import { getAllUsers } from "../store/UserListAdmin/UserListAdminSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -41,8 +42,10 @@ const Dashboard = () => {
     (state) => state.adminAllProduct
   );
   const { adminOrders } = useSelector((state) => state.adminOrderList);
+  const { users } = useSelector((state) => state.allUser);
   useEffect(() => {
     dispatch(getAdminProducts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   let outOfStock = 0;
@@ -53,10 +56,9 @@ const Dashboard = () => {
     }
   });
 
-
   const bannerData = [
     {
-      logo: <i>{adminProducts.products?.length}</i>,
+      logo: <i>{adminProducts.products?.length || 0}</i>,
       title: "Products",
       path: "/admin/products",
     },
@@ -68,7 +70,7 @@ const Dashboard = () => {
     },
 
     {
-      logo: <i>7</i>,
+      logo: <i>{users.allUser?.length || 0}</i>,
       title: "Users",
       path: "/admin/users",
     },
