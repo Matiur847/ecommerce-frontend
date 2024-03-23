@@ -50,7 +50,3 @@
 .contact-container input::placeholder {
     color: #FFFFFF;
 }
-
-.contact-container textarea, input:focus {
-    color: #fde4e4;
-}
