@@ -82,6 +82,13 @@ const AdminOrdersList = () => {
       minWidth: 150,
       flex: 0.3,
     },
+    {
+      field: "item",
+      headerName: "Item",
+      type: "number",
+      minWidth: 150,
+      flex: 0.3,
+    },
 
     {
       field: "amount",
@@ -136,7 +143,7 @@ const AdminOrdersList = () => {
         id: item._id,
         status: item.orderStatus,
         amount: `৳ ${item.totalPrice}`,
-        orderId: item.orderItems,
+        item: `${item.orderItems.map((item) => item.quantity)}x`,
       });
     });
 

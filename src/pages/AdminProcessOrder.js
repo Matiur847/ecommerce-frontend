@@ -6,6 +6,7 @@ import laptop from "../img/laptop.jpg";
 import { useParams } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
 import {
+  adminOrderList,
   adminUpdateOrder,
   getOrderDetail,
 } from "../store/adminOrderListSlice/adminOrderListSlice";
@@ -17,14 +18,13 @@ const AdminProcessOrder = () => {
   const { shippingInfo, cartItem } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { orderDetail } = useSelector((state) => state.adminOrderList);
-  const { adminOrderUpdate, status } = useSelector(
+  const { adminOrderUpdate, adminOrders, status } = useSelector(
     (state) => state.adminOrderList
-  );
+  )
 
   const [orderProcessStatus, setOrderProcessStatus] = useState("");
 
   const updateOrderSubmitHandler = (e) => {
-    console.log("funcCall");
     e.preventDefault();
 
     const myForm = new FormData();
@@ -43,6 +43,7 @@ const AdminProcessOrder = () => {
 
   useEffect(() => {
     dispatch(getOrderDetail(id));
+    dispatch(adminOrderList());
   }, [dispatch, id]);
 
   return (
@@ -67,9 +68,9 @@ const AdminProcessOrder = () => {
                   </div>
                 </div>
                 <div className="order-cart-items mt-3">
-                  <h3>Your Cart Items</h3>
+                  <h3>Order Items Price {orderDetail.order.itemsPrice}</h3>
                   <div className="order-confirm-product-details">
-                    {cartItem.map((item, index) => (
+                    {orderDetail.order.orderItems.map((item, index) => (
                       <div
                         className="order-confirm-single-order d-flex justify-content-between"
                         key={index}
@@ -86,9 +87,6 @@ const AdminProcessOrder = () => {
                           </p>
                           <p>
                             Price: <span>{item.price}</span>
-                          </p>
-                          <p>
-                            Total: <span>{item.totalPrice}</span>
                           </p>
                         </div>
                       </div>

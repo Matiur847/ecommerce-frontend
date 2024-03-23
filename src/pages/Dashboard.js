@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../store/adminProducts/adminProductSlice";
 import HashLoader from "react-spinners/HashLoader";
 import { getAllUsers } from "../store/UserListAdmin/UserListAdminSlice";
+import { adminOrderList } from "../store/adminOrderListSlice/adminOrderListSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -46,6 +47,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(getAllUsers());
+    dispatch(adminOrderList());
   }, [dispatch]);
 
   let outOfStock = 0;
@@ -64,7 +66,7 @@ const Dashboard = () => {
     },
 
     {
-      logo: <i>{adminOrders.orders?.length}</i>,
+      logo: <i>{adminOrders.orders?.length || 0}</i>,
       title: "Orders",
       path: "/admin/orders",
     },
@@ -76,6 +78,12 @@ const Dashboard = () => {
     },
   ];
 
+  let totalAmount = 0;
+  adminOrders.orders &&
+    adminOrders.orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
+
   const data = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -83,7 +91,7 @@ const Dashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, 4000],
+        data: [0, totalAmount],
       },
     ],
   };

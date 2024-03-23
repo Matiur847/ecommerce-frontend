@@ -38,7 +38,7 @@ const Register = () => {
 
   useEffect(() => {
     if (user?.user) {
-      toast.success(user.user.message, {
+      toast.success("Successfully Register", {
         position: "top-right",
         autoClose: 2000,
       });

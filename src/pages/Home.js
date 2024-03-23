@@ -21,7 +21,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.product);
   const { cartItem } = useSelector((state) => state.cart);
-  console.log(products)
   
   const [itemId, setItemId] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -110,7 +109,7 @@ const Home = () => {
             <CardContent>
               <Typography level="body-xs">Price: ${product.price}</Typography>
               <Typography level="title-sm" sx={{ mt: 1, fontWeight: "xl" }}>
-                {product.name}
+                {product.name.slice(0, 20)}
               </Typography>
 
               <Typography level="body-sm">
