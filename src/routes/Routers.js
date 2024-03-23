@@ -30,6 +30,7 @@ import AdminProcessOrder from "../pages/AdminProcessOrder";
 import AdminAllUser from "../pages/AdminAllUser";
 import GetSingleUserDetailAdmin from "../pages/GetSingleUserDetailAdmin";
 import Contact from "../pages/Contact";
+import RouteNotFound from "../pages/RouteNotFound";
 // import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
@@ -60,6 +61,7 @@ const Routers = () => {
       <Route path="/profile/update" element={<ProfileUpdate />} />
       <Route path="/password/forgot" element={<ForgotPassword />} />
       <Route path="/password/reset/:token" element={<ResetPassword />} />
+      <Route path="*" element={<RouteNotFound />} />
 
       {/* Protected Route */}
       <Route
