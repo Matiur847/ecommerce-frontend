@@ -6,8 +6,8 @@
 }
 
 .navbar {
-    background-color: #fdf8f8;
-    height: 4rem;
+    background-color: #F85606;
+    height: auto;
     border-bottom: 1px solid rgba(106, 185, 86, 0.226);
 }
 
@@ -27,6 +27,11 @@ nav.navbar {
     color: black;
 }
 
+.logo {
+    filter: invert(48%) sepia(13%) saturate(320%) hue-rotate(130deg) brightness(10%) contrast(100%);
+    width: calc(100% - 94%);
+}
+
 .menu-icon {
     cursor: pointer;
     color: #fff;
@@ -43,7 +48,11 @@ nav.navbar {
     font-size: 20px;
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
-    color: black;
+    color: #faf4f4;
+}
+
+.modal-nav a {
+    color: #242222;
 }
 
 .headerSpeedDial {
@@ -66,6 +75,7 @@ nav.navbar {
 .user-icon .cart-icon {
     font-size: 25px;
     cursor: pointer;
+    color: #dddddd;
 }
 
 .cart-icon {
@@ -116,8 +126,15 @@ span sup {
     width: 100%;
     padding: 5px 39px;
     border: 1px solid rgba(0, 0, 255, 0.63);
-    border-radius: 50px;
+    border-radius: 5px;
     outline: none;
+}
+
+.search-icon svg {
+    position: relative;
+    right: 30px;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .mobile-menu {
@@ -129,6 +146,13 @@ span sup {
     font-size: 25px;
     font-weight: 700;
     cursor: pointer;
+}
+
+
+.input-search-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px
 }
 
 /* -------------------- cart items -------------------- */
@@ -221,6 +245,12 @@ span sup {
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .logo {
+        width: calc(100% - 90%);
+    }
+}
+
 @media only screen and (max-width: 576px) {
     .search-icon input {
         padding: 5px 5px;
@@ -239,5 +269,15 @@ span sup {
     .header-login-button {
         font-size: 13px;
         padding: 2px 15px;
+    }
+
+    .logo {
+        width: calc(100% - 85%);
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .navbar {
+        height: 4rem !important;
     }
 }

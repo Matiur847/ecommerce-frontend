@@ -15,10 +15,10 @@ import { toast } from "react-toastify";
 const AdminProcessOrder = () => {
   const id = useParams();
   const dispatch = useDispatch();
-  const { shippingInfo, cartItem } = useSelector((state) => state.cart);
+  const { shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { orderDetail } = useSelector((state) => state.adminOrderList);
-  const { adminOrderUpdate, adminOrders, status } = useSelector(
+  const { adminOrderUpdate, status } = useSelector(
     (state) => state.adminOrderList
   )
 
@@ -68,9 +68,9 @@ const AdminProcessOrder = () => {
                   </div>
                 </div>
                 <div className="order-cart-items mt-3">
-                  <h3>Order Items Price {orderDetail.order.itemsPrice}</h3>
+                  <h3>Order Items Price {orderDetail.order?.itemsPrice}</h3>
                   <div className="order-confirm-product-details">
-                    {orderDetail.order.orderItems.map((item, index) => (
+                    {orderDetail.order?.orderItems?.map((item, index) => (
                       <div
                         className="order-confirm-single-order d-flex justify-content-between"
                         key={index}

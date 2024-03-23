@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../style/AdminAllUser.css";
 
 import Helmet from "../components/Helmet/Helmet";

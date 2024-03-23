@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../style/GetSingleUserDetailAdmin.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Helmet from "../components/Helmet/Helmet";
 import { useDispatch, useSelector } from "react-redux";

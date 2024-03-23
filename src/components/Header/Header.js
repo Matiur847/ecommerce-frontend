@@ -6,12 +6,12 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 import Cart from "../../pages/Cart";
+import { IoMdSearch } from "react-icons/io";
+import logo from "../../img/logo.png";
 
 const Header = () => {
   const { user, status } = useSelector((state) => state.user);
-  const { totalQuantity } = useSelector(
-    (state) => state.cart
-  );
+  const { totalQuantity } = useSelector((state) => state.cart);
 
   // console.log("cartItem", cartItem);
 
@@ -36,16 +36,19 @@ const Header = () => {
   return (
     <div className="header">
       <nav className="navbar">
-        <div className="logo">
-          <h1 className="navbar-logo">Logo</h1>
-        </div>
+        {/* <div className="logo"> */}
+          <img src={logo} alt="Logo" className="logo" />
+        {/* </div> */}
         <div className="search-icon d-flex align-items-center">
-          <form onSubmit={searchHandler}>
-            <input
-              type="text"
-              placeholder="Search Product"
-              onChange={(e) => setKeyword(e.target.value)}
-            />
+          <form>
+            <div className="d-flex align-items-center justify-content-center">
+              <input
+                type="text"
+                placeholder="Search Product"
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+              <IoMdSearch onClick={searchHandler} />
+            </div>
           </form>
         </div>
         <div className="nav-menu-link-container">

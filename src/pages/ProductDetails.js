@@ -8,7 +8,7 @@ import Helmet from "../components/Helmet/Helmet";
 import { Col, Container, Row } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Review from "./Review";
+// import Review from "./Review";
 import { cartActions } from "../store/cartSlice.js/cartSlice";
 import { toast } from "react-toastify";
 
@@ -136,7 +136,7 @@ const ProductDetails = () => {
                       label={product.product?.stock}
                     />
                   </div>
-                  {product.product?.reviews && product.product?.reviews[0] ? (
+                  {/* {product.product?.reviews && product.product?.reviews[0] ? (
                     <div className="reviews d-flex align-items-center mt-3">
                       {product.product?.reviews &&
                         product.product.reviews.map((review, index) => (
@@ -145,7 +145,7 @@ const ProductDetails = () => {
                     </div>
                   ) : (
                     <p className="d-flex mt-3 no-review">No Reviews Yet!</p>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

@@ -20,13 +20,14 @@ const CreateProductAdmin = () => {
   const [images, setImages] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
     "SmartPhones",
+    "Earphone",
+    "SecondHand Phone",
+    "Air buds",
+    "Charger",
+    "Memory",
+    "Gadgets",
+    "Other",
   ];
 
   useEffect(() => {

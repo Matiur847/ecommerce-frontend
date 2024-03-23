@@ -92,8 +92,23 @@
     border-radius: 20px;
 }
 
-.carousel-title h3, p {
+.carousel-title h3,
+p {
     /* color: #eddfdf; */
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-slider-container {
+        margin: 20px 0px !important;
+    }
+
+    .carousel-slider {
+        flex-direction: column;
+    }
+
+    .details-button {
+        margin-bottom: 10px;
+    }
 }

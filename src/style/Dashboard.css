@@ -1,0 +1,16 @@
+@media only screen and (max-width: 576px) {
+    .line-chart canvas {
+        height: 100px !important;
+    }
+
+    .line-chart-doughnut {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px !important;
+    }
+
+    .admin-path a {
+        font-size: 12px;
+    }
+}
