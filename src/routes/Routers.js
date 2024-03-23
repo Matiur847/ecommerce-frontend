@@ -29,6 +29,7 @@ import AdminOrdersList from "../pages/AdminOrdersList";
 import AdminProcessOrder from "../pages/AdminProcessOrder";
 import AdminAllUser from "../pages/AdminAllUser";
 import GetSingleUserDetailAdmin from "../pages/GetSingleUserDetailAdmin";
+import Contact from "../pages/Contact";
 // import AdminProductList from "../pages/AdminProductList";
 // import { useSelector } from "react-redux";
 
@@ -49,6 +50,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/:keyword" element={<Products />} />

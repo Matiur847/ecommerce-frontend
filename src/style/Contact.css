@@ -1,0 +1,56 @@
+.contact-section {
+    margin: 40px 0px;
+    min-height: 50vh;
+}
+
+.contact-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: linear-gradient(rgba(40, 58, 90, 0.74), rgba(40, 58, 90, 0.671)), url(../img/images.jpg) fixed 90%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+    background-color: #fde4e4;
+    border-radius: 10px ;
+}
+
+.contact-container h3 {
+    font-size: 35px;
+    color: #FFFFFF;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+}
+
+.contact-container input, textarea {
+    width: 100%;
+    background: transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 3px;
+    padding: 5px 20px;
+    margin: 5px 0px;
+    outline: none;
+    transition: 0.2s ease-in-out;
+}
+
+.contact-container input:hover {
+    border: 2px solid #0077ff;
+}
+
+.contactBtn {
+    margin-top: 10px;
+    background-color:#0077ff;
+    width: 100% !important;
+    border-radius: 3px;
+}
+
+.contactBtn:hover {
+    background-color: #3377c4da;
+}
+
+.contact-container input::placeholder {
+    color: #FFFFFF;
+}
+
+.contact-container textarea, input:focus {
+    color: #fde4e4;
+}

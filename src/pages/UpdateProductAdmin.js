@@ -17,7 +17,6 @@ const UpdateProductAdmin = () => {
   const { isUpdateProduct, status, error } = useSelector(
     (state) => state.productUpdate
   );
-  console.log(isUpdateProduct);
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");

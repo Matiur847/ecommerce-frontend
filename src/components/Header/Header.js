@@ -13,8 +13,6 @@ const Header = () => {
   const { user, status } = useSelector((state) => state.user);
   const { totalQuantity } = useSelector((state) => state.cart);
 
-  // console.log("cartItem", cartItem);
-
   const [show, setShow] = useState(false);
   const [offcanShow, offcanSetShow] = useState(false);
 
@@ -57,7 +55,6 @@ const Header = () => {
               <Link to="/">Home</Link>
               <Link to="/products">Product</Link>
               <Link to="/contact">Contact</Link>
-              <Link to="/about">About</Link>
             </div>
           </div>
           <div className="user-icon d-flex align-items-center justify-content-center">
@@ -111,7 +108,6 @@ const Header = () => {
                     <Link to="/">Home</Link>
                     <Link to="/products">Product</Link>
                     <Link to="/contact">Contact</Link>
-                    <Link to="/about">About</Link>
                   </div>
                 </Offcanvas.Body>
               </Offcanvas>
