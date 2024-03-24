@@ -1,16 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchProduct = createAsyncThunk('/products', async (data) => {
+export const fetchProduct = createAsyncThunk("/products", async (data) => {
   try {
-    const { keyword = '', currentPage, price = [0, 25000], category, ratings = 0} = data;
-    let link = `https://ecommerce-backend-1-pcvn.onrender.com/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+    const {
+      keyword = "",
+      currentPage,
+      price = [0, 25000],
+      category,
+      ratings = 0,
+    } = data;
+    let link = `https://ecommerce-backend-tzi7.onrender.com/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-    if(category) {
-      link = `https://ecommerce-backend-1-pcvn.onrender.com/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+    if (category) {
+      link = `https://ecommerce-backend-tzi7.onrender.com/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
     }
 
-    const response = await axios.get(link);
+    const config = {
+      Headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.get(link, config);
     // console.log("data", response.da)
     return response.data;
   } catch (error) {
@@ -18,9 +29,17 @@ export const fetchProduct = createAsyncThunk('/products', async (data) => {
   }
 });
 
-export const detailsProduct = createAsyncThunk('/product', async (id) => {
+export const detailsProduct = createAsyncThunk("/product", async (id) => {
   try {
-    const response = await axios.get(`https://ecommerce-backend-1-pcvn.onrender.com/api/v1/product/${id.id}`);
+    const config = {
+      Headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.get(
+      `https://ecommerce-backend-tzi7.onrender.com/api/v1/product/${id.id}`,
+      config
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -42,7 +61,7 @@ const productSlice = createSlice({
       state.products = action.payload;
     },
     productDetails: (state, action) => {
-      state.product = action.payload
+      state.product = action.payload;
     },
   },
   extraReducers: (builder) => {

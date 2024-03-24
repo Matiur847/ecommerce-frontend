@@ -40,7 +40,15 @@ const Routers = () => {
   const [stripeApiKey, setStripeApiKey] = useState(null);
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/stripeApiKey");
+    const config = {
+      Headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.get(
+      "https://ecommerce-backend-1-pcvn.onrender.com/api/v1/stripeApiKey",
+      config
+    );
     setStripeApiKey(data.stripeApiKey);
   }
 
