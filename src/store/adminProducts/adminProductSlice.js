@@ -5,7 +5,7 @@ export const getAdminProducts = createAsyncThunk(
   "/admin/products",
   async () => {
     try {
-      const { data } = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/admin/all/products");
+      const { data } = await axios.get("https://ecommerce-backend-tzi7.onrender.com/api/v1/admin/all/products");
       return data;
     } catch (error) {
       throw error;
