@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchProduct = createAsyncThunk('/products', async (data) => {
   try {
     const { keyword = '', currentPage, price = [0, 25000], category, ratings = 0} = data;
-    let link = `/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+    let link = `https://ecommerce-backend-1-pcvn.onrender.com/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
 
     if(category) {
       link = `/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
@@ -20,7 +20,7 @@ export const fetchProduct = createAsyncThunk('/products', async (data) => {
 
 export const detailsProduct = createAsyncThunk('/product', async (id) => {
   try {
-    const response = await axios.get(`/api/v1/product/${id.id}`);
+    const response = await axios.get(`https://ecommerce-backend-1-pcvn.onrender.com/api/v1/product/${id.id}`);
     return response.data;
   } catch (error) {
     throw error;
