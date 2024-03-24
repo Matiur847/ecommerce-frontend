@@ -8,7 +8,7 @@ export const updateProduct = createAsyncThunk(
       const { id, myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
       const { data } = await axios.put(
-        `/api/v1/product/${id.id}`,
+        `https://ecommerce-backend-1-pcvn.onrender.com/api/v1/product/${id.id}`,
         myForm,
         config
       );

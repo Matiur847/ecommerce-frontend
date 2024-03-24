@@ -6,7 +6,7 @@ export const login = createAsyncThunk("/login", async (data) => {
     const { loginEmail, loginPassword } = data;
     const config = { Headers: { "Content-Type": "application/json" } };
     const response = await axios.post(
-      "/api/v1/login",
+      "https://ecommerce-backend-1-pcvn.onrender.com/api/v1/login",
       { email: loginEmail, password: loginPassword },
       config
     );
@@ -19,7 +19,7 @@ export const login = createAsyncThunk("/login", async (data) => {
 export const register = createAsyncThunk("/register", async (myForm) => {
   try {
     const config = { Headers: { "content-type": "multipart/form-data" } };
-    const response = await axios.post("/api/v1/register", myForm, config);
+    const response = await axios.post("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/register", myForm, config);
     return response.data;
   } catch (error) {
     throw error;
@@ -28,7 +28,7 @@ export const register = createAsyncThunk("/register", async (myForm) => {
 
 export const getUserDetails = createAsyncThunk("/user-detail", async () => {
   try {
-    const response = await axios.get("/api/v1/user/details");
+    const response = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/user/details");
     return response.data;
   } catch (error) {
     throw error;
@@ -37,7 +37,7 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
 
 export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    const response = await axios.get("/api/v1/logout");
+    const response = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/logout");
     return response.data;
   } catch (error) {
     throw error;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const allOrders = createAsyncThunk("/myOrders", async (order) => {
   try {
-    const { data } = await axios.get("/api/v1/my/orders");
+    const { data } = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/my/orders");
     return data;
   } catch (error) {
     throw error;

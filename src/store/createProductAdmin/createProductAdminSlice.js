@@ -7,7 +7,7 @@ export const createProduct = createAsyncThunk(
     try {
       // const { myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post("/api/v1/product/new", myForm, config);
+      const { data } = await axios.post("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/product/new", myForm, config);
       return data;
     } catch (error) {
       throw error;

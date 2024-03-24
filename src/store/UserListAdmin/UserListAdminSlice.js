@@ -6,7 +6,7 @@ export const getAllUsers = createAsyncThunk(
   async (order) => {
     try {
       // const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.get("/api/v1/admin/users");
+      const { data } = await axios.get("https://ecommerce-backend-1-pcvn.onrender.com/api/v1/admin/users");
       return data;
     } catch (error) {
       throw error;
@@ -19,7 +19,7 @@ export const userDetailAdmin = createAsyncThunk(
   async (id) => {
     try {
       // const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.get(`/api/v1/admin/user/${id.id}`);
+      const { data } = await axios.get(`https://ecommerce-backend-1-pcvn.onrender.com/api/v1/admin/user/${id.id}`);
       return data;
     } catch (error) {
       throw error;
@@ -34,7 +34,7 @@ export const userUpdateAdmin = createAsyncThunk(
       const { id, myForm } = allData;
       const config = { Headers: { "Content-Type": "application/json" } };
       const { data } = await axios.put(
-        `/api/v1/admin/update/user/role/${id.id}`,
+        `https://ecommerce-backend-1-pcvn.onrender.com/api/v1/admin/update/user/role/${id.id}`,
         myForm,
         config
       );
@@ -50,7 +50,7 @@ export const userDeleteAdmin = createAsyncThunk(
   async (id) => {
     try {
       // const config = { Headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.delete(`/api/v1/admin/user/delete/${id}`);
+      const { data } = await axios.delete(`https://ecommerce-backend-1-pcvn.onrender.com/api/v1/admin/user/delete/${id}`);
       return data;
     } catch (error) {
       throw error;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const deleteProduct = createAsyncThunk("/delete-product", async (id) => {
   try {
-    const response = await axios.delete(`/api/v1/product/${id}`);
+    const response = await axios.delete(`https://ecommerce-backend-1-pcvn.onrender.com/api/v1/product/${id}`);
     return response.data;
   } catch (error) {
     throw error;
