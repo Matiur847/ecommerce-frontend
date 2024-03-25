@@ -4,7 +4,10 @@ import axios from "axios";
 export const login = createAsyncThunk("/login", async (data) => {
   try {
     const { loginEmail, loginPassword } = data;
-    const config = { Headers: { "Content-Type": "application/json" } };
+    const config = {
+      Headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
     const response = await axios.post(
       "https://ecommerce-backend-tzi7.onrender.com/api/v1/login",
       { email: loginEmail, password: loginPassword },
@@ -18,8 +21,15 @@ export const login = createAsyncThunk("/login", async (data) => {
 
 export const register = createAsyncThunk("/register", async (myForm) => {
   try {
-    const config = { Headers: { "content-type": "multipart/form-data" } };
-    const response = await axios.post("https://ecommerce-backend-tzi7.onrender.com/api/v1/register", myForm, config);
+    const config = {
+      Headers: { "content-type": "multipart/form-data" },
+      withCredentials: true,
+    };
+    const response = await axios.post(
+      "https://ecommerce-backend-tzi7.onrender.com/api/v1/register",
+      myForm,
+      config
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -28,7 +38,9 @@ export const register = createAsyncThunk("/register", async (myForm) => {
 
 export const getUserDetails = createAsyncThunk("/user-detail", async () => {
   try {
-    const response = await axios.get("https://ecommerce-backend-tzi7.onrender.com/api/v1/user/details");
+    const response = await axios.get(
+      "https://ecommerce-backend-tzi7.onrender.com/api/v1/user/details"
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -37,7 +49,9 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
 
 export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    const response = await axios.get("https://ecommerce-backend-tzi7.onrender.com/api/v1/logout");
+    const response = await axios.get(
+      "https://ecommerce-backend-tzi7.onrender.com/api/v1/logout"
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -95,7 +109,7 @@ const userSlice = createSlice({
       })
 
       .addCase(loggedOut.pending, (state) => {
-        state.status = 'loading'
+        state.status = "loading";
       })
       .addCase(loggedOut.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -104,7 +118,7 @@ const userSlice = createSlice({
       .addCase(loggedOut.rejected, (state, action) => {
         state.status = "failed";
         state.user = action.error.message;
-      })
+      });
   },
 });
 
