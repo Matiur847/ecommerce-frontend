@@ -37,7 +37,7 @@ import RouteNotFound from "../pages/RouteNotFound";
 const Routers = () => {
   // const { user } = useSelector((state) => state.user);
 
-  const [stripeApiKey, setStripeApiKey] = useState(null);
+  const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
     const config = {
@@ -46,7 +46,7 @@ const Routers = () => {
       },
     };
     const { data } = await axios.get(
-      "https://ecommerce-backend-tzi7.onrender.com/api/v1/stripeApiKey",
+      "/api/v1/stripeApiKey",
       config
     );
     setStripeApiKey(data.stripeApiKey);

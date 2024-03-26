@@ -2,6 +2,10 @@
     padding: 40px 0px;
 }
 
+.home-spinner {
+    margin: 90px 0px;
+}
+
 .home-product-carousel {
     z-index: -99;
 }

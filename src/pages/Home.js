@@ -85,7 +85,7 @@ const Home = () => {
   let data;
   if (status === "loading") {
     data = (
-      <div className="loading-spinner">
+      <div className="loading-spinner home-spinner">
         <HashLoader color="#000000" />
       </div>
     );

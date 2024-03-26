@@ -73,7 +73,7 @@ const Carousel = () => {
         </Col>
         <Col md="8">
           {status === "loading" ? (
-            <div className="d-flex align-items-center justify-content-center">
+            <div className="home-loader-spinner d-flex align-items-center justify-content-center">
               <HashLoader />
             </div>
           ) : (

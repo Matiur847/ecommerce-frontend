@@ -111,4 +111,8 @@ p {
     .details-button {
         margin-bottom: 10px;
     }
+
+    .home-loader-spinner {
+        margin-top: 50px;
+    }
 }

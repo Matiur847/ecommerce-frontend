@@ -5,11 +5,13 @@ export const login = createAsyncThunk("/login", async (data) => {
   try {
     const { loginEmail, loginPassword } = data;
     const config = {
-      Headers: { "Content-Type": "application/json" },
+      Headers: {
+        "Content-Type": "application/json",
+      },
       withCredentials: true,
     };
     const response = await axios.post(
-      "https://ecommerce-backend-tzi7.onrender.com/api/v1/login",
+      "/api/v1/login",
       { email: loginEmail, password: loginPassword },
       config
     );
@@ -26,7 +28,7 @@ export const register = createAsyncThunk("/register", async (myForm) => {
       withCredentials: true,
     };
     const response = await axios.post(
-      "https://ecommerce-backend-tzi7.onrender.com/api/v1/register",
+      "/api/v1/register",
       myForm,
       config
     );
@@ -38,8 +40,15 @@ export const register = createAsyncThunk("/register", async (myForm) => {
 
 export const getUserDetails = createAsyncThunk("/user-detail", async () => {
   try {
+    const config = {
+      Headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
     const response = await axios.get(
-      "https://ecommerce-backend-tzi7.onrender.com/api/v1/user/details"
+      "/api/v1/user/details",
+      config
     );
     return response.data;
   } catch (error) {
@@ -49,9 +58,7 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
 
 export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    const response = await axios.get(
-      "https://ecommerce-backend-tzi7.onrender.com/api/v1/logout"
-    );
+    const response = await axios.get("/api/v1/logout");
     return response.data;
   } catch (error) {
     throw error;
