@@ -10,10 +10,10 @@ export const fetchProduct = createAsyncThunk("/products", async (data) => {
       category,
       ratings = 0,
     } = data;
-    let link = `https://ecommerce-backend-tawny-nine.vercel.app/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+    let link = `/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
     if (category) {
-      link = `https://ecommerce-backend-tawny-nine.vercel.app/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      link = `/api/v1/productPerPage?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
     }
 
     const config = {
@@ -36,7 +36,7 @@ export const detailsProduct = createAsyncThunk("/product", async (id) => {
       },
     };
     const response = await axios.get(
-      `https://ecommerce-backend-tawny-nine.vercel.app/api/v1/product/${id.id}`,
+      `/api/v1/product/${id.id}`,
       config
     );
     return response.data;
