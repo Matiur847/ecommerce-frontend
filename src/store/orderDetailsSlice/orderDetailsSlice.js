@@ -6,7 +6,7 @@ export const orderDetails = createAsyncThunk(
   async (allData) => {
     try {
       const { id } = allData;
-      const { data } = await axios.get(`https://ecommerce-backend-tzi7.onrender.com/api/v1/order/${id}`);
+      const { data } = await axios.get(`/api/v1/order/${id}`);
       return data;
     } catch (error) {
       throw error;

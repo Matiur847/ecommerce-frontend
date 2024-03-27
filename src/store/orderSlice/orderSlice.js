@@ -4,7 +4,7 @@ import axios from "axios";
 export const createOrder = createAsyncThunk("create/order", async (order) => {
   try {
     const config = { Headers: { "Content-Type": "application/json" } };
-    const { data } = await axios.post("https://ecommerce-backend-tzi7.onrender.com/api/v1/order/new", order, config);
+    const { data } = await axios.post("/api/v1/order/new", order, config);
     return data;
   } catch (error) {
     throw error;

@@ -102,6 +102,7 @@ const SideBar = () => {
             if (route.subRoutes) {
               return (
                 <SidebarAdmin
+                key={index}
                   setIsOpen={setIsOpen}
                   route={route}
                   showAnimation={showAnimation}

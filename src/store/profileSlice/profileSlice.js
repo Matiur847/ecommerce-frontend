@@ -7,7 +7,7 @@ export const updateProfile = createAsyncThunk(
     try {
       const config = { Headers: { "content-type": "multipart/form-data" } };
       const response = await axios.put(
-        "https://ecommerce-backend-tzi7.onrender.com/api/v1/update/profile",
+        "/api/v1/update/profile",
         myForm,
         config
       );
@@ -24,7 +24,7 @@ export const updatePassword = createAsyncThunk(
     try {
       const config = { Headers: { "Content-Type": "application/json" } };
       const response = await axios.put(
-        "https://ecommerce-backend-tzi7.onrender.com/api/v1/update/password",
+        "/api/v1/update/password",
         myForm,
         config
       );
@@ -41,7 +41,7 @@ export const forgotPassword = createAsyncThunk(
     try {
       const config = { Headers: { "Content-Type": "application/json" } };
       const response = await axios.post(
-        "https://ecommerce-backend-tzi7.onrender.com/api/v1/forgot/password",
+        "/api/v1/forgot/password",
         myForm,
         config
       );
@@ -62,7 +62,7 @@ export const resetPassword = createAsyncThunk(
       const config = { Headers: { "Content-Type": "application/json" } };
 
       const response = await axios.put(
-        `https://ecommerce-backend-tzi7.onrender.com/api/v1/forgot/password/${token}`,
+        `/api/v1/forgot/password/${token}`,
         myForm,
         config
       );

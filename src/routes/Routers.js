@@ -45,10 +45,7 @@ const Routers = () => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.get(
-      "/api/v1/stripeApiKey",
-      config
-    );
+    const { data } = await axios.get("/api/v1/stripeApiKey", config);
     setStripeApiKey(data.stripeApiKey);
   }
 

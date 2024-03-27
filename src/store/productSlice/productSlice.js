@@ -35,10 +35,7 @@ export const detailsProduct = createAsyncThunk("/product", async (id) => {
         "Content-Type": "application/json",
       },
     };
-    const response = await axios.get(
-      `/api/v1/product/${id.id}`,
-      config
-    );
+    const response = await axios.get(`/api/v1/product/${id.id}`, config);
     return response.data;
   } catch (error) {
     throw error;

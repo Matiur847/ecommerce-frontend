@@ -11,7 +11,7 @@ export const login = createAsyncThunk("/login", async (data) => {
       withCredentials: true,
     };
     const response = await axios.post(
-      "https://ecommerce-backend-tawny-nine.vercel.app/api/v1/login",
+      "/api/v1/login",
       { email: loginEmail, password: loginPassword },
       config
     );
@@ -27,7 +27,11 @@ export const register = createAsyncThunk("/register", async (myForm) => {
       Headers: { "content-type": "multipart/form-data" },
       withCredentials: true,
     };
-    const response = await axios.post("/api/v1/register", myForm, config);
+    const response = await axios.post(
+      "/api/v1/register",
+      myForm,
+      config
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -42,7 +46,10 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
       },
       withCredentials: true,
     };
-    const response = await axios.get("https://ecommerce-backend-tawny-nine.vercel.app/api/v1/user/details", config);
+    const response = await axios.get(
+      "/api/v1/user/details",
+      config
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -51,9 +58,7 @@ export const getUserDetails = createAsyncThunk("/user-detail", async () => {
 
 export const loggedOut = createAsyncThunk("/user-logout", async (data) => {
   try {
-    const response = await axios.get(
-      "https://ecommerce-backend-tawny-nine.vercel.app/api/v1/logout"
-    );
+    const response = await axios.get("/api/v1/logout");
     return response.data;
   } catch (error) {
     throw error;
